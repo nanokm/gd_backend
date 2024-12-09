@@ -6,10 +6,11 @@ from user.managers import CustomUserManager
 
 
 class GDUser(AbstractUser):
-    username = None
     USERNAME_FIELD = "email"
-    email = models.EmailField(_("Email address"), unique=True)
     REQUIRED_FIELDS = ["password"]
+
+    username = None
+    email = models.EmailField(_("Email address"), unique=True)
 
     objects = CustomUserManager()
 
