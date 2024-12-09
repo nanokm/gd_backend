@@ -32,4 +32,4 @@ RUN poetry install --no-interaction --no-ansi
 
 EXPOSE 8080
 
-COPY gd_backend /code
+COPY . /code
