@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "gd-backend"
+version = "0.1.0"
+description = ""
+authors = ["Kamil Bobola <kamilb9610@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.4"
+psycopg2-binary = "^2.9.10"
+djangorestframework = "^3.15.2"
+environs = "^11.2.1"
+django-filter = "^24.3"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+markdown = "^3.7"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
