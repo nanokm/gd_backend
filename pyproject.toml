@@ -17,6 +17,12 @@ django-filter = "^24.3"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
 markdown = "^3.7"
+pylint = "^3.3.2"
+isort = "^5.13.2"
+
+
+[tool.poetry.group.black.dependencies]
+isort = "^5.13.2"
 
 [build-system]
 requires = ["poetry-core"]
