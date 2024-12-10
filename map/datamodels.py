@@ -3,13 +3,9 @@ import enum
 from pydantic import BaseModel, Field
 
 
-class PointModel(BaseModel):
-    latitude: float = Field(gt=0, lt=300)
-    longitude: float = Field(gt=0, lt=300)
-
-
-class OSMPointTypes(enum.StrEnum):
-    elevation = "elevation"
+class GeocodedPoint(BaseModel):
+    latitude: float = Field(ge=-90, le=90)
+    longitude: float = Field(ge=-180, le=180)
 
 
 class DisanceEnum(enum.IntEnum):

@@ -1,3 +1,4 @@
+import enum
 from pathlib import Path
 
 from environs import Env
@@ -91,7 +92,7 @@ DATABASES = {
     },
 }
 
-DATABASE_ROUTERS = ["dg_backend.db_routers.OSMRouter"]
+DATABASE_ROUTERS = ["gd_backend.db_routers.OSMRouter"]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -132,3 +133,7 @@ REST_KNOX = {
 
 APP_SRID = 4326
 MAX_DISTANCE_FROM_POINT_KM = 10
+
+
+class OSMDBNames(enum.StrEnum):
+    postgres_point = "ostgres_point"

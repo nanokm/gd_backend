@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from rest_framework.exceptions import APIException
 from rest_framework.filters import BaseFilterBackend
@@ -22,4 +21,4 @@ class PointDistanceFilter(BaseFilterBackend):
                 % settings.MAX_DISTANCE_FROM_POINT_KM
             )
 
-        return queryset.filter(way__dwithin=(request.point, D(km=distance)))
+        return queryset.filter(way__dwithin=(view.point, D(km=distance)))

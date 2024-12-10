@@ -1,6 +1,10 @@
+from map.models import OSMPoint
+
+
 class OSMRouter:
+    OSM_models = (OSMPoint,)
+    OSM_db_name = "osm"
+
     def db_for_read(self, model, **hints):
-        print("#" * 100)
-        print(model)
-        if model.__class__.__name__ == "Leisure":
-            return "osm"
+        if isinstance(model, self.OSM_models):
+            return self.OSM_db_name

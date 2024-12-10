@@ -1,34 +1,35 @@
-import enum
+from collections import defaultdict
 
-from django.db.models import TextChoices
 from rest_framework.exceptions import APIException
 from rest_framework.filters import BaseFilterBackend
-from rest_framework.views import APIView
 
-
-class OSMCategoryEnum(TextChoices):
-    leisure = "leisure"
-    shop = "shop"
-    religion = "religion"
-
-
-ALLOWED_CATEGORIES = ["leisure", "shop", "religion"]
+from map.models import OSMPoint
 
 
 class CategoryFilter(BaseFilterBackend):
-    def filter_queryset(self, request, queryset, view):
-        category = request.query_params.get("category", None)
-        if not category:
+    ALLOWED_CATEGORIES = ["leisure", "shop", "religion"]
+
+    def get_categories(self, request) -> list:
+        """
+        Returns a list of categories.
+        """
+        categories = request.query_params.get("category", "")
+        if not categories:
             raise APIException(detail="Category is required")
+        return categories.strip().split(",")
 
-        if category not in ALLOWED_CATEGORIES:
-            raise APIException(
-                detail="Category is not allowed, choose one of %s"
-                % ", ".join(ALLOWED_CATEGORIES)
-            )
+    def filter_queryset(self, request, queryset, view) -> dict[str, list[OSMPoint]]:
+        points_by_category = defaultdict(list)
+        for category in self.get_categories(request):
+            if category not in self.ALLOWED_CATEGORIES:
+                raise APIException(
+                    detail="Category is not allowed, choose one of %s"
+                    % ", ".join(self.ALLOWED_CATEGORIES)
+                )
+            filter_dict = {
+                f"{category}__isnull": False,
+                "name__isnull": False,
+            }
+            points_by_category[category] = queryset.filter(**filter_dict)
 
-        filter_dict = {
-            f"{category}__isnull": False,
-        }
-
-        return queryset.filter(**filter_dict)
+        return points_by_category
