@@ -15,7 +15,7 @@ services:
     depends_on:
       - db
   db:
-    image: postgres:15
+    image: postgis/postgis:15-3.5
     ports:
       - "5555:5432"
     volumes:

@@ -31,8 +31,11 @@ INSTALLED_APPS = (
         "django.contrib.sessions",
         "django.contrib.messages",
         "django.contrib.staticfiles",
+        "django.contrib.gis",
         "app.apps.AppConfig",
         "user.apps.UserConfig",
+        "map.apps.MapConfig",
+        "filterbar.apps.FilterbarConfig",
         "shared.apps.SharedConfig",
     ]
     + THIRD_PARTY_APPS
@@ -71,14 +74,24 @@ WSGI_APPLICATION = "gd_backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": env.str("POSTGRES_DB", "postgres"),
         "USER": env.str("POSTGRES_USER", "user"),
         "PASSWORD": env.str("POSTGRES_PASSWORD", "password"),
         "HOST": env.str("POSTGRES_HOST", "localhost"),
         "PORT": env.str("POSTGRES_PORT", "5432"),
-    }
+    },
+    "osm": {
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "NAME": "osmtest",
+        "USER": env.str("POSTGRES_USER", "user"),
+        "PASSWORD": env.str("POSTGRES_PASSWORD", "password"),
+        "HOST": env.str("POSTGRES_HOST", "localhost"),
+        "PORT": env.str("POSTGRES_PORT", "5432"),
+    },
 }
+
+DATABASE_ROUTERS = ["dg_backend.db_routers.OSMRouter"]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -112,7 +125,6 @@ REST_FRAMEWORK = {
         "knox.auth.TokenAuthentication",
     ]
 }
-
 
 REST_KNOX = {
     "USER_SERIALIZER": "shared.serializers.GDUserSerializer",
