@@ -20,6 +20,7 @@ ALLOWED_HOSTS = []
 THIRD_PARTY_APPS = [
     "rest_framework",
     "django_filters",
+    "knox",
 ]
 THIRD_PARTY_DEBUG_APPS = []
 INSTALLED_APPS = (
@@ -32,6 +33,7 @@ INSTALLED_APPS = (
         "django.contrib.staticfiles",
         "app.apps.AppConfig",
         "user.apps.UserConfig",
+        "shared.apps.SharedConfig",
     ]
     + THIRD_PARTY_APPS
     + THIRD_PARTY_DEBUG_APPS
@@ -93,7 +95,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -105,3 +106,14 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "knox.auth.TokenAuthentication",
+    ]
+}
+
+
+REST_KNOX = {
+    "USER_SERIALIZER": "shared.serializers.GDUserSerializer",
+}
