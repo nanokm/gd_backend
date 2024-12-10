@@ -1,8 +1,7 @@
 import logging
 
-from django.contrib.gis.db.models import PointField
+from django.conf import settings
 from django.contrib.gis.geos import Point
-from django.contrib.gis.measure import D
 from geopy.geocoders.base import Geocoder
 from rest_framework.exceptions import APIException
 from rest_framework.generics import ListAPIView
@@ -11,6 +10,8 @@ from rest_framework.views import APIView
 
 from map.client import get_geocoder_client
 from map.datamodels import PointModel
+from map.filters.category import CategoryFilter
+from map.filters.distance import PointDistanceFilter
 from map.models import OSMPoint
 from map.serializers import OSMPointSerializer
 
@@ -46,13 +47,18 @@ class GeocodeAPIView(APIView):
 
 class FindPointsAPIView(ListAPIView):
     serializer_class = OSMPointSerializer
+    filter_backends = (PointDistanceFilter, CategoryFilter)
 
     def get_queryset(self):
-        # "latitude": 52.1942434,
-        # "longitude": 21.0456641
-        point = Point((21.045664, 52.1942434), srid=4326)
-        return (
-            OSMPoint.objects.using("osm")
-            .filter(leisure__isnull=False, name__isnull=False)
-            .filter(way__dwithin=(point, D(km=5)))
+        return OSMPoint.objects.using("osm").filter(
+            leisure__isnull=False, name__isnull=False
         )
+
+    def get_point(self) -> Point:
+        return Point((21.045664, 52.1942434), srid=settings.APP_SRID)
+
+    def filter_queryset(self, queryset):
+        self.request.point = self.get_point()
+        qs = super().filter_queryset(queryset)
+        print("!" * 100)
+        return qs

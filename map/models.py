@@ -13,6 +13,8 @@ class OSMPoint(models.Model):
     leisure = models.CharField(max_length=120, choices=LeisureChoicesEnum)
     name = models.CharField(max_length=120)
     way = PointField(geography=True, srid=3857)
+    shop = models.CharField(max_length=120)
+    religion = models.CharField(max_length=120)
 
     class Meta:
         managed = False

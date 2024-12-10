@@ -129,3 +129,6 @@ REST_FRAMEWORK = {
 REST_KNOX = {
     "USER_SERIALIZER": "shared.serializers.GDUserSerializer",
 }
+
+APP_SRID = 4326
+MAX_DISTANCE_FROM_POINT_KM = 10
