@@ -22,10 +22,7 @@ class CategoryFilter(BaseFilterBackend):
         points_by_category = defaultdict(list)
         for category in self.get_categories(request):
             if category not in self.ALLOWED_CATEGORIES:
-                raise APIException(
-                    detail="Category is not allowed, choose one of %s"
-                    % ", ".join(self.ALLOWED_CATEGORIES)
-                )
+                raise APIException(detail="Category is not allowed, choose one of %s" % ", ".join(self.ALLOWED_CATEGORIES))
             filter_dict = {
                 f"{category}__isnull": False,
                 "name__isnull": False,

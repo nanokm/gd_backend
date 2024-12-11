@@ -17,6 +17,4 @@ class OSMPoint(models.Model):
         db_table = "ostgres_point"
 
     def __str__(self):
-        return (
-            f"{self.name or self.osm_id} {self.leisure or self.shop or self.religion}"
-        )
+        return f"{self.name or self.osm_id} {self.leisure or self.shop or self.religion}"

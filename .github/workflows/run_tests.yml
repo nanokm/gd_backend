@@ -14,6 +14,9 @@ jobs:
   lint:
     runs-on: ubuntu-22.04
     steps:
+      #----------------------------------------------
+      #       check-out repo and set-up python
+      #----------------------------------------------
       - name: "Fetch code"
         uses: actions/checkout@v4
         with:
@@ -25,13 +28,24 @@ jobs:
           cache: "pip"
       - name: "Install pre-commit"
         run: pip install pre-commit
+      #----------------------------------------------
+      #       load cached venv if cache exists
+      #----------------------------------------------
+      - name: "Cache pre-commit"
+        uses: actions/cache@v4
+        with:
+          path: "~/.cache/pre-commit"
+          key: ${{ runner.os }}-venv-${{ hashFiles('./.pre-commit-config.yml') }}
       - name: "Run linters"
         run: pre-commit run -a
   test:
     runs-on: ubuntu-22.04
     needs: lint
     steps:
-      - name: Fetch code
+      #----------------------------------------------
+      #       check-out repo and set-up python
+      #----------------------------------------------
+      - name: "Fetch code"
         uses: actions/checkout@v4
         with:
           fetch-depth: '0'
@@ -40,11 +54,21 @@ jobs:
         with:
           python-version: "3.13"
           cache: "pip"
-      - uses: Gr1N/setup-poetry@v8
-      - name: "Configure poetry"
-        run: python -m poetry config virtualenvs.in-project true
-      - name: "Save poetry cache"
-        uses: actions/cache@v3
+      #----------------------------------------------
+      #  -----  install & configure poetry  -----
+      #----------------------------------------------
+      - name: "Install poetry"
+        uses: snok/install-poetry@v1
+        with:
+          version: 1.8.5
+          virtualenvs-in-project: true
+          virtualenvs-path: .venv
+          installer-parallel: true
+      #----------------------------------------------
+      #       load cached venv if cache exists
+      #----------------------------------------------
+      - name: "Load poetry cache"
+        uses: actions/cache@v4
         with:
             path: ./.venv
             key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
