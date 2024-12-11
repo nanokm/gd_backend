@@ -14,16 +14,23 @@ SECRET_KEY = env.str(
 
 AUTH_USER_MODEL = "user.GDUser"
 
-DEBUG = True
+DEBUG = env.bool("DEBUG", True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*", "localhost"])
 
 THIRD_PARTY_APPS = [
     "rest_framework",
     "django_filters",
     "knox",
 ]
-THIRD_PARTY_DEBUG_APPS = []
+THIRD_PARTY_DEV_APPS = []
+PROJECT_APPS = [
+    "app.apps.AppConfig",
+    "user.apps.UserConfig",
+    "map.apps.MapConfig",
+    "filterbar.apps.FilterbarConfig",
+    "shared.apps.SharedConfig",
+]
 INSTALLED_APPS = (
     [
         "django.contrib.admin",
@@ -33,14 +40,10 @@ INSTALLED_APPS = (
         "django.contrib.messages",
         "django.contrib.staticfiles",
         "django.contrib.gis",
-        "app.apps.AppConfig",
-        "user.apps.UserConfig",
-        "map.apps.MapConfig",
-        "filterbar.apps.FilterbarConfig",
-        "shared.apps.SharedConfig",
     ]
+    + PROJECT_APPS
     + THIRD_PARTY_APPS
-    + THIRD_PARTY_DEBUG_APPS
+    + THIRD_PARTY_DEV_APPS
 )
 
 MIDDLEWARE = [
@@ -75,7 +78,7 @@ WSGI_APPLICATION = "gd_backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": env.str("POSTGRES_DB", "postgres"),
         "USER": env.str("POSTGRES_USER", "user"),
         "PASSWORD": env.str("POSTGRES_PASSWORD", "password"),

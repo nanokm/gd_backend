@@ -25,7 +25,7 @@ class GeocodeAPIView(APIView):
         client = self.get_geocode_client()
         location = client.geocode(search_string)
         if not location:
-            logger.warning(f"No location found for {search_string}")
+            logger.warning("No location found for %s" % search_string)
             return None
         return GeocodedPoint(latitude=location.latitude, longitude=location.longitude)
 

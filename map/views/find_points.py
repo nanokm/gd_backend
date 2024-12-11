@@ -5,8 +5,8 @@ from django.contrib.gis.geos import Point
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 
-from map.filters.category import CategoryFilter
-from map.filters.distance import PointDistanceFilter
+from map.filters import CategoryFilter
+from map.filters import PointDistanceFilter
 from map.models import OSMPoint
 from map.serializers import OSMPointSerializer
 
@@ -16,6 +16,7 @@ class FindPointsAPIView(ListAPIView):
     filter_backends = (PointDistanceFilter,)
     by_category_filter_backend = CategoryFilter
     point: None | Point = None
+    POINTS_MAX_LIMIT: int = 200
 
     def get_queryset(self):
         return OSMPoint.objects.using("osm")

@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: Gr1N/setup-poetry@v8
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+      - name: "Install dependencies"
+        run: poetry install && sudo apt-get install binutils libproj-dev gdal-bin --no-install-suggests --no-install-recommends --yes
+      - name: "Run tests"
+        run: poetry run python manage.py test
