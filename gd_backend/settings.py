@@ -23,7 +23,6 @@ THIRD_PARTY_APPS = [
     "django_filters",
     "knox",
 ]
-THIRD_PARTY_DEV_APPS = []
 PROJECT_APPS = [
     "app.apps.AppConfig",
     "user.apps.UserConfig",
@@ -43,7 +42,6 @@ INSTALLED_APPS = (
     ]
     + PROJECT_APPS
     + THIRD_PARTY_APPS
-    + THIRD_PARTY_DEV_APPS
 )
 
 MIDDLEWARE = [

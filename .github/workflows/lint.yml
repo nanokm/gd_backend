@@ -9,7 +9,7 @@ jobs:
   lint:
     runs-on: ubuntu-22.04
     steps:
-      - name: Fetch code
+      - name: "Fetch code"
         uses: actions/checkout@v4
         with:
           fetch-depth: '0'
@@ -18,5 +18,7 @@ jobs:
         with:
           python-version: "3.13"
           cache: "pip"
-      - name: Lint code using isort
-        uses: isort/isort-action@master
+      - name: "Install pre-commit"
+        run: pip install pre-commit
+      - name: "Run linters"
+        run: pre-commit run -a
