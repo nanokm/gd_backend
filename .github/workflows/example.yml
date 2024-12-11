@@ -22,11 +22,11 @@ jobs:
           cache: "pip"
       - uses: Gr1N/setup-poetry@v8
       - name: "Ssave poetry cache"
-      - name: "Install dependencies"
-        run: poetry install && sudo apt-get install binutils libproj-dev gdal-bin --no-install-suggests --no-install-recommends --yes
-      - uses: actions/cache@v3
+        uses: actions/cache@v3
         with:
           path: ~/.cache/pypoetry/virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}g
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+      - name: "Install dependencies"
+        run: poetry install && sudo apt-get install binutils libproj-dev gdal-bin --no-install-suggests --no-install-recommends --yes
       - name: "Run tests"
         run: poetry run python manage.py test
