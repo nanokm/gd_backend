@@ -14,7 +14,10 @@ jobs:
   test:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - name: Fetch code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
       - name: "Set up python 3.13"
         uses: actions/setup-python@v5
         with:
