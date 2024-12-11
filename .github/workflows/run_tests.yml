@@ -41,11 +41,13 @@ jobs:
           python-version: "3.13"
           cache: "pip"
       - uses: Gr1N/setup-poetry@v8
-      - name: "Ssave poetry cache"
+      - name: "Configure poetry"
+        run: python -m poetry config virtualenvs.in-project true
+      - name: "Save poetry cache"
         uses: actions/cache@v3
         with:
-          path: ~/.cache/pypoetry/virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+            path: ./.venv
+            key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
       - name: "Install dependencies"
         run: poetry install
       - name: "Install GDAL"
