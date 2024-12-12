@@ -3,7 +3,7 @@ from collections import defaultdict
 from rest_framework.exceptions import APIException
 from rest_framework.filters import BaseFilterBackend
 
-from map.models import OSMPoint
+from apps.map.models import OSMPoint
 
 
 class CategoryFilter(BaseFilterBackend):

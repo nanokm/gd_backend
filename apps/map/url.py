@@ -1,6 +1,6 @@
 from django.urls import path
 
-from map.views import FindPointsAPIView, GeocodeAPIView
+from apps.map.views import FindPointsAPIView, GeocodeAPIView
 
 urlpatterns = [
     path(r"geocode/", GeocodeAPIView.as_view(), name="geocode"),

@@ -1,12 +1,11 @@
 from collections import defaultdict
 
-from django.contrib.gis.geos import Point
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 
-from map.filters import CategoryFilter, PointDistanceFilter
-from map.models import OSMPoint
-from map.serializers import OSMPointSerializer
+from apps.map.filters import CategoryFilter, PointDistanceFilter
+from apps.map.models import OSMPoint
+from apps.map.serializers import OSMPointSerializer
 from shared.mixins import PointMixin
 
 

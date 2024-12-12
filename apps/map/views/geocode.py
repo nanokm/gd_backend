@@ -5,8 +5,8 @@ from rest_framework.exceptions import APIException
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from map.client import get_geocoder_client
-from map.datamodels import GeocodedPoint
+from apps.map.client import get_geocoder_client
+from apps.map.datamodels import GeocodedPoint
 
 logger = logging.getLogger(__name__)
 

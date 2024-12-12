@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from map.models import OSMPoint
+from apps.map.models import OSMPoint
 
 
 class OSMRouter:

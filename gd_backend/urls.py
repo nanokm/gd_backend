@@ -27,7 +27,7 @@ urlpatterns = [
 ]
 
 auth_views = [
-    path(r"map/", include("map.url")),
+    path(r"map/", include("apps.map.url")),
     path(r"auth/login/", LoginView.as_view(), name="knox_login"),
     path(r"auth/logout/", knox_views.LogoutView.as_view(), name="knox_logout"),
     path(r"auth/logoutall/", knox_views.LogoutAllView.as_view(), name="knox_logoutall"),

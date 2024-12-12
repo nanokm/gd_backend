@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from user.models import GDUser
+from apps.user.models import GDUser
 
 
 class GDUserSerializer(serializers.ModelSerializer):

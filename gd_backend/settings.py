@@ -24,10 +24,9 @@ THIRD_PARTY_APPS = [
     "knox",
 ]
 PROJECT_APPS = [
-    "app.apps.AppConfig",
-    "user.apps.UserConfig",
-    "map.apps.MapConfig",
-    "filterbar.apps.FilterbarConfig",
+    "apps.user.apps.UserConfig",
+    "apps.map.apps.MapConfig",
+    "apps.filterbar.apps.FilterbarConfig",
     "shared.apps.SharedConfig",
 ]
 INSTALLED_APPS = (

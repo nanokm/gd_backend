@@ -1,8 +1,7 @@
 from django.conf import settings
-from django.core.serializers import serialize
 from rest_framework import serializers
 
-from map.models import OSMPoint
+from apps.map.models import OSMPoint
 
 
 class OSMPointSerializer(serializers.ModelSerializer):
