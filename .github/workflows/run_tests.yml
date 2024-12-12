@@ -36,6 +36,9 @@ jobs:
         with:
           path: "~/.cache/pre-commit"
           key: ${{ runner.os }}-venv-${{ hashFiles('./.pre-commit-config.yml') }}
+      #----------------------------------------------
+      #       Run linters
+      #----------------------------------------------
       - name: "Run linters"
         run: pre-commit run -a
   test:
@@ -72,9 +75,15 @@ jobs:
         with:
             path: ./.venv
             key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
+      #----------------------------------------------
+      #       Install poetry and sys packages
+      #----------------------------------------------
       - name: "Install dependencies"
         run: poetry install
       - name: "Install GDAL"
         run: sudo apt-get install binutils libproj-dev gdal-bin --no-install-suggests --no-install-recommends --yes
+      #----------------------------------------------
+      #       Run test
+      #----------------------------------------------
       - name: "Run tests"
         run: poetry run python manage.py test
