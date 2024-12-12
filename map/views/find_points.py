@@ -1,6 +1,5 @@
 from collections import defaultdict
 
-from django.conf import settings
 from django.contrib.gis.geos import Point
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
@@ -8,20 +7,15 @@ from rest_framework.response import Response
 from map.filters import CategoryFilter, PointDistanceFilter
 from map.models import OSMPoint
 from map.serializers import OSMPointSerializer
+from shared.mixins import PointMixin
 
 
-class FindPointsAPIView(ListAPIView):
+class FindPointsAPIView(PointMixin, ListAPIView):
+    queryset = OSMPoint.objects.all()
     serializer_class = OSMPointSerializer
     filter_backends = (PointDistanceFilter,)
     by_category_filter_backend = CategoryFilter
     point: None | Point = None
-    POINTS_MAX_LIMIT: int = 200
-
-    def get_queryset(self):
-        return OSMPoint.objects.using("osm")
-
-    def get_point(self) -> Point:
-        return Point((21.045664, 52.1942434), srid=settings.APP_SRID)
 
     def serialize_nested_response(self, by_category) -> dict:
         serialized_dict = defaultdict(list)

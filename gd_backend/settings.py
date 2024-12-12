@@ -16,6 +16,8 @@ DEBUG = env.bool("DEBUG", True)
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*", "localhost"])
 
+OSM_DB_NAME = "osm"
+
 THIRD_PARTY_APPS = [
     "rest_framework",
     "django_filters",
@@ -81,7 +83,7 @@ DATABASES = {
         "HOST": env.str("POSTGRES_HOST", "localhost"),
         "PORT": env.str("POSTGRES_PORT", "5432"),
     },
-    "osm": {
+    OSM_DB_NAME: {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": "osmtest",
         "USER": env.str("POSTGRES_USER", "user"),

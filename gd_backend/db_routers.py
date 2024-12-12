@@ -1,10 +1,11 @@
+from django.conf import settings
+
 from map.models import OSMPoint
 
 
 class OSMRouter:
     OSM_models = (OSMPoint,)
-    OSM_db_name = "osm"
 
     def db_for_read(self, model, **hints):
-        if isinstance(model, self.OSM_models):
-            return self.OSM_db_name
+        if any(model.__name__ == osm_model.__name__ for osm_model in self.OSM_models):
+            return settings.OSM_DB_NAME
