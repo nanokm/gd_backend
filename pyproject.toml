@@ -2,7 +2,7 @@
 name = "gd-backend"
 version = "0.1.0"
 description = ""
-authors = ["Kamil Bobola <kamilb9610@gmail.com>"]
+authors = ["Kamil Bobola <kamilb9610@proton.me>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -25,6 +25,7 @@ markdown = "^3.7"
 pylint = "^3.3.2"
 isort = "^5.13.2"
 pre-commit = "^4.0.1"
+django-debug-toolbar = "^4.4.6"
 
 
 [tool.poetry.group.black.dependencies]

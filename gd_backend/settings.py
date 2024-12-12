@@ -1,6 +1,7 @@
 import enum
 from pathlib import Path
 
+from django.conf import settings
 from environs import Env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,6 +24,7 @@ THIRD_PARTY_APPS = [
     "django_filters",
     "knox",
 ]
+THIRD_PARTY_DEV_APPS = ["debug_toolbar"]
 PROJECT_APPS = [
     "apps.user.apps.UserConfig",
     "apps.map.apps.MapConfig",
@@ -40,8 +42,9 @@ INSTALLED_APPS = (
         "django.contrib.staticfiles",
         "django.contrib.gis",
     ]
-    + PROJECT_APPS
+    + THIRD_PARTY_DEV_APPS
     + THIRD_PARTY_APPS
+    + PROJECT_APPS
 )
 
 MIDDLEWARE = [
@@ -49,6 +52,7 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -142,9 +146,9 @@ REST_KNOX = {
     "USER_SERIALIZER": "shared.serializers.GDUserSerializer",
 }
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 APP_SRID = 4326
 MAX_DISTANCE_FROM_POINT_KM = 10
-
-
-class OSMDBNames(enum.StrEnum):
-    postgres_point = "ostgres_point"

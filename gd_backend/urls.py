@@ -14,7 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
+from debug_toolbar.toolbar import debug_toolbar_urls
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
@@ -24,6 +25,7 @@ from apps.shared.views import LoginView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path(r"", include("apps.map.url")),
 ]
 
 auth_views = [
@@ -34,3 +36,6 @@ auth_views = [
 ]
 
 urlpatterns += auth_views
+
+if settings.DEBUG:
+    urlpatterns += debug_toolbar_urls()
