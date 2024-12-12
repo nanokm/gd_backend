@@ -15,7 +15,6 @@ class FindPointsAPIView(PointMixin, ListAPIView):
     serializer_class = OSMPointSerializer
     filter_backends = (PointDistanceFilter,)
     by_category_filter_backend = CategoryFilter
-    point: None | Point = None
 
     def serialize_nested_response(self, by_category) -> dict:
         serialized_dict = defaultdict(list)
@@ -24,7 +23,7 @@ class FindPointsAPIView(PointMixin, ListAPIView):
             serialized_dict[category] = data.data
         return serialized_dict
 
-    def list(self, request, *args, **kwargs):
+    def list(self, request, *args, **kwargs) -> Response:
         # Set point of interest
         self.point = self.get_point()
 
