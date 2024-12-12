@@ -37,6 +37,12 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 CONSTANCE_CONFIG = {
     "THE_ANSWER": (42, "Answer to the Ultimate Question of Life, " "The Universe, and Everything"),
 }
+CONSTANCE_BACKEND = "constance.backends.redisd.RedisBackend"
+CONSTANCE_REDIS_CONNECTION = {
+    "host": "redis",
+    "port": 6379,
+    "db": 0,
+}
 
 ############################################################################
 ############################################################################
@@ -50,12 +56,7 @@ DEBUG = env.bool("DEBUG", True)
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*", "localhost"])
 
 
-THIRD_PARTY_APPS = [
-    "rest_framework",
-    "django_filters",
-    "knox",
-    "constance",
-]
+THIRD_PARTY_APPS = ["rest_framework", "django_filters", "knox", "constance"]
 
 PROJECT_APPS = [
     "apps.user.apps.UserConfig",
