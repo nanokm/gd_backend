@@ -94,6 +94,16 @@ DATABASES = {
 }
 
 DATABASE_ROUTERS = ["gd_backend.db_routers.OSMRouter"]
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": env.str("REDIS_URL", "redis://localhost:6379/"),
+        "KEY_PREFIX": "imdb",
+        "TIMEOUT": 60 * 15,  # in seconds: 60 * 15 (15 minutes)
+    }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
