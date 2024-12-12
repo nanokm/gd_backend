@@ -32,13 +32,6 @@ REST_KNOX = {
     "USER_SERIALIZER": "shared.serializers.GDUserSerializer",
 }
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-    "0.0.0.0",
-    "localhost",
-    "*",
-]
-
 DATABASE_ROUTERS = ["gd_backend.db_routers.OSMRouter"]
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
@@ -59,7 +52,7 @@ THIRD_PARTY_APPS = [
     "django_filters",
     "knox",
 ]
-THIRD_PARTY_DEV_APPS = ["debug_toolbar"]
+
 PROJECT_APPS = [
     "apps.user.apps.UserConfig",
     "apps.map.apps.MapConfig",
@@ -77,7 +70,6 @@ INSTALLED_APPS = (
         "django.contrib.staticfiles",
         "django.contrib.gis",
     ]
-    + THIRD_PARTY_DEV_APPS
     + THIRD_PARTY_APPS
     + PROJECT_APPS
 )
@@ -89,7 +81,6 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 

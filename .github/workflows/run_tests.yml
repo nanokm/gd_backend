@@ -35,7 +35,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: "~/.cache/pre-commit"
-          key: ${{ runner.os }}-venv-${{ hashFiles('./.pre-commit-config.yml') }}
+          key: ${{ runner.os }}-venv-pre-commit-${{ hashFiles('**/.pre-commit-config.yaml') }}
       #----------------------------------------------
       #       Run linters
       #----------------------------------------------

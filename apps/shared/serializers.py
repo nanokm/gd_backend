@@ -11,3 +11,7 @@ class GDUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = GDUser
         fields = ("first_name", "last_name", "email", "date_joined")
+
+
+class PointMixinSerializer(serializers.Serializer):
+    pass
