@@ -1,4 +1,5 @@
 import enum
+import os
 from pathlib import Path
 
 from django.conf import settings
@@ -33,16 +34,9 @@ REST_KNOX = {
 }
 
 DATABASE_ROUTERS = ["gd_backend.db_routers.OSMRouter"]
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-CONSTANCE_CONFIG = {
-    "THE_ANSWER": (42, "Answer to the Ultimate Question of Life, " "The Universe, and Everything"),
-}
-CONSTANCE_BACKEND = "constance.backends.redisd.RedisBackend"
-CONSTANCE_REDIS_CONNECTION = {
-    "host": "redis",
-    "port": 6379,
-    "db": 0,
-}
+# SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 ############################################################################
 ############################################################################
@@ -56,7 +50,7 @@ DEBUG = env.bool("DEBUG", True)
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*", "localhost"])
 
 
-THIRD_PARTY_APPS = ["rest_framework", "django_filters", "knox", "constance"]
+THIRD_PARTY_APPS = ["rest_framework", "django_filters", "knox", "phonenumber_field"]
 
 PROJECT_APPS = [
     "apps.user.apps.UserConfig",
@@ -64,6 +58,7 @@ PROJECT_APPS = [
     "apps.filterbar.apps.FilterbarConfig",
     "apps.shared.apps.SharedConfig",
     "apps.org.apps.OrgConfig",
+    "apps.offer.apps.OfferConfig",
 ]
 INSTALLED_APPS = (
     [
@@ -130,7 +125,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": env.str("REDIS_URL", "redis://redis:6379/"),
+        "LOCATION": env.str("REDIS_URL", "redis://localhost:6379/"),
         "KEY_PREFIX": "gd",
         "TIMEOUT": 60 * 15,  # in seconds: 60 * 15 (15 minutes)
     }
@@ -152,13 +147,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_TZ = True
-
 STATIC_URL = "static/"
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
