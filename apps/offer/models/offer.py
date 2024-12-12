@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.modelfields import PhoneNumberField
 
 from .photo import Photo
 from .static import Appliances, Flooring
@@ -21,7 +21,7 @@ class Offer(models.Model):
     rooms = models.PositiveIntegerField(blank=False)
     appliances = models.ManyToManyField(Appliances, blank=True)
     flooring = models.ManyToManyField(Flooring, blank=True)
-    lease_terms = models.PositiveIntegerField(blank=True)
+    lease_terms = models.PositiveIntegerField(blank=True, null=True)
     photos = models.ManyToManyField(Photo, blank=False)
     last_modified = models.DateTimeField(auto_now=True)
     lift = models.BooleanField(blank=False, null=True)
