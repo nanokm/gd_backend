@@ -11,13 +11,48 @@ env.read_env()
 
 SECRET_KEY = env.str("SECRET_KEY", "django-insecure-feef@8-q5-uq(8!a0t&(ww2djg0vtr*ys0^g#8f3d-*qfa*h-m")
 
+
+############################################################################
+############################################################################
+#########################        APP SETTINGS      #########################
+############################################################################
+############################################################################
 AUTH_USER_MODEL = "user.GDUser"
+APP_SRID = 4326
+MAX_DISTANCE_FROM_POINT_KM = 10
+OSM_DB_NAME = "osm"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "knox.auth.TokenAuthentication",
+    ]
+}
+
+REST_KNOX = {
+    "USER_SERIALIZER": "shared.serializers.GDUserSerializer",
+}
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+    "0.0.0.0",
+    "localhost",
+    "*",
+]
+
+DATABASE_ROUTERS = ["gd_backend.db_routers.OSMRouter"]
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+############################################################################
+############################################################################
+#########################            END           #########################
+############################################################################
+############################################################################
+
 
 DEBUG = env.bool("DEBUG", True)
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*", "localhost"])
 
-OSM_DB_NAME = "osm"
 
 THIRD_PARTY_APPS = [
     "rest_framework",
@@ -52,9 +87,9 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -63,7 +98,6 @@ ROOT_URLCONF = "gd_backend.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -96,9 +130,6 @@ DATABASES = {
         "PORT": env.str("POSTGRES_PORT", "5432"),
     },
 }
-
-DATABASE_ROUTERS = ["gd_backend.db_routers.OSMRouter"]
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 CACHES = {
     "default": {
@@ -135,20 +166,3 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "knox.auth.TokenAuthentication",
-    ]
-}
-
-REST_KNOX = {
-    "USER_SERIALIZER": "shared.serializers.GDUserSerializer",
-}
-
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
-
-APP_SRID = 4326
-MAX_DISTANCE_FROM_POINT_KM = 10
