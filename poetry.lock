@@ -105,6 +105,23 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-constance"
+version = "4.1.3"
+description = "Django live settings with pluggable backends, including Redis."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_constance-4.1.3-py3-none-any.whl", hash = "sha256:e5e05acbf329c3addec141f3911989d58c423ebc3bc92e1359f9c1dd77e08e95"},
+    {file = "django_constance-4.1.3.tar.gz", hash = "sha256:e8b619ebeab75665d279299cce4bbebbcb0a73caf3539edcd788f2d2275c21a1"},
+]
+
+[package.dependencies]
+redis = {version = "*", optional = true, markers = "extra == \"redis\""}
+
+[package.extras]
+redis = ["redis"]
+
+[[package]]
 name = "django-filter"
 version = "24.3"
 description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
@@ -904,4 +921,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "496d9a2aa041aebfd3e5e563f6c51f30345a6ea9fc5924ef6a2d8a544acd6b5c"
+content-hash = "cc05e0972b740d897a003bd8f955cd55979fec2856aa15b654724ec2ca679fcb"

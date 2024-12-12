@@ -34,6 +34,9 @@ REST_KNOX = {
 
 DATABASE_ROUTERS = ["gd_backend.db_routers.OSMRouter"]
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+CONSTANCE_CONFIG = {
+    "THE_ANSWER": (42, "Answer to the Ultimate Question of Life, " "The Universe, and Everything"),
+}
 
 ############################################################################
 ############################################################################
@@ -51,6 +54,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "django_filters",
     "knox",
+    "constance",
 ]
 
 PROJECT_APPS = [
@@ -125,8 +129,8 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": env.str("REDIS_URL", "redis://localhost:6379/"),
-        "KEY_PREFIX": "imdb",
+        "LOCATION": env.str("REDIS_URL", "redis://redis:6379/"),
+        "KEY_PREFIX": "gd",
         "TIMEOUT": 60 * 15,  # in seconds: 60 * 15 (15 minutes)
     }
 }
