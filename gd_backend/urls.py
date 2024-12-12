@@ -20,7 +20,7 @@ from django.urls import path
 from django.urls.conf import include
 from knox import views as knox_views
 
-from shared.views import LoginView
+from apps.shared.views import LoginView
 
 urlpatterns = [
     path("admin/", admin.site.urls),

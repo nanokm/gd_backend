@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from apps.map.filters import CategoryFilter, PointDistanceFilter
 from apps.map.models import OSMPoint
 from apps.map.serializers import OSMPointSerializer
-from shared.mixins import PointMixin
+from apps.shared.mixins import PointMixin
 
 
 class FindPointsAPIView(PointMixin, ListAPIView):

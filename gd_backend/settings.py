@@ -27,7 +27,8 @@ PROJECT_APPS = [
     "apps.user.apps.UserConfig",
     "apps.map.apps.MapConfig",
     "apps.filterbar.apps.FilterbarConfig",
-    "shared.apps.SharedConfig",
+    "apps.shared.apps.SharedConfig",
+    "apps.org.apps.OrgConfig",
 ]
 INSTALLED_APPS = (
     [
