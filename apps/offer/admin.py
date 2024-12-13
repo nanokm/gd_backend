@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.offer.models import Appliances, Flooring, Offer, Photo
+from apps.offer.models import Appliances, Flooring, HeatingType, Offer, Photo
 
 
 class OfferAdmin(admin.ModelAdmin):
@@ -19,8 +19,13 @@ class FlooringAdmin(admin.ModelAdmin):
     pass
 
 
+class HeatingTypeAdmin(admin.ModelAdmin):
+    pass
+
+
 # Register your models here.
 admin.site.register(Offer, OfferAdmin)
 admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Appliances, AppliancesAdmin)
 admin.site.register(Flooring, FlooringAdmin)
+admin.site.register(HeatingType, HeatingTypeAdmin)

@@ -24,7 +24,7 @@ class FindPointsAPIView(PointMixin, ListAPIView):
 
     def list(self, request, *args, **kwargs) -> Response:
         # Set point of interest
-        self.point = self.get_point()
+        self.point = self.get_point(request)
 
         queryset = self.filter_queryset(self.get_queryset())
         points_grouped_by_category = self.by_category_filter_backend().filter_queryset(

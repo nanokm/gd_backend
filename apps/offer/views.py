@@ -1,7 +1,8 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from apps.offer.models import Offer
-from apps.offer.serialziers import OfferSerializer
+
+from .serialziers import OfferSerializer
 
 
 class ListCreateOfferAPIView(ListCreateAPIView):

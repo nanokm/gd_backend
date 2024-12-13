@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
 from .photo import Photo
-from .static import Appliances, Flooring
+from .static import Appliances, Flooring, HeatingType
 
 
 class Offer(models.Model):
@@ -26,6 +26,8 @@ class Offer(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
     lift = models.BooleanField(blank=False, null=True)
     broadband = models.CharField(max_length=250, null=True, blank=True)
+    floor = models.PositiveIntegerField(blank=True, null=True)
+    heating_type = models.ManyToManyField(HeatingType, blank=True)
 
     def get_square_meter_price(self):
         return self.price / self.square_meters

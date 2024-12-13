@@ -14,4 +14,5 @@ class GDUserSerializer(serializers.ModelSerializer):
 
 
 class PointMixinSerializer(serializers.Serializer):
-    pass
+    lat = serializers.FloatField(min_value=-90, max_value=90)
+    long = serializers.FloatField(min_value=-180, max_value=180)

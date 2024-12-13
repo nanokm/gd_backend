@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.offer.models import Photo
+from ..models import Photo
 
 
 class PhotoSerializer(serializers.ModelSerializer):

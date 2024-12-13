@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.offer.models import Flooring
+from ..models import Flooring
 
 
 class FlooringSerializer(serializers.ModelSerializer):
