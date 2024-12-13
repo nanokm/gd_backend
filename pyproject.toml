@@ -19,6 +19,8 @@ redis = "^5.2.1"
 hiredis = "^3.1.0"
 pillow = "^11.0.0"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "^8.0.0"}
+django-storages = "^1.14.4"
+django-compressor = "^4.5.1"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -27,6 +29,7 @@ markdown = "^3.7"
 pylint = "^3.3.2"
 isort = "^5.13.2"
 pre-commit = "^4.0.1"
+django-zeal = "^2.0.2"
 
 
 [tool.poetry.group.black.dependencies]

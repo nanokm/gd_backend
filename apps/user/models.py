@@ -19,4 +19,4 @@ class GDUser(AbstractUser):
         verbose_name_plural = _("GD Users")
 
     def __str__(self):
-        return f"{self.email} joined: {self.date_joined}"
+        return f"{self.email} joined: {self.date_joined:%d-%m-%Y}"

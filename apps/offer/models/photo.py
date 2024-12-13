@@ -8,7 +8,7 @@ class Photo(models.Model):
     file = models.ImageField(upload_to="photos", blank=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} - {self.date_added:%d-%m-%Y} "
 
     class Meta:
         verbose_name = _("Photo")

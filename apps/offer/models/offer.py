@@ -13,7 +13,7 @@ class Offer(models.Model):
     square_meters = models.PositiveIntegerField()
     price = models.PositiveIntegerField(blank=True)
     deposit = models.PositiveIntegerField(blank=False)
-    construction_year = models.DateField(blank=False, null=True)
+    construction_year = models.PositiveIntegerField(blank=False, null=True)
     title = models.CharField(max_length=200)
     energy_certificate = models.CharField(blank=True, null=True)
     description = models.TextField(max_length=2000)

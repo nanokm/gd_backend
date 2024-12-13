@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mapbox GL JS map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            height: 1000px;
+            width: 2000px;
+            margin: 200px auto 0;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+
+
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia2FtaWxiOTYxMCIsImEiOiJjbTRtaDE4dWIwNHphMndxc3F2NWJmNmw1In0.HqebzlQEy9WPPxw3Fb_ntQ';
+    const map = new mapboxgl.Map({
+        style: 'mapbox://styles/kamilb9610/cm4mjizup001x01sb90zlcap3?optimize=true',
+        container: 'map', // container ID
+        center: [21.0456641, 52.1942434], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+        zoom: 9, // starting zoom,
+        bounds: [
+            [13.623047, 48.748945],
+            [25.004883, 55.404070]
+        ], // bounding box (southwest corner, northeast corner)
+    });
+    map.on('load', function () {
+
+        var center = [21.0456641, 52.1942434];
+        var radiusTwo = 2;
+        var options = {steps: 200, units: 'kilometers', properties: {foo: 'bar'}};
+        var circle = turf.circle(center, radiusTwo, options);
+
+        map.addLayer({
+            "id": "circle",
+            "type": "fill",
+            "source": {
+                "type": "geojson",
+                "data": circle,
+                "lineMetrics": true,
+            },
+            "paint": {
+                "fill-color": "#b36d05",
+                "fill-antialias": true,
+                "fill-opacity": 0.1,
+            },
+            "layout": {}
+        });
+        map.addLayer({
+            'id': 'states-layer-outline',
+            'type': 'line',
+            'source': {
+                'type': 'geojson',
+                'data': circle,
+            },
+            'paint': {
+                'line-color': '#d69431',
+                'line-width': 3,
+                'line-opacity': 0.4,
+            }
+        });
+        map.addControl(new mapboxgl.NavigationControl({showCompass: false}));
+
+    });
+
+    // add data source to hold our data we want to display
+
+</script>
+
+</body>
+</html>
