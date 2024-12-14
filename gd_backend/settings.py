@@ -34,7 +34,7 @@ REST_KNOX = {
 }
 
 DATABASE_ROUTERS = ["gd_backend.db_routers.OSMRouter"]
-# SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
@@ -50,7 +50,7 @@ DEBUG = env.bool("DEBUG", True)
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*", "localhost"])
 
 
-THIRD_PARTY_APPS = ["rest_framework", "django_filters", "knox", "phonenumber_field", "compressor"]
+THIRD_PARTY_APPS = ["rest_framework", "django_filters", "knox", "phonenumber_field", "oauth2_provider"]
 THIRD_PARTY_DEV_APPS = [
     "zeal",
 ]
@@ -88,11 +88,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-STATICFILES_FINDERS = (
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    "compressor.finders.CompressorFinder",
-)
 if DEBUG:
     MIDDLEWARE.append("zeal.middleware.zeal_middleware")
 
@@ -101,7 +96,7 @@ ROOT_URLCONF = "gd_backend.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "gd_backend/base_templates"],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -139,7 +134,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": env.str("REDIS_URL", "redis://localhost:6379/"),
+        "LOCATION": env.str("REDIS_URL", "redis://redis:6379/"),
         "KEY_PREFIX": "gd",
         "TIMEOUT": 60 * 15,  # in seconds: 60 * 15 (15 minutes)
     }
@@ -165,7 +160,4 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 STATIC_URL = "static/"
-COMPRESS_ROOT = BASE_DIR / "static"
-COMPRESS_ENABLED = True
-
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]

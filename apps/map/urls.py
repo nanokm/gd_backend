@@ -1,5 +1,4 @@
 from django.urls import path
-from django_filters.conf import settings
 
 from apps.map.views import FindPointsAPIView, GeocodeAPIView, MapTestView
 
