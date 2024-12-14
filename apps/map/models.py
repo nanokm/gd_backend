@@ -15,17 +15,11 @@ class SavedPointSearch(models.Model):
     distance = models.PositiveIntegerField(null=False, blank=False)
 
     def __str__(self):
-        return f"<{self.user}> - {self.created_at}"
+        return f"<{self.user}> - {self.created_at:'%m-%d-%Y'}"
 
     class Meta:
         verbose_name = _("Saved point")
         verbose_name_plural = _("Saved points")
-
-
-class CategoryChoices(models.TextChoices):
-    SHOP = "shop"
-    RELIGION = "religion"
-    LEISURE = "leisure"
 
 
 # Create your models here.
@@ -55,4 +49,4 @@ class OSMPoint(models.Model):
         return getattr(self, meta_category)
 
     def __str__(self):
-        return f"{self.name or self.osm_id} {self.leisure or self.shop or self.religion}"
+        return f"{self.get_meta_category()} - {self.name}"
