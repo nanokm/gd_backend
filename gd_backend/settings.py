@@ -19,9 +19,11 @@ SECRET_KEY = env.str("SECRET_KEY", "django-insecure-feef@8-q5-uq(8!a0t&(ww2djg0v
 ############################################################################
 ############################################################################
 AUTH_USER_MODEL = "user.GDUser"
-APP_SRID = 4326
+APP_SRID = 3857
 MAX_DISTANCE_FROM_POINT_KM = 10
 OSM_DB_NAME = "osm"
+OSM_POINT_TABLE_POINT = "planet_osm_point"
+
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -50,7 +52,7 @@ DEBUG = env.bool("DEBUG", True)
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*", "localhost"])
 
 
-THIRD_PARTY_APPS = ["rest_framework", "django_filters", "knox", "phonenumber_field", "oauth2_provider"]
+THIRD_PARTY_APPS = ["rest_framework", "django_filters", "knox", "phonenumber_field", "oauth2_provider", "rest_framework_gis"]
 THIRD_PARTY_DEV_APPS = [
     "zeal",
 ]
@@ -123,7 +125,7 @@ DATABASES = {
     },
     OSM_DB_NAME: {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "NAME": "osmtest",
+        "NAME": OSM_DB_NAME,
         "USER": env.str("POSTGRES_USER", "user"),
         "PASSWORD": env.str("POSTGRES_PASSWORD", "password"),
         "HOST": env.str("POSTGRES_HOST", "localhost"),
@@ -161,3 +163,4 @@ USE_I18N = True
 USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+LOGIN_URL = "/admin/login/"

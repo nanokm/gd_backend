@@ -1,17 +1,20 @@
-from django.conf import settings
 from rest_framework import serializers
+from rest_framework_gis import fields as gis_fields
+from rest_framework_gis import serializers as gis_serializers
 
 from apps.map.models import OSMPoint
 
 
-class OSMPointSerializer(serializers.ModelSerializer):
-    coords = serializers.SerializerMethodField()
+class OSMPointSerializer(gis_serializers.GeoFeatureModelSerializer):
+    name = serializers.CharField()
+    category = serializers.CharField(source="get_meta_category")
+    way = gis_fields.GeometrySerializerMethodField()
+
+    def get_way(self, state):
+        return state.way.transform(4326, clone=True)
 
     class Meta:
         model = OSMPoint
-        fields = ("name", "coords")
-
-    def get_coords(self, obj):
-        way = obj.way
-        way.transform(settings.APP_SRID)
-        return {"lat": way.x, "lon": way.y}
+        geo_field = "way"
+        auto_bbox = False
+        fields = ("name", "category", "way")
