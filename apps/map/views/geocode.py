@@ -2,6 +2,7 @@ import logging
 
 from geopy.geocoders.base import Geocoder
 from rest_framework.exceptions import APIException
+from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -21,7 +22,7 @@ class GeocodeAPIView(APIView):
             raise APIException("No query provided.")
         return query
 
-    def geocode(self, search_string) -> GeocodedPoint | None:
+    def geocode(self, search_string: str) -> GeocodedPoint | None:
         client = self.get_geocode_client()
         location = client.geocode(search_string)
         if not location:
@@ -29,10 +30,10 @@ class GeocodeAPIView(APIView):
             return None
         return GeocodedPoint(latitude=location.latitude, longitude=location.longitude)
 
-    def get(self, request) -> Response:
+    def get(self, request: Request) -> Response:
         search_string = self.get_geocode_search_string()
 
         if geocoded_point := self.geocode(search_string):
             return Response(data=geocoded_point.model_dump())
 
-        return Response(data={"detail": "No location found"})
+        return Response(data={"detail": "No location found."})
