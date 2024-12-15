@@ -30,8 +30,9 @@ class OSMPoint(models.Model):
     way = PointField(geography=True, srid=settings.APP_SRID)
     shop = models.CharField(max_length=120)
     religion = models.CharField(max_length=120)
+    amenity = models.CharField(max_length=120)
 
-    CATEGORY_FIELDS = ["shop", "religion", "leisure"]
+    CATEGORY_FIELDS = ["shop", "religion", "leisure", "amenity"]
 
     class Meta:
         managed = False
@@ -39,7 +40,7 @@ class OSMPoint(models.Model):
 
     def get_meta_category(self) -> str:
         category = list(filter(lambda attr: getattr(self, attr), self.CATEGORY_FIELDS))
-        if len(category) >= 2:
+        if not category:
             # OSM row that contains more than one non-null data fields is invalid.
             raise ValidationError("Inconsistent data.")
         return category[0]

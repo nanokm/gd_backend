@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.gis.geos import Point
 from rest_framework.exceptions import APIException
 
@@ -20,7 +21,7 @@ class PointMixin:
         return serializer.data["lat"], serializer.data["long"]
 
     def get_point(self) -> Point:
-        lat, long = self.get_lat_long()
-        p = Point((long, lat), srid=4326)
+        lat, lng = self.get_lat_long()
+        p = Point(lng, lat, srid=settings.APP_SRID)
         self.point = p
         return p

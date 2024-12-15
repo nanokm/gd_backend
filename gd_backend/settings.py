@@ -19,8 +19,8 @@ SECRET_KEY = env.str("SECRET_KEY", "django-insecure-feef@8-q5-uq(8!a0t&(ww2djg0v
 ############################################################################
 ############################################################################
 AUTH_USER_MODEL = "user.GDUser"
-APP_SRID = 3857
-MAX_DISTANCE_FROM_POINT_KM = 10
+APP_SRID = 4326
+MAX_DISTANCE_FROM_POINT_KM = 3
 OSM_DB_NAME = "osm"
 OSM_POINT_TABLE_POINT = "planet_osm_point"
 

@@ -15,7 +15,7 @@ class PointDistanceFilter(BaseFilterBackend):
         except ValueError:
             raise APIException("Distance is invalid.")
 
-        if not settings.MAX_DISTANCE_FROM_POINT_KM > distance > 0:
-            raise APIException(f"Distance should be between 0 and %s." % settings.MAX_DISTANCE_FROM_POINT_KM)
+        if not settings.MAX_DISTANCE_FROM_POINT_KM >= distance > 0:
+            raise APIException(f"Distance should be between 1 and %s." % settings.MAX_DISTANCE_FROM_POINT_KM)
 
-        return queryset.filter(way__dwithin=(view.point, D(km=distance)))
+        return queryset.filter(way__distance_lte=(view.point, D(km=distance)))
