@@ -1,0 +1,51 @@
+<!-- Standard Meta -->
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+<!-- Site Properties -->
+<title>Theming - Semantic</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
+<style>
+    body > .ui.container {
+        margin-top: 3em;
+    }
+
+    #map {
+        width: 60%;
+        height: 70em;
+        margin: 0 auto;
+    }
+
+    #topbar {
+        margin-bottom: 2em;
+        padding: 1em;
+    }
+
+    /* Kolor szary po kliknięciu */
+    .ui.button.grey {
+        background-color: #d3d3d3 !important; /* Szary kolor */
+    }
+
+    /* Kolory aktywnych przycisków */
+    .ui.button.active-shop {
+        background-color: #21ba45 !important; /* Zielony */
+        color: white;
+    }
+
+    .ui.button.active-restaurant {
+        background-color: #fbbd08 !important; /* Żółty */
+        color: white;
+    }
+
+    .ui.button.active-leisure {
+        background-color: #1e2020 !important; /* Niebieski */
+        color: white;
+    }
+
+</style>
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
