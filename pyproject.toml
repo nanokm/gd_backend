@@ -22,6 +22,7 @@ django-phonenumber-field = {extras = ["phonenumbers"], version = "^8.0.0"}
 django-storages = "^1.14.4"
 django-oauth-toolkit = "^3.0.1"
 djangorestframework-gis = "^1.1"
+sentry-sdk = {extras = ["django"], version = "^2.19.2"}
 
 
 [tool.poetry.group.dev.dependencies]

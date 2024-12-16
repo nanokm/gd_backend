@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 from environs import Env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -11,7 +12,7 @@ env = Env()
 env.read_env()
 
 SECRET_KEY = env.str("SECRET_KEY", "django-insecure-feef@8-q5-uq(8!a0t&(ww2djg0vtr*ys0^g#8f3d-*qfa*h-m")
-
+DEBUG = env.bool("DEBUG", True)
 
 ############################################################################
 ############################################################################
@@ -40,14 +41,38 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
+LANGUAGES = [
+    ("pl", _("Polish")),
+    ("en", _("English")),
+]
+
+LANGUAGE_CODE = "pl"
+
+LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
+
+if not DEBUG:
+
+    import sentry_sdk
+
+    sentry_sdk.init(
+        dsn="https://ddb494d802cc0e74e5b4697fdca9198a@o4508477868212224.ingest.de.sentry.io/4508477875159120",
+        # Set traces_sample_rate to 1.0 to capture 100%
+        # of transactions for tracing.
+        traces_sample_rate=1.0,
+        _experiments={
+            # Set continuous_profiling_auto_start to True
+            # to automatically start the profiler on when
+            # possible.
+            "continuous_profiling_auto_start": True,
+        },
+    )
+
 ############################################################################
 ############################################################################
 #########################            END           #########################
 ############################################################################
 ############################################################################
 
-
-DEBUG = env.bool("DEBUG", True)
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*", "localhost"])
 
@@ -83,6 +108,7 @@ INSTALLED_APPS = (
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",

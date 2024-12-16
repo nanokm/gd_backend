@@ -50,10 +50,8 @@ map.on('load', function () {
 
 
     map.addControl(new mapboxgl.NavigationControl({showCompass: false}));
-});
 
 
-map.on('load', () => {
     // Add a GeoJSON source with 2 points
     map.addSource('points', {
         type: 'geojson',
