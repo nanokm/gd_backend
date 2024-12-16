@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,8 @@
     <!-- Site Properties -->
     <title>Theming - Semantic</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
     <style>
         body > .ui.container {
             margin-top: 3em;
@@ -31,41 +34,47 @@
 
 </head>
 <body>
-    <h1>Spr</h1>
-<div class="ui container">
-
-<div class="ui big icon input">
-  <input type="text" placeholder="Search big...">
-  <i class="search icon"></i>
+<div class="ui stackable menu">
+    <div class="item">
+        <img src="https://semantic-ui.com/images/logo.png">
+    </div>
+    <a class="item active" href="{% url 'map-test' %}">Home</a>
+    <a class="item" href="{% url 'map-test-saved-searches' %}">Zapisane wyszukiwania</a>
 </div>
+<div class="ui container ">
     <div id="topbar">
         <div class="ui left aligned stackable grid container">
             <div class="row">
+                <div class="ui big icon input">
+                    <input type="text" placeholder="Search big...">
+                    <i class="search icon"></i>
+                </div>
+            </div>
+            <div class="row">
                 <button class="ui green large button">
-                    <i class="cart icon"></i>
-                    Sklepy (32)
+                    <i class="fa-solid fa-basket-shopping icon"></i>
+                    Sklepy (<span id="shops_count"></span>)
                 </button>
                 <button class="ui toggle yellow large button">
                     <i class="utensils icon"></i>
                     Restauracje (13)
                 </button>
                 <button class="ui black toggle large button">
-                    <i class="columns icon"></i>
+                    <i class="fa-solid fa-building-columns icon"></i>
                     Aktywności (6)
                 </button>
             </div>
             <div class="row">
-                <h1>Szukaj w promieniu: </h1>
                 <div class="ui icon buttons">
-                    <button class="ui active medium button">
+                    <button class="ui medium button distance" data-distance="1">
                         <i class="circle outline icon"></i>
                         1 km
                     </button>
-                    <button class="ui medium button">
+                    <button class="ui medium button distance active" data-distance="2">
                         <i class="circle outline icon"></i>
                         2 km
                     </button>
-                    <button class="ui medium button">
+                    <button class="ui medium button distance" data-distance="3">
                         <i class="circle outline icon"></i>
                         3 km
                     </button>
@@ -83,6 +92,7 @@
         center: [21.0456641, 52.1942434], // starting position [lng, lat]. Note that lat must be set between -90 and 90
         zoom: 13, // starting zoom,
     });
+    const BASE_URL = "http://localhost:8080/map/find_points/?distance=2&category=shop,leisure,religion&lat=52.1942434&long=21.0456641"
     map.on('load', function () {
 
         var center = [21.0456641, 52.1942434];
@@ -93,6 +103,7 @@
         map.addLayer({
             "id": "circle",
             "type": "fill",
+            "dynamic": true,
             "source": {
                 "type": "geojson",
                 "data": circle,
@@ -105,12 +116,15 @@
             },
             "layout": {}
         });
+
+
         map.addLayer({
-            'id': 'states-layer-outline',
+            'id': 'circle-outline',
             'type': 'line',
             'source': {
                 'type': 'geojson',
                 'data': circle,
+                "lineMetrics": true,
             },
             'paint': {
                 'line-color': '#d69431',
@@ -118,6 +132,8 @@
                 'line-opacity': 0.4,
             }
         });
+
+
         map.addControl(new mapboxgl.NavigationControl({showCompass: false}));
     });
 
@@ -127,7 +143,7 @@
         map.addSource('points', {
             type: 'geojson',
             // Use a URL for the value for the `data` property.
-            data: 'http://localhost:8080/map/find_points/?distance=2&category=shop,leisure,religion&lat=52.1942434&long=21.0456641'
+            data: BASE_URL,
         });
 
         // Add a symbol layer
@@ -145,6 +161,7 @@
                     'cross1',
                     'leisure',
                     'building-columns-solid',
+                    "#cecece"
                 ],
                 'text-field': ['get', 'name'],
 
@@ -157,8 +174,43 @@
                 'text-anchor': 'top'
             }
         });
+
+        // Add a GeoJSON source with 2 points
+        map.addSource('main_point', {
+            'type': 'geojson',
+            'data': {
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        // feature for Mapbox SF
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [21.0456641, 52.1942434]
+                        },
+                        'properties': {
+                            'title': 'Mapbox SF'
+                        }
+                    }
+                ]
+            }
+        });
+
+        // Add a symbol layer
+        map.addLayer({
+            'id': 'main_point',
+            'type': 'symbol',
+            'source': 'main_point',
+            'layout': {
+                'icon-image': 'utensils1',
+
+            }
+        });
+
     });
+
 </script>
+<script src="{% static 'js/distance_resize.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 </body>
 </html>
