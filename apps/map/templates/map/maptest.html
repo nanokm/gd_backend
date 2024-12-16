@@ -1,43 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>GD Test app visible in DEBUG mode</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <link href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
-    <script src='https://cdn.jsdelivr.net/npm/mapbox-gl-fontawesome-markers@0.0.1/dist/index.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
-          integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.1.0/turf.min.js"></script>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <!-- Site Properties -->
+    <title>Theming - Semantic</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
+        body > .ui.container {
+            margin-top: 3em;
         }
 
         #map {
-            height: 1000px;
-            width: 2000px;
-            margin: 200px auto 0;
+            width: 60%;
+            height: 70em;
+            margin: 0 auto;
+        }
+
+        #topbar {
+            margin-bottom: 2em;
+            padding: 1em;
         }
     </style>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
+
 </head>
 <body>
+    <h1>Spr</h1>
+<div class="ui container">
+
+<div class="ui big icon input">
+  <input type="text" placeholder="Search big...">
+  <i class="search icon"></i>
+</div>
+    <div id="topbar">
+        <div class="ui left aligned stackable grid container">
+            <div class="row">
+                <button class="ui green large button">
+                    <i class="cart icon"></i>
+                    Sklepy (32)
+                </button>
+                <button class="ui toggle yellow large button">
+                    <i class="utensils icon"></i>
+                    Restauracje (13)
+                </button>
+                <button class="ui black toggle large button">
+                    <i class="columns icon"></i>
+                    Aktywności (6)
+                </button>
+            </div>
+            <div class="row">
+                <h1>Szukaj w promieniu: </h1>
+                <div class="ui icon buttons">
+                    <button class="ui active medium button">
+                        <i class="circle outline icon"></i>
+                        1 km
+                    </button>
+                    <button class="ui medium button">
+                        <i class="circle outline icon"></i>
+                        2 km
+                    </button>
+                    <button class="ui medium button">
+                        <i class="circle outline icon"></i>
+                        3 km
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="map"></div>
-
-
 <script>
     mapboxgl.accessToken = 'pk.eyJ1Ijoia2FtaWxiOTYxMCIsImEiOiJjbTRtaDE4dWIwNHphMndxc3F2NWJmNmw1In0.HqebzlQEy9WPPxw3Fb_ntQ';
     const map = new mapboxgl.Map({
         style: 'mapbox://styles/kamilb9610/cm4oif82n001e01qy95ou2yxk',
         container: 'map', // container ID
         center: [21.0456641, 52.1942434], // starting position [lng, lat]. Note that lat must be set between -90 and 90
-        zoom: 14, // starting zoom,
+        zoom: 13, // starting zoom,
     });
     map.on('load', function () {
 
@@ -101,9 +145,6 @@
                     'cross1',
                     'leisure',
                     'building-columns-solid',
-                    'Asian',
-                    '#3bb2d0',
-                    /* other */ '#ccc'
                 ],
                 'text-field': ['get', 'name'],
 
@@ -118,8 +159,6 @@
         });
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
-        integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 </body>
 </html>
