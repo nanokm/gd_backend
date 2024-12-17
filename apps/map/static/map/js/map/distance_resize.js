@@ -56,6 +56,7 @@ $(document).ready(function () {
                 const source = map.getSource('points');
                 if (source) {
                     source.setData(newData);
+                    fitBoundsToGeoJSON('points');
                 } else {
                     console.error('Źródło o identyfikatorze "points" nie zostało znalezione.');
                 }

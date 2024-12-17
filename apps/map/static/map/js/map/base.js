@@ -124,48 +124,48 @@ map.on('load', function () {
             'icon-image': 'house',
         }
     });
-    let hasFitBounds = false; // Flaga globalna kontrolująca focus
 
-    function fitBoundsToGeoJSON(sourceId) {
-        console.log(hasFitBounds)
-        if (hasFitBounds) return; // Jeśli focus już był, nie rób nic
-        const source = map.getSource(sourceId);
-        if (!source || !source._data) return;
 
-        const bounds = new mapboxgl.LngLatBounds();
+    // map.on('data', (e) => {
+    //     if (e.sourceId === 'points' && e.isSourceLoaded) {
+    //         fitBoundsToGeoJSON('points');
+    //     }
+    // });
+});
 
-        const features = source._data.features;
-        if (features === undefined) {
-            // Ignore first fetch
-            return
-        }
-        features.forEach(feature => {
-            const geometry = feature.geometry;
+function fitBoundsToGeoJSON(sourceId) {
+    console.log(hasFitBounds)
+    if (hasFitBounds) return; // Jeśli focus już był, nie rób nic
+    const source = map.getSource(sourceId);
+    if (!source || !source._data) return;
 
-            if (geometry.type === 'Point') {
-                bounds.extend(geometry.coordinates);
-            } else if (geometry.type === 'LineString' || geometry.type === 'MultiLineString') {
-                geometry.coordinates.forEach(coord => bounds.extend(coord));
-            } else if (geometry.type === 'Polygon' || geometry.type === 'MultiPolygon') {
-                geometry.coordinates.forEach(ring => {
-                    ring.forEach(coord => bounds.extend(coord));
-                });
-            }
-        });
+    const bounds = new mapboxgl.LngLatBounds();
 
-        // Dopasowanie widoku do bounding box
-        if (!bounds.isEmpty()) {
-            map.fitBounds(bounds, {
-                padding: 70,
-                duration: 600
+    const features = source._data.features;
+    if (features === undefined) {
+        // Ignore first fetch
+        return
+    }
+    features.forEach(feature => {
+        const geometry = feature.geometry;
+
+        if (geometry.type === 'Point') {
+            bounds.extend(geometry.coordinates);
+        } else if (geometry.type === 'LineString' || geometry.type === 'MultiLineString') {
+            geometry.coordinates.forEach(coord => bounds.extend(coord));
+        } else if (geometry.type === 'Polygon' || geometry.type === 'MultiPolygon') {
+            geometry.coordinates.forEach(ring => {
+                ring.forEach(coord => bounds.extend(coord));
             });
         }
-        hasFitBounds = true;
-    }
-
-    map.on('data', (e) => {
-        if (e.sourceId === 'points' && e.isSourceLoaded) {
-            fitBoundsToGeoJSON('points');
-        }
     });
-});
+
+    // Dopasowanie widoku do bounding box
+    if (!bounds.isEmpty()) {
+        map.fitBounds(bounds, {
+            padding: 70,
+            duration: 600
+        });
+    }
+    hasFitBounds = true;
+}
