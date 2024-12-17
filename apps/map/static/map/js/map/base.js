@@ -9,6 +9,13 @@ const map = new mapboxgl.Map({
     center: [21.0456641, 52.1942434], // starting position [lng, lat]. Note that lat must be set between -90 and 90
     zoom: 13, // starting zoom,
 });
+let hasFitBounds = false; // Flaga globalna kontrolująca focus
+
+function resetFitBoundsFlag() {
+    hasFitBounds = false; // Funkcja do resetowania flagi
+    console.log("Flaga hasFitBounds zresetowana");
+}
+
 map.on('load', function () {
     var center = [21.0456641, 52.1942434];
     var radiusTwo = 2;
@@ -52,7 +59,6 @@ map.on('load', function () {
     map.addControl(new mapboxgl.NavigationControl({showCompass: false}));
 
 
-    // Add a GeoJSON source with 2 points
     map.addSource('points', {
         type: 'geojson',
         // Use a URL for the value for the `data` property.
@@ -118,5 +124,48 @@ map.on('load', function () {
             'icon-image': 'house',
         }
     });
+    let hasFitBounds = false; // Flaga globalna kontrolująca focus
 
+    function fitBoundsToGeoJSON(sourceId) {
+        console.log(hasFitBounds)
+        if (hasFitBounds) return; // Jeśli focus już był, nie rób nic
+        const source = map.getSource(sourceId);
+        if (!source || !source._data) return;
+
+        const bounds = new mapboxgl.LngLatBounds();
+
+        const features = source._data.features;
+        if (features === undefined) {
+            // Ignore first fetch
+            return
+        }
+        features.forEach(feature => {
+            const geometry = feature.geometry;
+
+            if (geometry.type === 'Point') {
+                bounds.extend(geometry.coordinates);
+            } else if (geometry.type === 'LineString' || geometry.type === 'MultiLineString') {
+                geometry.coordinates.forEach(coord => bounds.extend(coord));
+            } else if (geometry.type === 'Polygon' || geometry.type === 'MultiPolygon') {
+                geometry.coordinates.forEach(ring => {
+                    ring.forEach(coord => bounds.extend(coord));
+                });
+            }
+        });
+
+        // Dopasowanie widoku do bounding box
+        if (!bounds.isEmpty()) {
+            map.fitBounds(bounds, {
+                padding: 70,
+                duration: 600
+            });
+        }
+        hasFitBounds = true;
+    }
+
+    map.on('data', (e) => {
+        if (e.sourceId === 'points' && e.isSourceLoaded) {
+            fitBoundsToGeoJSON('points');
+        }
+    });
 });

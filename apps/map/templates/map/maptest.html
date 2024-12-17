@@ -6,19 +6,20 @@
     {% include 'map/_head.html' %}
 </head>
 <body>
-<div class="ui stackable huge menu">
+<div class="ui stackable huge menu inverted">
     <div class="item">
         <img src="https://semantic-ui.com/images/logo.png">
     </div>
-    <a class="item active" href="{% url 'map-test' %}">Home</a>
+    <a class="item active" href="{% url 'map-test' %}">{% trans 'Start' %}</a>
     <a class="item" href="{% url 'map-test-saved-searches' %}">Zapisane wyszukiwania</a>
+    <a class="item" href="{% url 'map-test-saved-searches' %}">O projekcie</a>
     <div class="right menu">
 
         <div id="drop" class="ui dropdown borderless item">
-            Language <i class="dropdown icon"></i>
+            {% trans 'Wybierz język' %} <i class="dropdown icon"></i>
             <div class="menu borderless">
-                <a class="item">{% trans 'Polish' %}</a>
-                <a class="item">{% trans 'English' %}</a>
+                <a class="item">{% trans 'Polski' %}</a>
+                <a class="item">{% trans 'Angielski' %}</a>
             </div>
         </div>
         <div class="item borderless">
@@ -39,7 +40,7 @@
     <div class="ui row">
         <div class="ten wide column left aligned">
             <div class="ui huge icon input" id="search-bar">
-                <input type="text" placeholder="{% trans 'Szukaj mieszkania' %}">
+                <input type="text" placeholder="{% trans 'Szukaj' %}">
                 <i class="search icon"></i>
             </div>
         </div>
@@ -86,12 +87,9 @@
     <div class="ui container">
         <div class="ui stackable inverted divided equal height stackable grid">
             <div class="three wide column">
-                <h4 class="ui inverted header">About</h4>
+                <h4 class="ui inverted header">{% trans 'O projekcie' %}</h4>
                 <div class="ui inverted link list">
-                    <a href="#" class="item">Sitemap</a>
-                    <a href="#" class="item">Contact Us</a>
-                    <a href="#" class="item">Religious Ceremonies</a>
-                    <a href="#" class="item">Gazebo Plans</a>
+                    <a href="#" class="item">{% trans 'Kontakt' %}</a>
                 </div>
             </div>
             <div class="three wide column">

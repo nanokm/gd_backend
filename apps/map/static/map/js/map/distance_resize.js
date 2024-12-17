@@ -41,7 +41,6 @@ $(document).ready(function () {
         const source = map.getSource('circle');
         const brd = map.getSource('circle-outline');
         const new_url = updateUrlParams(BASE_URL, {"distance": distance})
-        console.log(new_url);
         if (source) {
             brd.setData(newCircle);
             source.setData(newCircle);
@@ -65,7 +64,11 @@ $(document).ready(function () {
     }
 
     $(".distance").click(function () {
+        console.log("Flaga zresetowana")
+        resetFitBoundsFlag();
         var distance = $(this).attr('data-distance');
+
+        // Reset 'active' class
         $(".distance").removeClass("active")
         $(this).addClass("active")
         center = [21.0456641, 52.1942434];
