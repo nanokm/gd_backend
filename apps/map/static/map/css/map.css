@@ -1,3 +1,63 @@
+
+body > .ui.container {
+    margin-top: 3em;
+}
+
+#map {
+    width: 60%;
+    height: 70em;
+    margin: 0 auto;
+}
+
+#topbar {
+    margin-bottom: 2em;
+    padding: 1em;
+}
+
+/* Kolor szary po kliknięciu */
+.ui.button.grey {
+    background-color: #d3d3d3 !important; /* Szary kolor */
+}
+
+/* Kolory aktywnych przycisków */
+.ui.button.active-shop {
+    background-color: #21ba45 !important; /* Zielony */
+    color: white;
+}
+
+.ui.button.active-restaurant {
+    background-color: #fbbd08 !important; /* Żółty */
+    color: white;
+}
+
+.ui.button.active-leisure {
+    background-color: #1e2020 !important; /* Niebieski */
+    color: white;
+}
+
 #login-button {
     margin-right: -1.4em;
+}
+
+#control-buttons {
+    margin-bottom: 4em;
+    margin-top: 5em;
+}
+
+#distance-buttons {
+    padding: 0.7em
+}
+
+#category-filters {
+    margin-left: 1em;
+}
+
+#search-bar {
+    width: 30em !important;
+    margin-bottom: 1.5em;
+    margin-left: 2em;
+}
+
+#footer {
+    margin-top: 7em;
 }

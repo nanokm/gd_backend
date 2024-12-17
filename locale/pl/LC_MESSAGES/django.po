@@ -37,11 +37,11 @@ msgstr "Oferty"
 
 #: apps/offer/models/photo.py:14
 msgid "Photo"
-msgstr ""
+msgstr "Zdjęcie"
 
 #: apps/offer/models/photo.py:15
 msgid "Photos"
-msgstr ""
+msgstr "Zdjęcia"
 
 #: apps/offer/models/static/appliances.py:9
 msgid "Appliance"
@@ -74,7 +74,7 @@ msgstr ""
 
 #: apps/user/models.py:13
 msgid "Email address"
-msgstr ""
+msgstr "Adres Email"
 
 #: apps/user/models.py:18
 msgid "GD User"
@@ -86,8 +86,8 @@ msgstr ""
 
 #: gd_backend/settings.py:45
 msgid "Polish"
-msgstr ""
+msgstr "Polski"
 
 #: gd_backend/settings.py:46
 msgid "English"
-msgstr ""
+msgstr "Angielski"
