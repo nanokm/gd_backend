@@ -9,4 +9,5 @@ urlpatterns = [
     path(r"auth/", include("apps.user.urls")),
     path(r"map/", include("apps.map.urls")),
     path(r"offer/", include("apps.offer.urls")),
+    path(r"shared/", include("apps.shared.urls")),
 ]

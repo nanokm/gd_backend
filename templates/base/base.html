@@ -1,0 +1,95 @@
+{% load i18n %}
+<!doctype html>
+<html lang="pl">
+<head>
+    {% load static %}
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
+
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
+    <link rel="stylesheet" href="{% static 'base/css/base.css' %}">
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+<div class="ui stackable huge menu inverted" id="main-menu">
+    <div class="item">
+        <img src="https://semantic-ui.com/images/logo.png">
+    </div>
+    <a class="item active" href="{% url 'map' %}">{% trans 'Start' %}</a>
+    <a class="item" href="{% url 'map-saved-searches' %}">{% trans 'Zapisane wyszukiwania' %}</a>
+    <a class="item" href="{% url 'about' %}">{% trans 'O projekcie' %}</a>
+    <div class="right menu">
+
+        <div id="drop" class="ui dropdown borderless item">
+            {% trans 'Wybierz język' %} <i class="dropdown icon"></i>
+            <div class="menu borderless">
+                <a class="item">{% trans 'Polski' %}</a>
+                <a class="item">{% trans 'Angielski' %}</a>
+            </div>
+        </div>
+        <div class="item borderless">
+            <a href="{% url 'login' %}">
+                <div class="ui big violet button" id="login-button">
+                    <i class="address card icon"></i> {% trans 'Zaloguj się' %}
+                </div>
+            </a>
+        </div>
+        <div class="item borderless">
+            <a href="{% url 'login' %}">
+                <div class="ui big violet button">
+                    <i class="icon user"></i> {% trans 'Rejestracja' %}
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% block content %}
+{% endblock %}
+<div class="ui bottom fixed inverted vertical footer segment" id="footer">
+    <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+            <div class="three wide column">
+                <h4 class="ui inverted header">{% trans 'O projekcie' %}</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">{% trans 'Kontakt' %}</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">Services</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Banana Pre-Order</a>
+                    <a href="#" class="item">DNA FAQ</a>
+                    <a href="#" class="item">How To Access</a>
+                    <a href="#" class="item">Favorite X-Men</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header">Footer Header</h4>
+                <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        $("#drop").dropdown();
+    });
+</script>
+<script src="{% static 'map/js/map/base.js' %}"></script>
+<script src="{% static 'map/js/map/distance_resize.js' %}"></script>
+<script src="{% static 'map/js/map/map.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+{% block js %}
+{% endblock %}
+</body>
+</html>

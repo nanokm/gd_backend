@@ -1,5 +1,4 @@
-from collections import defaultdict
-
+from django.conf import settings
 from django.db.models import Q
 from rest_framework.exceptions import APIException
 from rest_framework.filters import BaseFilterBackend
@@ -9,7 +8,8 @@ from apps.map.models import OSMPoint
 
 
 class CategoryFilter(BaseFilterBackend):
-    ALLOWED_CATEGORIES = ["leisure", "shop", "religion"]
+    ALLOWED_CATEGORIES = settings.OSM_CATEGORY_LIST
+    OSM_MAPPING = settings.OSM_CATEGORY_MAPPING
 
     def get_categories(self, request: Request) -> list:
         """
@@ -24,13 +24,20 @@ class CategoryFilter(BaseFilterBackend):
         categories = self.get_categories(request)
         if any(r := set(categories) - set(self.ALLOWED_CATEGORIES)):
             raise APIException(
-                detail="Invalid category queryparam=%s. Choose from %s" % (r, ", ".join(self.ALLOWED_CATEGORIES))
+                detail="Invalid category queryparam=%s. Choose from: %s" % (r, ", ".join(self.ALLOWED_CATEGORIES))
             )
 
         q = Q()
         for category in categories:
-            q |= Q(**{f"{category}__isnull": False})
-
+            selected_category_mapping = self.OSM_MAPPING[category]
+            if isinstance(selected_category_mapping, dict):
+                column = self.OSM_MAPPING[category]["column"]
+                column_value = self.OSM_MAPPING[category]["value"]
+                q |= Q(**{f"{column}": column_value})
+            elif isinstance(selected_category_mapping, list):
+                for filter_elem in selected_category_mapping:
+                    column = filter_elem["column"]
+                    value = filter_elem["value"]
+                    q |= Q(**{f"{column}": value})
         qs = queryset.filter(q)
-        qs = qs.filter(name__isnull=False)
         return qs

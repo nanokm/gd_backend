@@ -14,9 +14,9 @@ urlpatterns = [
 ]
 if settings.DEBUG:
     urlpatterns += [
-        (path(r"test/", MapTestView.as_view(), name="map-test")),
+        (path(r"", MapTestView.as_view(), name="map")),
     ]
 
     urlpatterns += [
-        (path(r"test/saved_searches", MapTestSavedSearchesView.as_view(), name="map-test-saved-searches")),
+        (path(r"saved_searches/", MapTestSavedSearchesView.as_view(), name="map-saved-searches")),
     ]

@@ -5,8 +5,7 @@ from apps.map.models import OSMPoint
 
 
 class OSMPointSerializer(gis_serializers.GeoFeatureModelSerializer):
-    name = serializers.CharField()
-    category = serializers.CharField(source="get_meta_category")
+    category = serializers.CharField(source="get_category")
 
     class Meta:
         model = OSMPoint

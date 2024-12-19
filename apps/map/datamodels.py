@@ -1,8 +1,4 @@
-from typing import TypedDict
-
 from pydantic import BaseModel, Field
-
-from apps.map.models import OSMPoint
 
 
 class GeocodedPoint(BaseModel):

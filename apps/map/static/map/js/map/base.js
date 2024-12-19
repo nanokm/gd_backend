@@ -1,12 +1,12 @@
 const TOKEN = 'pk.eyJ1Ijoia2FtaWxiOTYxMCIsImEiOiJjbTRtaDE4dWIwNHphMndxc3F2NWJmNmw1In0.HqebzlQEy9WPPxw3Fb_ntQ'
-const BASE_URL = "http://localhost:8080/map/find_points/?distance=2&category=shop,leisure,religion&lat=52.1942434&long=21.0456641"
-const MAPBOX_STYLE = 'mapbox://styles/kamilb9610/cm4qqbyym00a501safqyj8g0f'
-
+const BASE_URL = "http://localhost:8080/map/find_points/?distance=2&category=pharmacy,fast_food,restaurant,books,cafe,convenience,gym,community_centre&lat=52.1942434&long=21.0456641"
+const MAPBOX_STYLE = 'mapbox://styles/kamilb9610/cm4t0vage001201s7ehqtfgl9'
+const STARTING_POINT = [21.0456641, 52.1942434];
 mapboxgl.accessToken = TOKEN;
 const map = new mapboxgl.Map({
     style: MAPBOX_STYLE,
     container: 'map', // container ID
-    center: [21.0456641, 52.1942434], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+    center: STARTING_POINT, // starting position [lng, lat]. Note that lat must be set between -90 and 90
     zoom: 13, // starting zoom,
 });
 let hasFitBounds = false; // Flaga globalna kontrolująca focus
@@ -17,7 +17,7 @@ function resetFitBoundsFlag() {
 }
 
 map.on('load', function () {
-    var center = [21.0456641, 52.1942434];
+    var center =  STARTING_POINT;
     var radiusTwo = 2;
     var options = {steps: 200, units: 'kilometers', properties: {foo: 'bar'}};
     var circle = turf.circle(center, radiusTwo, options);
@@ -74,12 +74,24 @@ map.on('load', function () {
             'icon-image': [
                 'match',
                 ['get', 'category'],
-                'shop',
+                'convenience',
                 'cart1',
                 'religion',
                 'cross1',
-                'leisure',
+                'community_centre',
                 'building-columns-solid',
+                'restaurant',
+                'utensils1',
+                'pharmacy',
+                'pharmacy1',
+                'fast_food',
+                'burger1',
+                'cafe',
+                'coffe1',
+                'books',
+                'bookstore1',
+                'gym',
+                'gym1',
                 "#cecece"
             ],
             'text-field': ['get', 'name'],
@@ -105,7 +117,7 @@ map.on('load', function () {
                     'type': 'Feature',
                     'geometry': {
                         'type': 'Point',
-                        'coordinates': [21.0456641, 52.1942434]
+                        'coordinates': STARTING_POINT,
                     },
                     'properties': {
                         'title': 'Mapbox SF'

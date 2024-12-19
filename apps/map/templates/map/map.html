@@ -1,0 +1,69 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load i18n %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'map/css/map.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="ui centered grid" id="control-buttons">
+        <div class="ui row">
+            <div class="eleven wide column left aligned">
+                <div class="ui huge icon input" id="search-bar">
+                    <input type="text" placeholder="{% trans 'Szukaj' %}">
+                    <i class="search icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="ui row">
+            <div class="one wide column" style="margin-right: 4.5em"></div>
+            <div class="column five wide" id="category-filters">
+                <h3>{% trans 'Punty na mapie' %}</h3>
+                <div>
+                    <button id="toggle-convenience" class="ui button large active-convenience">
+                        Sklepy
+                    </button>
+                    <button id="toggle-restaurant" class="ui button large active-restaurant">
+                        {% trans 'Restauracje' %}
+                    </button>
+                    <button id="toggle-fast_food" class="ui button large active-fast_food">
+                        {% trans 'Fast Foody' %}
+                    </button>
+                    <button id="toggle-cafe" class="ui brown button large active-cafe">
+                        {% trans 'Kawiarnie' %}
+                    </button>
+                    <button id="toggle-pharmacy" class="ui button large active-pharmacy">
+                        {% trans 'Apteki' %}
+                    </button>
+                    <button id="toggle-gym" class="ui button large active-gym">
+                        {% trans 'Siłownie' %}
+                    </button>
+                    <button id="toggle-books" class="ui button large active-books">
+                        {% trans 'Księgarnie' %}
+                    </button>
+                    <button id="toggle-community_centre" class="ui button large active-community_centre">
+                        {% trans 'Kultura' %}
+                    </button>
+                </div>
+            </div>
+
+            <div class="ui six wide column">
+                <h3>{% trans 'Odległość od mieszkania' %}</h3>
+                <div class="ui icon buttons" id="distance-buttons">
+                    <button class="ui large button distance" data-distance="1">
+                        <i class="circle outline icon"></i>
+                        1 km
+                    </button>
+                    <button class="ui large button distance active" data-distance="2">
+                        <i class="circle outline icon"></i>
+                        2 km
+                    </button>
+                    <button class="ui large button distance" data-distance="3">
+                        <i class="circle outline icon"></i>
+                        3 km
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="map"></div>
+{% endblock %}

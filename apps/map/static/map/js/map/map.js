@@ -1,6 +1,6 @@
 map.on('load', function () {
 
-    var activeCategories = ['shop', 'restaurant', 'leisure']; // Zmieniamy 'activity' na 'leisure'
+    var activeCategories = ['convenience', 'restaurant', 'books', 'fast_food', 'gym', 'cafe', 'pharmacy', 'community_centre']; // Zmieniamy 'activity' na 'leisure'
 
 // Funkcja do przełączania filtrów
     function toggleCategory(category, button) {
@@ -20,16 +20,33 @@ map.on('load', function () {
 
     }
 
-    $('#toggle-shops').on('click', function () {
-        toggleCategory('shop', this);
+    $('#toggle-convenience').on('click', function () {
+        toggleCategory('convenience', this);
     });
 
-    $('#toggle-restaurants').on('click', function () {
+    $('#toggle-restaurant').on('click', function () {
         toggleCategory('restaurant', this);
     });
 
-    $('#toggle-leisure').on('click', function () {
-        toggleCategory('leisure', this);
+    $('#toggle-books').on('click', function () {
+        toggleCategory('books', this);
     });
 
+    $('#toggle-fast_food').on('click', function () {
+        toggleCategory('fast_food', this);
+    });
+
+    $('#toggle-gym').on('click', function () {
+        toggleCategory('gym', this);
+    });
+
+    $('#toggle-cafe').on('click', function () {
+        toggleCategory('cafe', this);
+    });
+    $('#toggle-pharmacy').on('click', function () {
+        toggleCategory('pharmacy', this);
+    });
+    $('#toggle-community_centre').on('click', function () {
+        toggleCategory('community_centre', this);
+    });
 });

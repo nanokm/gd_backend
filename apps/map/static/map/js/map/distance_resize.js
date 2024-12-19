@@ -50,6 +50,11 @@ $(document).ready(function () {
 
 // Funkcja do aktualizacji danych w źródle
     function updateSourceData(newUrl) {
+        const source = map.getSource('points');
+        source.setData({
+            "type": "FeatureCollection",
+            "features": []
+        });
         fetch(newUrl)
             .then(response => response.json())
             .then(newData => {

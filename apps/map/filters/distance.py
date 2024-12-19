@@ -9,7 +9,6 @@ class PointDistanceFilter(BaseFilterBackend):
         distance = request.query_params.get("distance", None)
         if not distance:
             raise APIException("Distance is required.")
-
         try:
             distance = int(distance)
         except ValueError:
@@ -17,5 +16,4 @@ class PointDistanceFilter(BaseFilterBackend):
 
         if not settings.MAX_DISTANCE_FROM_POINT_KM >= distance > 0:
             raise APIException(f"Distance should be between 1 and %s." % settings.MAX_DISTANCE_FROM_POINT_KM)
-
         return queryset.filter(way__distance_lte=(view.point, D(km=distance)))

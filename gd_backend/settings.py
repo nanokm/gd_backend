@@ -50,6 +50,76 @@ LANGUAGE_CODE = "pl"
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
 
+OSM_CATEGORY_MAPPING = {
+    "books": {"column": "shop", "value": "books"},
+    "restaurant": {"column": "amenity", "value": "restaurant"},
+    "cafe": {
+        "column": "amenity",
+        "value": "cafe",
+    },
+    "fast_food": {
+        "column": "amenity",
+        "value": "fast_food",
+    },
+    "convenience": {
+        "column": "shop",
+        "value": "convenience",
+    },
+    "pharmacy": {
+        "column": "amenity",
+        "value": "pharmacy",
+    },
+    "gym": [
+        {
+            "column": "leisure",
+            "value": "fitness_centre",
+        },
+        {"column": "amenity", "value": "gym"},
+        {"column": "sport", "value": "fitness"},
+        {"column": "leisure", "value": "sports_hall"},
+        {"column": "sport", "value": "multi"},
+        {"column": "leisure", "value": "bowling_alley"},
+        {"column": "leisure", "value": "ice_rink"},
+        {"column": "leisure", "value": "fitness_station"},
+        {"column": "leisure", "value": "sports_centre"},
+    ],
+    "community_centre": [
+        {
+            "column": "amenity",
+            "value": "community_centre",
+        },
+        {
+            "column": "tourism",
+            "value": "museum",
+        },
+        {"column": "tourism", "value": "gallery"},
+        {"column": "shop", "value": "antiques"},
+        {
+            "column": "amenity",
+            "value": "theatre",
+        },
+    ],
+    "atm": {"column": "amenity", "value": "atm"},
+    "religion": {"column": "religion", "value": "religion"},
+}
+
+OSM_CATEGORY_LIST = [key.lower() for key in OSM_CATEGORY_MAPPING.keys()]
+
+
+def find_top_level_key(search_value):
+    for top_level_key, sub_mapping in OSM_CATEGORY_MAPPING.items():
+        if isinstance(sub_mapping, dict):
+            # Jeśli sub_mapping jest słownikiem
+            if sub_mapping.get("value") == search_value:
+                return top_level_key
+        elif isinstance(sub_mapping, list):
+            # Jeśli sub_mapping jest listą
+            for item in sub_mapping:
+                if item.get("value") == search_value:
+                    return top_level_key
+    return None  # Jeśli nie znaleziono
+
+
 if not DEBUG:
 
     import sentry_sdk
