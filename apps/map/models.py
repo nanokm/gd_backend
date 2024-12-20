@@ -50,8 +50,7 @@ class OSMPoint(models.Model):
     def get_category(self) -> str:
         non_null_field_name = self.get_first_non_null_display()
         non_null_field_value = getattr(self, non_null_field_name)
-        top_level_category = utils.find_top_level_key(non_null_field_value)
-        return top_level_category or ""
+        return utils.find_top_level_key(non_null_field_value)
 
     def __str__(self):
         return f"{self.osm_id} - ${self.get_category()} - {self.name}"

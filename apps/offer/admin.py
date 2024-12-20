@@ -23,7 +23,6 @@ class HeatingTypeAdmin(admin.ModelAdmin):
     pass
 
 
-# Register your models here.
 admin.site.register(Offer, OfferAdmin)
 admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Appliances, AppliancesAdmin)

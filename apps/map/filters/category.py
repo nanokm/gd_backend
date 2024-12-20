@@ -34,6 +34,8 @@ class CategoryFilter(BaseFilterBackend):
                 column = self.OSM_MAPPING[category]["column"]
                 column_value = self.OSM_MAPPING[category]["value"]
                 q |= Q(**{f"{column}": column_value})
+
+            # It is a list of mappings
             elif isinstance(selected_category_mapping, list):
                 for filter_elem in selected_category_mapping:
                     column = filter_elem["column"]

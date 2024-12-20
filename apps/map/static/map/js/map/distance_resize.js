@@ -1,8 +1,8 @@
 $(document).ready(function () {
     function createCircle(center, radius) {
         return turf.circle(center, radius, {
-            steps: 200, // Liczba segmentów dla wygładzenia okręgu
-            units: 'kilometers' // Jednostka promienia
+            steps: 200,
+            units: 'kilometers'
         });
     }
 
@@ -70,7 +70,6 @@ $(document).ready(function () {
     }
 
     $(".distance").click(function () {
-        console.log("Flaga zresetowana")
         resetFitBoundsFlag();
         var distance = $(this).attr('data-distance');
 

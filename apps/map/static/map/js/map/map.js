@@ -1,8 +1,7 @@
 map.on('load', function () {
 
-    var activeCategories = ['convenience', 'restaurant', 'books', 'fast_food', 'gym', 'cafe', 'pharmacy', 'community_centre']; // Zmieniamy 'activity' na 'leisure'
+    var activeCategories = ['convenience', 'restaurant', 'books', 'fast_food', 'gym', 'cafe', 'pharmacy', 'community_centre'];
 
-// Funkcja do przełączania filtrów
     function toggleCategory(category, button) {
         var isActive = $(button).hasClass('active-' + category); // Sprawdzamy, czy przycisk ma klasę aktywnego koloru
 

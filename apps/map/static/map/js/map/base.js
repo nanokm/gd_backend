@@ -13,7 +13,6 @@ let hasFitBounds = false; // Flaga globalna kontrolująca focus
 
 function resetFitBoundsFlag() {
     hasFitBounds = false; // Funkcja do resetowania flagi
-    console.log("Flaga hasFitBounds zresetowana");
 }
 
 map.on('load', function () {
@@ -136,13 +135,6 @@ map.on('load', function () {
             'icon-image': 'house',
         }
     });
-
-
-    // map.on('data', (e) => {
-    //     if (e.sourceId === 'points' && e.isSourceLoaded) {
-    //         fitBoundsToGeoJSON('points');
-    //     }
-    // });
 });
 
 function fitBoundsToGeoJSON(sourceId) {

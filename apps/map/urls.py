@@ -8,6 +8,8 @@ from apps.map.views import (
     MapTestView,
 )
 
+app_name = "map"
+
 urlpatterns = [
     path(r"geocode/", GeocodeAPIView.as_view(), name="geocode"),
     path(r"find_points/", FindPointsAPIView.as_view(), name="find-points"),

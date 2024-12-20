@@ -14,11 +14,7 @@ env.read_env()
 SECRET_KEY = env.str("SECRET_KEY", "django-insecure-feef@8-q5-uq(8!a0t&(ww2djg0vtr*ys0^g#8f3d-*qfa*h-m")
 DEBUG = env.bool("DEBUG", True)
 
-############################################################################
-############################################################################
 #########################        APP SETTINGS      #########################
-############################################################################
-############################################################################
 AUTH_USER_MODEL = "user.GDUser"
 APP_SRID = 4326
 MAX_DISTANCE_FROM_POINT_KM = 3
@@ -138,11 +134,6 @@ if not DEBUG:
     )
 
 ############################################################################
-############################################################################
-#########################            END           #########################
-############################################################################
-############################################################################
-
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*", "localhost"])
 
@@ -152,12 +143,12 @@ THIRD_PARTY_DEV_APPS = [
     "zeal",
 ]
 PROJECT_APPS = [
-    "apps.user.apps.UserConfig",
-    "apps.map.apps.MapConfig",
-    "apps.filterbar.apps.FilterbarConfig",
-    "apps.shared.apps.SharedConfig",
-    "apps.org.apps.OrgConfig",
-    "apps.offer.apps.OfferConfig",
+    "apps.user",
+    "apps.map",
+    "apps.filterbar",
+    "apps.shared",
+    "apps.org",
+    "apps.offer",
 ]
 
 INSTALLED_APPS = (

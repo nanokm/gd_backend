@@ -14,65 +14,50 @@ body > .ui.container {
     padding: 1em;
 }
 
-a {
-    color: white;
-    text-underline: none;
-    transition: 0.2s ease;
-}
-
-a:hover {
-    color: #ededed;
-    text-underline: none;
-}
-
 /* Kolor szary po kliknięciu */
 .ui.button.grey {
-    background-color: #d3d3d3 !important; /* Szary kolor */
+    background-color: #d3d3d3 !important;
 }
 
-/* Kolory aktywnych przycisków */
+
 .ui.button.active-convenience {
-    background-color: #21ba45 !important; /* Zielony */
+    background-color: #21ba45 !important;
     color: white;
 }
 
 .ui.button.active-restaurant {
-    background-color: #fbbd08 !important; /* Żółty */
+    background-color: #fbbd08 !important;
     color: white;
 }
 
 .ui.button.active-community_centre {
-    background-color: #1e2020 !important; /* Niebieski */
+    background-color: #1e2020 !important;
     color: white;
 }
 
 .ui.button.active-cafe {
-    background-color: #A52A2A !important; /* Niebieski */
+    background-color: #A52A2A !important;
     color: white;
 }
 .ui.button.active-pharmacy {
-    background-color: #FF1493 !important; /* Niebieski */
+    background-color: #FF1493 !important;
     color: white;
 }
 
 .ui.button.active-books {
-    background-color: #B413EC !important; /* Niebieski */
+    background-color: #B413EC !important;
     color: white;
 }
 
 .ui.button.active-fast_food {
-    background-color: #EE82EE !important; /* Niebieski */
+    background-color: #EE82EE !important;
     color: white;
 }
 
 .ui.button.active-gym {
-    background-color: #008080 !important; /* Niebieski */
+    background-color: #008080 !important;
     color: white;
 }
-
-
-
-
 
 
 #login-button {
