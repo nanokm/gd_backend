@@ -14,21 +14,24 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
-
     <link rel="stylesheet" href="{% static 'base/css/base.css' %}">
     {% block css %}
     {% endblock %}
 </head>
 <body>
 <div class="ui stackable huge menu inverted" id="main-menu">
-    <div class="item active">
-        <a href="{% url 'map:map' %}">
+    <div class="item">
+        <a href="{% url 'shared:about' %}">
             <img alt="start" src="{% static 'light_gray_n_logo.png' %}">
         </a>
     </div>
+    <a class="item {% if request.path == "/map/" %}active{% endif %}"
+       href="{% url 'map:map' %}">{% trans 'Szukaj adresu' %}</a>
     <a class="item" href="{% url 'map:map-saved-searches' %}">{% trans 'Ceny mieszkań' %}</a>
+    <a class="item" href="{% url 'map:map-saved-searches' %}">{% trans 'Jak dojadę' %}</a>
     <a class="item" href="{% url 'map:map-saved-searches' %}">{% trans 'Trendy' %}</a>
-    <a class="item" href="{% url 'shared:about' %}">{% trans 'O projekcie' %}</a>
+    <a class="item  {% if request.path == "/shared/about/" %}active{% endif %}"
+       href="{% url 'shared:about' %}">{% trans 'O projekcie' %}</a>
     <div class="right menu">
 
         <div id="drop" class="ui dropdown borderless item">
@@ -38,20 +41,33 @@
                 <a class="item">{% trans 'Angielski' %}</a>
             </div>
         </div>
-        <div class="item borderless">
-            <a href="{% url 'user:login' %}">
-                <div class="ui big violet button" id="login-button">
-                    <i class="address card icon"></i> {% trans 'Zaloguj się' %}
-                </div>
-            </a>
-        </div>
-        <div class="item borderless">
-            <a href="{% url 'user:login' %}">
-                <div class="ui big violet button">
-                    <i class="icon user"></i> {% trans 'Rejestracja' %}
-                </div>
-            </a>
-        </div>
+        {% if request.user.is_authenticated %}
+            <div class="item borderless">
+                {% trans 'Cześć' %} {{ request.user.email }}
+            </div>
+            <div class="item borderless">
+                <a href="{% url 'account_logout' %}">
+                    <div class="ui medium violet button">
+                        <i class="address card icon"></i> {% trans 'Wyloguj się' %}
+                    </div>
+                </a>
+            </div>
+        {% else %}
+            <div class="item borderless">
+                <a href="{% url 'account_login' %}">
+                    <div class="ui medium violet button" id="login-button">
+                        <i class="address card icon"></i> {% trans 'Zaloguj się' %}
+                    </div>
+                </a>
+            </div>
+            <div class="item borderless">
+                <a href="{% url 'user:login' %}">
+                    <div class="ui medium violet button">
+                        <i class="icon user"></i> {% trans 'Rejestracja' %}
+                    </div>
+                </a>
+            </div>
+        {% endif %}
     </div>
 </div>
 {% block content %}
@@ -80,14 +96,10 @@
     </div>
 </div>
 <script>
-
     $(document).ready(function () {
         $("#drop").dropdown();
     });
 </script>
-<script src="{% static 'map/js/map/base.js' %}"></script>
-<script src="{% static 'map/js/map/distance_resize.js' %}"></script>
-<script src="{% static 'map/js/map/map.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 {% block js %}
 {% endblock %}

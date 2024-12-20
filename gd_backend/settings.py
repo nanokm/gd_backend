@@ -116,29 +116,44 @@ def find_top_level_key(search_value):
     return None  # Jeśli nie znaleziono
 
 
-if not DEBUG:
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by email
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
 
-    import sentry_sdk
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        "APP": {"client_id": "123", "secret": "456", "key": ""}
+    }
+}
 
-    sentry_sdk.init(
-        dsn="https://ddb494d802cc0e74e5b4697fdca9198a@o4508477868212224.ingest.de.sentry.io/4508477875159120",
-        # Set traces_sample_rate to 1.0 to capture 100%
-        # of transactions for tracing.
-        traces_sample_rate=1.0,
-        _experiments={
-            # Set continuous_profiling_auto_start to True
-            # to automatically start the profiler on when
-            # possible.
-            "continuous_profiling_auto_start": True,
-        },
-    )
-
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_ON_GET = True
 ############################################################################
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*", "localhost"])
 
 
-THIRD_PARTY_APPS = ["rest_framework", "django_filters", "knox", "phonenumber_field", "oauth2_provider", "rest_framework_gis"]
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "django_filters",
+    "knox",
+    "phonenumber_field",
+    "rest_framework_gis",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount.providers.google",
+]
 THIRD_PARTY_DEV_APPS = [
     "zeal",
 ]
@@ -149,6 +164,7 @@ PROJECT_APPS = [
     "apps.shared",
     "apps.org",
     "apps.offer",
+    "apps.prices",
 ]
 
 INSTALLED_APPS = (
@@ -175,6 +191,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 if DEBUG:

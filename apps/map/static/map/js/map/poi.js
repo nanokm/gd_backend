@@ -19,33 +19,8 @@ map.on('load', function () {
 
     }
 
-    $('#toggle-convenience').on('click', function () {
-        toggleCategory('convenience', this);
-    });
-
-    $('#toggle-restaurant').on('click', function () {
-        toggleCategory('restaurant', this);
-    });
-
-    $('#toggle-books').on('click', function () {
-        toggleCategory('books', this);
-    });
-
-    $('#toggle-fast_food').on('click', function () {
-        toggleCategory('fast_food', this);
-    });
-
-    $('#toggle-gym').on('click', function () {
-        toggleCategory('gym', this);
-    });
-
-    $('#toggle-cafe').on('click', function () {
-        toggleCategory('cafe', this);
-    });
-    $('#toggle-pharmacy').on('click', function () {
-        toggleCategory('pharmacy', this);
-    });
-    $('#toggle-community_centre').on('click', function () {
-        toggleCategory('community_centre', this);
+    $('.toggle-poi').on('click', function () {
+        let poi  = $(this).data("poi");
+        toggleCategory(poi, this);
     });
 });

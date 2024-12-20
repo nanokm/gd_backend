@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -42,7 +43,7 @@
     <div class="ui middle aligned center aligned grid">
       <div class="column">
         <h2 class="ui violet center aligned header">
-          <img class="image" src="https://semantic-ui.com/images/logo.png" /> Log-in to your
+          <img class="image" src="{% static 'light_gray_n_logo.png' %}" /> Log-in to your
           account
         </h2>
         <form class="ui large form">
@@ -63,7 +64,7 @@
           </div>
           <div class="ui error message"></div>
         </form>
-        <div class="ui message">{% trans 'Nie masz konta?' %}<a href="#root"> {% trans 'Sign Up' %}</a></div>
+        <div class="ui message">{% trans 'Nie masz konta?' %}<a href="#root"> {% trans 'Zarejestruj się' %}</a></div>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

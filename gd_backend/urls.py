@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
-from oauth2_provider import urls as oauth2_urls
+from django.views.generic import RedirectView
 
 urlpatterns = [
-    path("o/", include(oauth2_urls)),
-    path("admin/", admin.site.urls),
+    path(r"", RedirectView.as_view(pattern_name="map:map")),
+    path(r"accounts/", include("allauth.urls")),
+    path(r"admin/", admin.site.urls),
     path(r"auth/", include("apps.user.urls")),
     path(r"map/", include("apps.map.urls")),
     path(r"offer/", include("apps.offer.urls")),

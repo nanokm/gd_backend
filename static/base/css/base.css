@@ -1,5 +1,8 @@
+body > .ui.container {
+    margin-top: 3em;
+}
 #login-button {
-    margin-right: -1.4em;
+    margin-right: -1.9em;
 }
 
 #main-menu {

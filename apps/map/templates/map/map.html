@@ -20,28 +20,28 @@
             <div class="column five wide" id="category-filters">
                 <h3>{% trans 'Punty na mapie' %}</h3>
                 <div>
-                    <button id="toggle-convenience" class="ui button large active-convenience">
+                    <button class="ui button large toggle-poi active-convenience" data-poi="convenience">
                         {% trans 'Sklepy' %}
                     </button>
-                    <button id="toggle-restaurant" class="ui button large active-restaurant">
+                    <button class="ui button toggle-poi large active-restaurant" data-poi="restaurant">
                         {% trans 'Restauracje' %}
                     </button>
-                    <button id="toggle-fast_food" class="ui button large active-fast_food">
+                    <button class="ui button large toggle-poi active-fast_food" data-poi="fast_food">
                         {% trans 'Fast Foody' %}
                     </button>
-                    <button id="toggle-cafe" class="ui brown button large active-cafe">
+                    <button class="ui brown button toggle-poi large active-cafe" data-poi="cafe">
                         {% trans 'Kawiarnie' %}
                     </button>
-                    <button id="toggle-pharmacy" class="ui button large active-pharmacy">
+                    <button class="ui button toggle-poi large active-pharmacy" data-poi="pharmacy">
                         {% trans 'Apteki' %}
                     </button>
-                    <button id="toggle-gym" class="ui button large active-gym">
+                    <button class="ui button toggle-poi large active-gym" data-poi="gym">
                         {% trans 'Siłownie' %}
                     </button>
-                    <button id="toggle-books" class="ui button large active-books">
+                    <button class="ui button toggle-poi large active-books" data-poi="books">
                         {% trans 'Księgarnie' %}
                     </button>
-                    <button id="toggle-community_centre" class="ui button large active-community_centre">
+                    <button class="ui button toggle-poi large active-community_centre" data-poi="community_centre">
                         {% trans 'Kultura' %}
                     </button>
                 </div>
@@ -67,4 +67,10 @@
         </div>
     </div>
     <div id="map"></div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'map/js/map/base.js' %}"></script>
+    <script src="{% static 'map/js/map/poi.js' %}"></script>
+    <script src="{% static 'map/js/map/distance_resize.js' %}"></script>
 {% endblock %}

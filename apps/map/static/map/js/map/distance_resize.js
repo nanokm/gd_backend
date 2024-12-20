@@ -1,11 +1,4 @@
 $(document).ready(function () {
-    function createCircle(center, radius) {
-        return turf.circle(center, radius, {
-            steps: 200,
-            units: 'kilometers'
-        });
-    }
-
     function updateUrlParams(baseUrl, newParams) {
         // Sprawdź, czy baseUrl zawiera protokół
         if (!/^https?:\/\//i.test(baseUrl)) {
@@ -76,8 +69,7 @@ $(document).ready(function () {
         // Reset 'active' class
         $(".distance").removeClass("active")
         $(this).addClass("active")
-        center = [21.0456641, 52.1942434];
-        updateCircleRadius(center, distance, distance)
+        updateCircleRadius(STARTING_POINT, distance, distance)
     })
 
 });
