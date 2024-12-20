@@ -34,6 +34,7 @@
     background-color: #A52A2A !important;
     color: white;
 }
+
 .ui.button.active-pharmacy {
     background-color: #FF1493 !important;
     color: white;
@@ -68,9 +69,22 @@
 }
 
 #search-bar {
-    width: 30em !important;
-    margin-bottom: 1.5em;
-    margin-left: 2em;
+    width: 40em !important;
+    border-radius: 0;
+}
+
+.ui .search {
+    margin-left: 2.5em;
+
+}
+
+.ui.search .prompt {
+    border-radius: 4px;
+    font-size: 15pt;
+}
+
+.ui.search > .results {
+    width: 40em !important;
 }
 
 #footer {

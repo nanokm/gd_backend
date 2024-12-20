@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block css %}
+    <style>
+        body, html {
+            height: 100%;
+        }
+        #main-menu {
+            margin-bottom: 0;
+        }
+        .bg {
+            /* The image used */
+            background-image: url("{% static 'under_constr.png' %}");
+
+            /* Full height */
+            height: 100%;
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="bg"></div>
+{% endblock %}

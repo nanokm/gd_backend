@@ -21,7 +21,7 @@ COPY pyproject.toml poetry.lock /code/
 
 # install dependencies
 RUN apt-get update && \
-    apt-get install --no-install-suggests --no-install-recommends --yes pipx chrpath libssl-dev libxft-dev binutils libproj-dev gdal-bin
+    apt-get install --no-install-suggests --no-upgrade --no-install-recommends --yes pipx chrpath libssl-dev libxft-dev binutils libproj-dev gdal-bin gettext
 
 # Install poetry
 ENV PATH="/root/.local/bin:${PATH}"

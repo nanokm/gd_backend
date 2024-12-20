@@ -23,7 +23,6 @@ function createCircle(center, radius) {
 }
 
 function fitBoundsToGeoJSON(sourceId) {
-    console.log(hasFitBounds)
     if (hasFitBounds) return; // Jeśli focus już był, nie rób nic
     const source = map.getSource(sourceId);
     if (!source || !source._data) return;

@@ -21,15 +21,15 @@
 <body>
 <div class="ui stackable huge menu inverted" id="main-menu">
     <div class="item">
-        <a href="{% url 'shared:about' %}">
+        <a href="/">
             <img alt="start" src="{% static 'light_gray_n_logo.png' %}">
         </a>
     </div>
     <a class="item {% if request.path == "/map/" %}active{% endif %}"
        href="{% url 'map:map' %}">{% trans 'Szukaj adresu' %}</a>
-    <a class="item" href="{% url 'map:map-saved-searches' %}">{% trans 'Ceny mieszkań' %}</a>
-    <a class="item" href="{% url 'map:map-saved-searches' %}">{% trans 'Jak dojadę' %}</a>
-    <a class="item" href="{% url 'map:map-saved-searches' %}">{% trans 'Trendy' %}</a>
+    <a class="item" href="{% url 'shared:under-construction' %}">{% trans 'Ceny mieszkań' %}</a>
+    <a class="item" href="{% url 'shared:under-construction' %}">{% trans 'Jak dojadę' %}</a>
+    <a class="item" href="{% url 'shared:under-construction' %}">{% trans 'Trendy' %}</a>
     <a class="item  {% if request.path == "/shared/about/" %}active{% endif %}"
        href="{% url 'shared:about' %}">{% trans 'O projekcie' %}</a>
     <div class="right menu">
