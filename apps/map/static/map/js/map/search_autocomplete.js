@@ -4,6 +4,23 @@ $(document).ready(function () {
             onSelect: function (selected_item) {
                 console.log(selected_item);
                 const source = map.getSource('main_point');
+                source.setData({
+
+                    'type': 'FeatureCollection',
+                    'features': [
+                        {
+                            // feature for Mapbox SF
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Point',
+                                'coordinates': selected_item.lat_long,
+                            },
+                        }
+                    ]
+                })
+                resetFitBoundsFlag();
+                updateCircleRadius(selected_item.lat_long, 2,2, selected_item.lat_long);
+                STARTING_POINT = selected_item.lat_long;
             },
             minCharacters: 4,
             apiSettings: {

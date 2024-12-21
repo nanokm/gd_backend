@@ -28,7 +28,6 @@
     <a class="item {% if request.path == "/map/" %}active{% endif %}"
        href="{% url 'map:map' %}">{% trans 'Szukaj adresu' %}</a>
     <a class="item" href="{% url 'shared:under-construction' %}">{% trans 'Ceny mieszkań' %}</a>
-    <a class="item" href="{% url 'shared:under-construction' %}">{% trans 'Jak dojadę' %}</a>
     <a class="item" href="{% url 'shared:under-construction' %}">{% trans 'Trendy' %}</a>
     <a class="item  {% if request.path == "/shared/about/" %}active{% endif %}"
        href="{% url 'shared:about' %}">{% trans 'O projekcie' %}</a>

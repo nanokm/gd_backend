@@ -1,7 +1,7 @@
 const TOKEN = 'pk.eyJ1Ijoia2FtaWxiOTYxMCIsImEiOiJjbTRtaDE4dWIwNHphMndxc3F2NWJmNmw1In0.HqebzlQEy9WPPxw3Fb_ntQ'
 const BASE_URL = "http://localhost:8080/map/find_points/?distance=2&category=pharmacy,fast_food,restaurant,books,cafe,convenience,gym,community_centre&lat=52.1942434&long=21.0456641"
 const MAPBOX_STYLE = 'mapbox://styles/kamilb9610/cm4t0vage001201s7ehqtfgl9'
-const STARTING_POINT = [21.0456641, 52.1942434];
+let STARTING_POINT = [21.0456641, 52.1942434];
 mapboxgl.accessToken = TOKEN;
 const map = new mapboxgl.Map({
     style: MAPBOX_STYLE,
