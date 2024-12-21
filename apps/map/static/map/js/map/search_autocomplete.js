@@ -1,37 +1,26 @@
 $(document).ready(function () {
-    var content = [
-        {title: 'Andorra'},
-        {title: 'United Arab Emirates'},
-        {title: 'Afghanistan'},
-        {title: 'Antigua'},
-        {title: 'Anguilla'},
-        {title: 'Albania'},
-        {title: 'Armenia'},
-        {title: 'Netherlands Antilles'},
-        {title: 'Angola'},
-        {title: 'Argentina'},
-        {title: 'American Samoa'},
-        {title: 'Austria'},
-        {title: 'Australia'},
-        {title: 'Aruba'},
-        {title: 'Aland Islands'},
-        {title: 'Azerbaijan'},
-        {title: 'Bosnia'},
-        {title: 'Barbados'},
-        {title: 'Bangladesh'},
-        {title: 'Belgium'},
-        {title: 'Burkina Faso'},
-        {title: 'Bulgaria'},
-        {title: 'Bahrain'},
-        {title: 'Burundi'}
-        // etc
-    ];
     $('.ui.search')
         .search({
             onSelect: function (selected_item) {
                 console.log(selected_item);
+                const source = map.getSource('main_point');
             },
-            source: content,
-
+            minCharacters: 4,
+            apiSettings: {
+                onResponse: function (autocompleteResponse) {
+                    let response = {
+                        results: []
+                    };
+                    $.each(autocompleteResponse, function (index, item) {
+                        response.results.push({
+                            title: item.title,
+                            description: item.description,
+                            lat_long: item.lat_long
+                        })
+                    });
+                    return response;
+                },
+                url: "http://localhost:8080/geocoding/api/v1/autocomplete/?q={query}"
+            }
         })
 })

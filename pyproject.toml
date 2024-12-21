@@ -21,8 +21,8 @@ pillow = "^11.0.0"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "^8.0.0"}
 django-storages = "^1.14.4"
 djangorestframework-gis = "^1.1"
-sentry-sdk = {extras = ["django"], version = "^2.19.2"}
 django-allauth = {extras = ["socialaccount"], version = "^65.3.0"}
+requests = "^2.32.3"
 
 
 [tool.poetry.group.dev.dependencies]

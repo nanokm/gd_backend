@@ -162,9 +162,6 @@ map.on('load', function () {
                         'type': 'Point',
                         'coordinates': STARTING_POINT,
                     },
-                    'properties': {
-                        'title': 'Mapbox SF'
-                    }
                 }
             ]
         }

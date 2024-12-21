@@ -15,6 +15,8 @@ services:
     depends_on:
       - db
       - redis
+    networks:
+      - main
   db:
     image: postgis/postgis:15-3.5
     ports:
@@ -26,8 +28,15 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=django_db_dev
       - POSTGRES_HOST=db
+    networks:
+      - main
   redis:
     image: redis:latest
     restart: always
+    networks:
+      - main
 volumes:
   postgres_data:
+networks:
+  main:
+    external: true

@@ -24,7 +24,6 @@ class SavedPointSearch(models.Model):
         verbose_name_plural = _("Saved points")
 
 
-# Create your models here.
 class OSMPoint(models.Model):
     osm_id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=120)
@@ -38,7 +37,7 @@ class OSMPoint(models.Model):
 
     class Meta:
         managed = False
-        db_table = "planet_osm_point"
+        db_table = settings.OSM_POINT_TABLE_POINT
 
     def get_first_non_null_display(self):
         osm_display_fields = ["shop", "religion", "amenity", "leisure", "sport", "tourism"]

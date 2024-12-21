@@ -11,4 +11,5 @@ urlpatterns = [
     path(r"map/", include("apps.map.urls")),
     path(r"offer/", include("apps.offer.urls")),
     path(r"shared/", include("apps.shared.urls")),
+    path(r"geocoding/", include("apps.geocoding.urls")),
 ]
