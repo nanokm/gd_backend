@@ -5,6 +5,7 @@ import requests
 from django.conf import settings
 from requests import Response as RequestResponse
 from rest_framework import status
+from rest_framework.exceptions import APIException
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -13,53 +14,13 @@ logger = logging.getLogger(__name__)
 
 class GeocodeAPIView(APIView):
     AUTOCOMPLETE_SIZE = 5
+    TIMEOUT_IN_SECONDS = 3
 
     def get_q_queryparam(self):
-        q = self.request.query_params.get("q", "")
-        return q
+        return self.request.query_params.get("q", "").strip()
 
     def extract_data(self, response: RequestResponse):
-        """
-            Example response
-            "geometry": {
-                "type": "Point",
-                "coordinates": [20.991731, 52.233861]
-            },
-            "properties": {
-                "id": "way/1271250738",
-                "gid": "openstreetmap:venue:way/1271250738",
-                "layer": "venue",
-                "source": "openstreetmap",
-                "source_id": "way/1271250738",
-                "country_code": "PL",
-                "name": "Żelazna 54",
-                "accuracy": "point",
-                "country": "Polska",
-                "country_gid": "whosonfirst:country:85633723",
-                "country_a": "POL",
-                "region": "mazowieckie",
-                "region_gid": "whosonfirst:region:85687257",
-                "region_a": "MZ",
-                "county": "Warszawa",
-                "county_gid": "whosonfirst:county:1477743805",
-                "localadmin": "Gmina Warszawa",
-                "localadmin_gid": "whosonfirst:localadmin:1125365875",
-                "locality": "Warszawa",
-                "locality_gid": "whosonfirst:locality:101752777",
-                "borough": "Wola",
-                "borough_gid": "whosonfirst:borough:1477921679",
-                "neighbourhood": "Mirów",
-                "neighbourhood_gid": "whosonfirst:neighbourhood:85906697",
-                "label": "Żelazna 54, Warszawa, MZ, Polska",
-                "addendum": {
-                    "osm": {
-                        "operator": "Matexi"
-                    }
-                }
-            },
-            "bbox": [20.9912119, 52.2335789, 20.9920554, 52.2341901]
-        },
-        """
+
         data = []
         for suggestion in response.json()["features"]:
             match suggestion:
@@ -77,13 +38,23 @@ class GeocodeAPIView(APIView):
         return data
 
     def get_pelias_params(self):
-        return {"text": self.get_q_queryparam(), "size": self.AUTOCOMPLETE_SIZE, "lang": "pl_pl"}
+        q = self.get_q_queryparam()
+        if not q:
+            raise APIException("q queryparam is required.")
+        return {
+            "text": q,
+            "size": self.AUTOCOMPLETE_SIZE,
+            "lang": "pl_pl",
+            "boundary.country": "PL",
+            "layers": "street,address,locality,postalcode,county,localadmin,neighbourhood,venue",
+        }
 
     def get(self, request) -> Response:
         response = requests.get(
             url=f"{settings.PELIAS_ENDPOINT}v1/autocomplete",
             params=self.get_pelias_params(),
             allow_redirects=False,
+            timeout=self.TIMEOUT_IN_SECONDS,
             json=True,
         )
         if not status.is_success(response.status_code):

@@ -1,0 +1,414 @@
+{
+  "geocoding": {
+    "version": "0.2",
+    "attribution": "http://localhost:4000/attribution",
+    "query": {
+      "text": "Żelazna 54",
+      "parser": "pelias",
+      "parsed_text": {
+        "subject": "54 Żelazna",
+        "street": "Żelazna",
+        "housenumber": "54"
+      },
+      "size": 10,
+      "private": false,
+      "lang": {
+        "name": "English",
+        "iso6391": "en",
+        "iso6393": "eng",
+        "via": "header",
+        "defaulted": false
+      },
+      "querySize": 20
+    },
+    "engine": {
+      "name": "Pelias",
+      "author": "Mapzen",
+      "version": "1.0"
+    },
+    "timestamp": 1734783382965
+  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.991731,
+          52.233861
+        ]
+      },
+      "properties": {
+        "id": "way/1271250738",
+        "gid": "openstreetmap:venue:way/1271250738",
+        "layer": "venue",
+        "source": "openstreetmap",
+        "source_id": "way/1271250738",
+        "country_code": "PL",
+        "name": "Żelazna 54",
+        "accuracy": "point",
+        "country": "Poland",
+        "country_gid": "whosonfirst:country:85633723",
+        "country_a": "POL",
+        "region": "Mazowieckie",
+        "region_gid": "whosonfirst:region:85687257",
+        "region_a": "MZ",
+        "county": "Warszawa",
+        "county_gid": "whosonfirst:county:1477743805",
+        "localadmin": "Warsaw",
+        "localadmin_gid": "whosonfirst:localadmin:1125365875",
+        "locality": "Warsaw",
+        "locality_gid": "whosonfirst:locality:101752777",
+        "borough": "Wola",
+        "borough_gid": "whosonfirst:borough:1477921679",
+        "neighbourhood": "Mirów",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85906697",
+        "label": "Żelazna 54, Warsaw, MZ, Poland",
+        "addendum": {
+          "osm": {
+            "operator": "Matexi"
+          }
+        }
+      },
+      "bbox": [
+        20.9912119,
+        52.2335789,
+        20.9920554,
+        52.2341901
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.991584,
+          52.233831
+        ]
+      },
+      "properties": {
+        "id": "node/7926130817",
+        "gid": "openstreetmap:address:node/7926130817",
+        "layer": "address",
+        "source": "openstreetmap",
+        "source_id": "node/7926130817",
+        "country_code": "PL",
+        "name": "Żelazna 54",
+        "housenumber": "54",
+        "street": "Żelazna",
+        "postalcode": "00-852",
+        "accuracy": "point",
+        "country": "Poland",
+        "country_gid": "whosonfirst:country:85633723",
+        "country_a": "POL",
+        "region": "Mazowieckie",
+        "region_gid": "whosonfirst:region:85687257",
+        "region_a": "MZ",
+        "county": "Warszawa",
+        "county_gid": "whosonfirst:county:1477743805",
+        "localadmin": "Warsaw",
+        "localadmin_gid": "whosonfirst:localadmin:1125365875",
+        "locality": "Warsaw",
+        "locality_gid": "whosonfirst:locality:101752777",
+        "borough": "Wola",
+        "borough_gid": "whosonfirst:borough:1477921679",
+        "neighbourhood": "Mirów",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85906697",
+        "label": "Żelazna 54, Warsaw, MZ, Poland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.579172,
+          51.228707
+        ]
+      },
+      "properties": {
+        "id": "pl/lubelskie:b4b573eb9c8da2f7",
+        "gid": "openaddresses:address:pl/lubelskie:b4b573eb9c8da2f7",
+        "layer": "address",
+        "source": "openaddresses",
+        "source_id": "pl/lubelskie:b4b573eb9c8da2f7",
+        "country_code": "PL",
+        "name": "Żelazna 54",
+        "housenumber": "54",
+        "street": "Żelazna",
+        "postalcode": "20-342",
+        "accuracy": "point",
+        "country": "Poland",
+        "country_gid": "whosonfirst:country:85633723",
+        "country_a": "POL",
+        "region": "Lubelskie",
+        "region_gid": "whosonfirst:region:85687309",
+        "region_a": "LU",
+        "county": "Lublin",
+        "county_gid": "whosonfirst:county:102079775",
+        "localadmin": "Lublin",
+        "localadmin_gid": "whosonfirst:localadmin:1125305623",
+        "locality": "Lublin",
+        "locality_gid": "whosonfirst:locality:101752199",
+        "label": "Żelazna 54, Lublin, LU, Poland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.005457,
+          51.099051
+        ]
+      },
+      "properties": {
+        "id": "node/1200542046",
+        "gid": "openstreetmap:address:node/1200542046",
+        "layer": "address",
+        "source": "openstreetmap",
+        "source_id": "node/1200542046",
+        "country_code": "PL",
+        "name": "Żelazna 54",
+        "housenumber": "54",
+        "street": "Żelazna",
+        "postalcode": "53-429",
+        "accuracy": "point",
+        "country": "Poland",
+        "country_gid": "whosonfirst:country:85633723",
+        "country_a": "POL",
+        "region": "dolnoslaskie",
+        "region_gid": "whosonfirst:region:85687301",
+        "region_a": "DS",
+        "county": "Wrocław",
+        "county_gid": "whosonfirst:county:102079661",
+        "localadmin": "Wrocław",
+        "localadmin_gid": "whosonfirst:localadmin:1125280577",
+        "locality": "Wrocław",
+        "locality_gid": "whosonfirst:locality:101752181",
+        "label": "Żelazna 54, Wrocław, DS, Poland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.495616,
+          50.496655
+        ]
+      },
+      "properties": {
+        "id": "node/3189668632",
+        "gid": "openstreetmap:address:node/3189668632",
+        "layer": "address",
+        "source": "openstreetmap",
+        "source_id": "node/3189668632",
+        "country_code": "PL",
+        "name": "Żelazna 54",
+        "housenumber": "54",
+        "street": "Żelazna",
+        "postalcode": "42-400",
+        "accuracy": "point",
+        "country": "Poland",
+        "country_gid": "whosonfirst:country:85633723",
+        "country_a": "POL",
+        "region": "Silesian Voivodeship",
+        "region_gid": "whosonfirst:region:85687277",
+        "region_a": "SL",
+        "county": "Zawierciański",
+        "county_gid": "whosonfirst:county:102079613",
+        "localadmin": "Zawiercie",
+        "localadmin_gid": "whosonfirst:localadmin:1125320975",
+        "locality": "Zawiercie",
+        "locality_gid": "whosonfirst:locality:101752167",
+        "label": "Żelazna 54, Zawiercie, SL, Poland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.495599,
+          50.496664
+        ]
+      },
+      "properties": {
+        "id": "pl/slaskie:2e1e54ddea0df3a5",
+        "gid": "openaddresses:address:pl/slaskie:2e1e54ddea0df3a5",
+        "layer": "address",
+        "source": "openaddresses",
+        "source_id": "pl/slaskie:2e1e54ddea0df3a5",
+        "country_code": "PL",
+        "name": "Żelazna 54",
+        "housenumber": "54",
+        "street": "Żelazna",
+        "postalcode": "42-431",
+        "accuracy": "point",
+        "country": "Poland",
+        "country_gid": "whosonfirst:country:85633723",
+        "country_a": "POL",
+        "region": "Silesian Voivodeship",
+        "region_gid": "whosonfirst:region:85687277",
+        "region_a": "SL",
+        "county": "Zawierciański",
+        "county_gid": "whosonfirst:county:102079613",
+        "localadmin": "Zawiercie",
+        "localadmin_gid": "whosonfirst:localadmin:1125320975",
+        "locality": "Zawiercie",
+        "locality_gid": "whosonfirst:locality:101752167",
+        "label": "Żelazna 54, Zawiercie, SL, Poland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.12166,
+          51.8668
+        ]
+      },
+      "properties": {
+        "id": "node/2188076171",
+        "gid": "openstreetmap:address:node/2188076171",
+        "layer": "address",
+        "source": "openstreetmap",
+        "source_id": "node/2188076171",
+        "country_code": "PL",
+        "name": "Żelazna 54",
+        "housenumber": "54",
+        "street": "Żelazna",
+        "postalcode": "96-116",
+        "accuracy": "point",
+        "country": "Poland",
+        "country_gid": "whosonfirst:country:85633723",
+        "country_a": "POL",
+        "region": "Łódź Voivodeship",
+        "region_gid": "whosonfirst:region:85687261",
+        "region_a": "LD",
+        "county": "Skierniewice County",
+        "county_gid": "whosonfirst:county:102079895",
+        "localadmin": "Gmina Skierniewice",
+        "localadmin_gid": "whosonfirst:localadmin:1477752377",
+        "locality": "Skierniewice",
+        "locality_gid": "whosonfirst:locality:101913797",
+        "label": "Żelazna 54, Skierniewice, LD, Poland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.958532,
+          53.871934
+        ]
+      },
+      "properties": {
+        "id": "node/12205122904",
+        "gid": "openstreetmap:address:node/12205122904",
+        "layer": "address",
+        "source": "openstreetmap",
+        "source_id": "node/12205122904",
+        "country_code": "PL",
+        "name": "Żelazna 54",
+        "housenumber": "54",
+        "street": "Żelazna",
+        "postalcode": "11-300",
+        "accuracy": "point",
+        "country": "Poland",
+        "country_gid": "whosonfirst:country:85633723",
+        "country_a": "POL",
+        "region": "Warmian-Masurian Voivodeship",
+        "region_gid": "whosonfirst:region:85687305",
+        "region_a": "WN",
+        "county": "Olsztyński",
+        "county_gid": "whosonfirst:county:102080207",
+        "localadmin": "Biskupiec",
+        "localadmin_gid": "whosonfirst:localadmin:1125377833",
+        "locality": "Biskupiec",
+        "locality_gid": "whosonfirst:locality:101817699",
+        "label": "Żelazna 54, Biskupiec, WN, Poland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.593753,
+          51.667935
+        ]
+      },
+      "properties": {
+        "id": "way/331890013",
+        "gid": "openstreetmap:address:way/331890013",
+        "layer": "address",
+        "source": "openstreetmap",
+        "source_id": "way/331890013",
+        "country_code": "PL",
+        "name": "Żelazna 54",
+        "housenumber": "54",
+        "street": "Żelazna",
+        "postalcode": "96-208",
+        "accuracy": "point",
+        "country": "Poland",
+        "country_gid": "whosonfirst:country:85633723",
+        "country_a": "POL",
+        "region": "Łódź Voivodeship",
+        "region_gid": "whosonfirst:region:85687261",
+        "region_a": "LD",
+        "county": "Rawa",
+        "county_gid": "whosonfirst:county:102079849",
+        "localadmin": "Sadkowice",
+        "localadmin_gid": "whosonfirst:localadmin:1125324323",
+        "label": "Żelazna 54, Sadkowice, LD, Poland"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.456425,
+          50.684551
+        ]
+      },
+      "properties": {
+        "id": "way/418963785",
+        "gid": "openstreetmap:address:way/418963785",
+        "layer": "address",
+        "source": "openstreetmap",
+        "source_id": "way/418963785",
+        "country_code": "PL",
+        "name": "Żelazna 54",
+        "housenumber": "54",
+        "street": "Żelazna",
+        "postalcode": "49-200",
+        "accuracy": "point",
+        "country": "Poland",
+        "country_gid": "whosonfirst:country:85633723",
+        "country_a": "POL",
+        "region": "Opolskie",
+        "region_gid": "whosonfirst:region:85687313",
+        "region_a": "OP",
+        "county": "Brzeski",
+        "county_gid": "whosonfirst:county:102079631",
+        "localadmin": "Gmina Grodków",
+        "localadmin_gid": "whosonfirst:localadmin:1125372189",
+        "locality": "Grodków Obszar Wiejski",
+        "locality_gid": "whosonfirst:locality:1477864379",
+        "label": "Żelazna 54, Grodków Obszar Wiejski, OP, Poland"
+      }
+    }
+  ],
+  "bbox": [
+    17.005457,
+    50.496655,
+    22.579172,
+    53.871934
+  ]
+}
