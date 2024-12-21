@@ -58,13 +58,18 @@ class GeocodeAPIView(APIView):
                 allow_redirects=False,
                 timeout=self.TIMEOUT_IN_SECONDS,
                 stream=False,
-            ).json()
+            )
+            response.raise_for_status()
+            json_response = response.json()
         except (requests.Timeout, requests.ConnectTimeout) as e:
             logger.error("Connection timeout: %s", e)
             return Response({"detail": "Connection timeout."}, status=status.HTTP_400_BAD_REQUEST)
+        except requests.HTTPError as e:
+            logger.error("Bad response: %s", e)
+            return Response({"detail": "Bad response."}, status=status.HTTP_400_BAD_REQUEST)
         except JSONDecodeError as e:
             logger.error("Unable to decode json: %s", e)
-            return Response({"detail": "Unable to decode response."})
+            return Response({"detail": "Unable to decode response."}, status=status.HTTP_400_BAD_REQUEST)
 
-        data = self.extract_data(response)
+        data = self.extract_data(json_response)
         return Response(data, status=status.HTTP_200_OK)
