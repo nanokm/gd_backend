@@ -86,4 +86,4 @@ jobs:
       #       Run test
       #----------------------------------------------
       - name: "Run tests"
-        run: poetry run python manage.py test
+        run: poetry run pytest
