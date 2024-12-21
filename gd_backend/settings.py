@@ -143,9 +143,6 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount.providers.google",
 ]
-THIRD_PARTY_DEV_APPS = [
-    "zeal",
-]
 PROJECT_APPS = ["apps.user", "apps.map", "apps.shared", "apps.org", "apps.offer", "apps.prices", "apps.geocoding"]
 
 INSTALLED_APPS = (
@@ -158,7 +155,6 @@ INSTALLED_APPS = (
         "django.contrib.staticfiles",
         "django.contrib.gis",
     ]
-    + THIRD_PARTY_DEV_APPS
     + THIRD_PARTY_APPS
     + PROJECT_APPS
 )
@@ -174,9 +170,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
-
-if DEBUG:
-    MIDDLEWARE.append("zeal.middleware.zeal_middleware")
 
 ROOT_URLCONF = "gd_backend.urls"
 

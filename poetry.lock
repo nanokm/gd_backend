@@ -27,13 +27,13 @@ tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
 
 [[package]]
 name = "astroid"
-version = "3.3.6"
+version = "3.3.7"
 description = "An abstract syntax tree for Python with inference support."
 optional = false
 python-versions = ">=3.9.0"
 files = [
-    {file = "astroid-3.3.6-py3-none-any.whl", hash = "sha256:db676dc4f3ae6bfe31cda227dc60e03438378d7a896aec57422c95634e8d722f"},
-    {file = "astroid-3.3.6.tar.gz", hash = "sha256:6aaea045f938c735ead292204afdb977a36e989522b7833ef6fea94de743f442"},
+    {file = "astroid-3.3.7-py3-none-any.whl", hash = "sha256:e1ea2c358a3c760ef583d4963e773100fa2c693b27ed158a1d0e81adb4436903"},
+    {file = "astroid-3.3.7.tar.gz", hash = "sha256:29fe1df7ef64dc17a54dbfad67b40b445340fcdba7c4012e7ecc9270c9b2f5b6"},
 ]
 
 [[package]]
@@ -453,17 +453,6 @@ google = ["google-cloud-storage (>=1.27)"]
 libcloud = ["apache-libcloud"]
 s3 = ["boto3 (>=1.4.4)"]
 sftp = ["paramiko (>=1.15)"]
-
-[[package]]
-name = "django-zeal"
-version = "2.0.2"
-description = "Detect N+1s in your Django app"
-optional = false
-python-versions = ">=3.9"
-files = [
-    {file = "django_zeal-2.0.2-py3-none-any.whl", hash = "sha256:d999903609efd0b1c6a8db7387073bdb77e82e502d1700f34a00617ea94713c1"},
-    {file = "django_zeal-2.0.2.tar.gz", hash = "sha256:4bbac64fdaa9370a8795682c29d5eb1851577db707c626c2aec40d2b35cb8eed"},
-]
 
 [[package]]
 name = "djangorestframework"
@@ -1254,6 +1243,24 @@ pluggy = ">=1.5,<2"
 dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "pygments (>=2.7.2)", "requests", "setuptools", "xmlschema"]
 
 [[package]]
+name = "pytest-django"
+version = "4.9.0"
+description = "A Django plugin for pytest."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pytest_django-4.9.0-py3-none-any.whl", hash = "sha256:1d83692cb39188682dbb419ff0393867e9904094a549a7d38a3154d5731b2b99"},
+    {file = "pytest_django-4.9.0.tar.gz", hash = "sha256:8bf7bc358c9ae6f6fc51b6cebb190fe20212196e6807121f11bd6a3b03428314"},
+]
+
+[package.dependencies]
+pytest = ">=7.0.0"
+
+[package.extras]
+docs = ["sphinx", "sphinx-rtd-theme"]
+testing = ["Django", "django-configurations (>=2.0)"]
+
+[[package]]
 name = "python-dotenv"
 version = "1.0.1"
 description = "Read key-value pairs from a .env file and set them as environment variables"
@@ -1471,4 +1478,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "1570bb88fff34fa777b8165e2cc8e4e1b654b9b46ad3bc6bfe6897a9dacfbf6a"
+content-hash = "0f00c65227ce49a444220ba4d99f318282b4292fb6c89c5a04855812964cfe1f"

@@ -1,3 +1,3 @@
-from django.test import TestCase
-
-# Create your tests here.
+class TestSomething:
+    def test_pytest(self):
+        assert True is True
