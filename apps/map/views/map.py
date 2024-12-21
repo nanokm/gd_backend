@@ -1,9 +1,9 @@
 from django.views.generic import TemplateView
 
 
-class MapTestView(TemplateView):
+class MapTemplateView(TemplateView):
     template_name = "map/map.html"
 
 
-class MapTestSavedSearchesView(TemplateView):
+class MapSavedSearchesTemplateView(TemplateView):
     template_name = "map/saved_searches.html"

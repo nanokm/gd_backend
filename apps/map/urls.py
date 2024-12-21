@@ -1,7 +1,11 @@
 from django.conf import settings
 from django.urls import path
 
-from apps.map.views import FindPointsAPIView, MapTestSavedSearchesView, MapTestView
+from apps.map.views import (
+    FindPointsAPIView,
+    MapSavedSearchesTemplateView,
+    MapTemplateView,
+)
 
 app_name = "map"
 
@@ -10,9 +14,9 @@ urlpatterns = [
 ]
 if settings.DEBUG:
     urlpatterns += [
-        (path(r"", MapTestView.as_view(), name="map")),
+        (path(r"", MapTemplateView.as_view(), name="map")),
     ]
 
     urlpatterns += [
-        (path(r"saved_searches/", MapTestSavedSearchesView.as_view(), name="map-saved-searches")),
+        (path(r"saved_searches/", MapSavedSearchesTemplateView.as_view(), name="map-saved-searches")),
     ]
