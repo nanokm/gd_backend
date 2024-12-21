@@ -2,7 +2,6 @@ $(document).ready(function () {
     $('.ui.search')
         .search({
             onSelect: function (selected_item) {
-                console.log(selected_item);
                 const source = map.getSource('main_point');
                 source.setData({
 
@@ -18,9 +17,14 @@ $(document).ready(function () {
                         }
                     ]
                 })
+
                 resetFitBoundsFlag();
-                updateCircleRadius(selected_item.lat_long, 2,2, selected_item.lat_long);
-                STARTING_POINT = selected_item.lat_long;
+                updateCircleRadius(selected_item.lat_long, 2, 2, selected_item.lat_long);
+                current_point = selected_item.lat_long;
+
+                // Reset distance to default value
+                $(".distance").removeClass("active");
+                $(".default-distance").addClass("active");
             },
             minCharacters: 4,
             apiSettings: {

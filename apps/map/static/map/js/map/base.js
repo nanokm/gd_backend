@@ -1,19 +1,26 @@
 const TOKEN = 'pk.eyJ1Ijoia2FtaWxiOTYxMCIsImEiOiJjbTRtaDE4dWIwNHphMndxc3F2NWJmNmw1In0.HqebzlQEy9WPPxw3Fb_ntQ'
-const BASE_URL = "http://localhost:8080/map/find_points/?distance=2&category=pharmacy,fast_food,restaurant,books,cafe,convenience,gym,community_centre&lat=52.1942434&long=21.0456641"
 const MAPBOX_STYLE = 'mapbox://styles/kamilb9610/cm4t0vage001201s7ehqtfgl9'
-let STARTING_POINT = [21.0456641, 52.1942434];
+const BASE_URL = "http://localhost:8080/map/find_points/"
+
+let hasFitBounds = false
+let initial_query_params = {
+    "distance": 2,
+    "category": "pharmacy,fast_food,restaurant,books,cafe,convenience,gym,community_centre",
+    "lat": "52.1942434",
+    "long": "21.0456641"
+}
+let current_point = [21.0456641, 52.1942434];
+function resetFitBoundsFlag() {
+    hasFitBounds = false;
+}
+
 mapboxgl.accessToken = TOKEN;
 const map = new mapboxgl.Map({
     style: MAPBOX_STYLE,
     container: 'map', // container ID
-    center: STARTING_POINT, // starting position [lng, lat]. Note that lat must be set between -90 and 90
+    center: current_point, // starting position [lng, lat]. Note that lat must be set between -90 and 90
     zoom: 13, // starting zoom,
 });
-let hasFitBounds = false; // Flaga globalna kontrolująca focus
-
-function resetFitBoundsFlag() {
-    hasFitBounds = false; // Funkcja do resetowania flagi
-}
 
 function createCircle(center, radius) {
     return turf.circle(center, radius, {
@@ -60,7 +67,7 @@ function fitBoundsToGeoJSON(sourceId) {
 
 
 map.on('load', function () {
-    var center = STARTING_POINT;
+    var center = current_point;
     var radiusTwo = 2;
     var options = {steps: 200, units: 'kilometers', properties: {foo: 'bar'}};
     var circle = turf.circle(center, radiusTwo, options);
@@ -101,11 +108,10 @@ map.on('load', function () {
 
     map.addControl(new mapboxgl.NavigationControl({showCompass: false}));
 
-
     map.addSource('points', {
         type: 'geojson',
         // Use a URL for the value for the `data` property.
-        data: BASE_URL,
+        data: updateUrlParams(BASE_URL, initial_query_params),
     });
 
     // Add a symbol layer
@@ -160,7 +166,7 @@ map.on('load', function () {
                     'type': 'Feature',
                     'geometry': {
                         'type': 'Point',
-                        'coordinates': STARTING_POINT,
+                        'coordinates': current_point,
                     },
                 }
             ]

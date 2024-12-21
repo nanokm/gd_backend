@@ -25,17 +25,16 @@ function updateUrlParams(baseUrl, newParams) {
     return urlObj.toString();
 }
 
-function updateCircleRadius(center, newRadius, distance, lat_long) {
+function updateCircleRadius(center, newRadius, distance) {
     const newCircle = createCircle(center, newRadius);
 
     // Zaktualizuj dane źródła
     const source = map.getSource('circle');
     const brd = map.getSource('circle-outline');
-    let new_params = {"distance": distance}
-    if (lat_long !== undefined) {
-        new_params["lat"] = lat_long[1];
-        new_params["long"] = lat_long[0]
-    }
+    let new_params = Object.assign({}, initial_query_params)
+    new_params["lat"] = center[1];
+    new_params["long"] = center[0]
+    new_params["distance"] = distance;
     const new_url = updateUrlParams(BASE_URL, new_params)
     if (source) {
         brd.setData(newCircle);
@@ -44,7 +43,6 @@ function updateCircleRadius(center, newRadius, distance, lat_long) {
     }
 }
 
-// Funkcja do aktualizacji danych w źródle
 function updateSourceData(newUrl) {
     const source = map.getSource('points');
     source.setData({
@@ -66,16 +64,12 @@ function updateSourceData(newUrl) {
 }
 
 $(document).ready(function () {
-
-
     $(".distance").click(function () {
         resetFitBoundsFlag();
         var distance = $(this).attr('data-distance');
-
-        // Reset 'active' class
         $(".distance").removeClass("active")
         $(this).addClass("active")
-        updateCircleRadius(STARTING_POINT, distance, distance)
+        updateCircleRadius(current_point, distance, distance)
     })
 
 });
