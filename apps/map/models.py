@@ -16,7 +16,7 @@ class SavedPointSearch(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     distance = models.PositiveIntegerField(null=False, blank=False)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"<{self.user}> - {self.created_at:'%m-%d-%Y'}"
 
     class Meta:
@@ -39,7 +39,7 @@ class OSMPoint(models.Model):
         managed = False
         db_table = settings.OSM_POINT_TABLE_POINT
 
-    def get_first_non_null_display(self):
+    def get_first_non_null_display(self) -> str:
         osm_display_fields = ["shop", "religion", "amenity", "leisure", "sport", "tourism"]
         non_null_display_fields = list(filter(partial(getattr, self), osm_display_fields))
         if not non_null_display_fields:
@@ -51,5 +51,5 @@ class OSMPoint(models.Model):
         non_null_field_value = getattr(self, non_null_field_name)
         return utils.find_top_level_key(non_null_field_value)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.osm_id} - ${self.get_category()} - {self.name}"

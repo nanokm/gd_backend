@@ -1,10 +1,8 @@
-# type: ignore
 import logging
 
 import requests
 from django.conf import settings
 from requests import JSONDecodeError
-from requests import Response as RequestResponse
 from rest_framework import status
 from rest_framework.exceptions import APIException
 from rest_framework.request import Request
@@ -23,7 +21,7 @@ class GeocodeAPIView(APIView):
     def get_q_queryparam(self) -> str:
         return self.request.query_params.get("q", "").strip()
 
-    def get_pelias_params(self) -> dict[str, str]:
+    def get_pelias_params(self) -> dict[str, str | int]:
         q = self.get_q_queryparam()
         if not q:
             raise APIException("q query_param is required.")
@@ -36,7 +34,7 @@ class GeocodeAPIView(APIView):
         }
 
     def extract_data(self, response: dict):
-        data = []
+        data: list = []
         for suggestion in response["features"]:
             match suggestion:
                 case {

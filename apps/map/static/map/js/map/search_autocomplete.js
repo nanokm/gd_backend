@@ -27,6 +27,7 @@ $(document).ready(function () {
                 $(".default-distance").addClass("active");
             },
             minCharacters: 4,
+            searchDelay: 220,
             apiSettings: {
                 onResponse: function (autocompleteResponse) {
                     let response = {

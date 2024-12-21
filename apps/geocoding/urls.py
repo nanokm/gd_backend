@@ -1,4 +1,3 @@
-# type: ignore
 from django.urls import path
 
 from apps.geocoding.views import GeocodeAPIView
