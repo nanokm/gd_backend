@@ -111,10 +111,18 @@ AUTHENTICATION_BACKENDS = [
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        "APP": {"client_id": "123", "secret": "456", "key": ""}
+        "APP": {
+            "client_id": "1079725403294-8vmqev45k1qti5pfudak8ll6dpiu0leg.apps.googleusercontent.com",
+            "secret": "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",
+            "key": "",
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
     }
 }
 
@@ -125,9 +133,14 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 LOGIN_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_ON_GET = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 
 PELIAS_ENDPOINT = env.str("PELIAS_ENDPOINT", "http://pelias_api:4000/")
+
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 ############################################################################
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*", "localhost"])
@@ -141,8 +154,10 @@ THIRD_PARTY_APPS = [
     "rest_framework_gis",
     "allauth",
     "allauth.account",
+    "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
 ]
+
 PROJECT_APPS = ["apps.user", "apps.map", "apps.shared", "apps.org", "apps.offer", "apps.prices", "apps.geocoding"]
 
 INSTALLED_APPS = (

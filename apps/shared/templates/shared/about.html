@@ -1,5 +1,23 @@
 {% extends 'base/base.html' %}
-
+{% load i18n %}
+{% load static %}
 {% block content %}
-    Szukając własnego mieszkania nie mogłem znaleźć narzędzia które pozwoliłoby mi podjąć najlepszą decyzję - dlatego
+    <div class="ui grid">
+        <div class="centered row">
+            <div class="ten wide column">
+                <div class="ui segment">
+                    <h1>{% trans 'O projekcie' %}</h1>
+
+                    <span>Text</span>
+                    <h1>{% trans 'Rozwój' %}</h1>
+                    <span>Text</span>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
 {% endblock %}

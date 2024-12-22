@@ -8,19 +8,31 @@
         #main-menu {
             margin-bottom: 0;
         }
-        .bg {
-            /* The image used */
-            background-image: url("{% static 'under_constr.png' %}");
 
-            /* Full height */
+        .bg {
+            background-image: url("{% static 'images/under_construction.png' %}");
+
             height: 100%;
-            /* Center and scale the image nicely */
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
         }
+
+        #under-construction-text {
+            position: absolute;
+            font-size: 45pt;
+            font-weight: bold;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            color: #424242;;
+            margin-top: 3%;
+        }
     </style>
 {% endblock %}
 {% block content %}
+    <div id="under-construction-text">
+        <span>Strona w budowie</span>
+    </div>
     <div class="bg"></div>
 {% endblock %}

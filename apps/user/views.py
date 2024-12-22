@@ -1,3 +1,4 @@
+from allauth.account.views import LoginView, SignupView
 from django.contrib.auth import login
 from django.views.generic import TemplateView
 from knox.views import LoginView as KnoxLoginView
@@ -16,5 +17,19 @@ class LoginAPIView(KnoxLoginView):
         return super(LoginAPIView, self).post(request, format=None)
 
 
-class LoginVIew(TemplateView):
-    template_name = "user/login.html"
+# class LoginVIew(TemplateView):
+#     template_name = "user/login.html"
+#
+
+
+class LoginNormalView(LoginView):
+    template_name = "allauth/login.html"
+
+
+class SignupNormalView(SignupView):
+    template_name = "allauth/register.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context["form"].errors)
+        return context

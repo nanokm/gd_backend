@@ -22,13 +22,12 @@
 <div class="ui stackable huge menu inverted" id="main-menu">
     <div class="item">
         <a href="/">
-            <img alt="start" src="{% static 'light_gray_n_logo.png' %}">
+            <img alt="start" src="{% static 'images/logo_simple .png' %}" style="width: 35px; height: 35px">
         </a>
     </div>
     <a class="item {% if request.path == "/map/" %}active{% endif %}"
        href="{% url 'map:map' %}">{% trans 'Szukaj adresu' %}</a>
-    <a class="item" href="{% url 'shared:under-construction' %}">{% trans 'Ceny mieszkań' %}</a>
-    <a class="item" href="{% url 'shared:under-construction' %}">{% trans 'Trendy' %}</a>
+    <a class="item {% if request.path == "/shared/under_construction/" %}active{% endif %}" href="{% url 'shared:under-construction' %}">{% trans 'Ceny mieszkań' %}</a>
     <a class="item  {% if request.path == "/shared/about/" %}active{% endif %}"
        href="{% url 'shared:about' %}">{% trans 'O projekcie' %}</a>
     <div class="right menu">
@@ -42,25 +41,25 @@
         </div>
         {% if request.user.is_authenticated %}
             <div class="item borderless">
-                {% trans 'Cześć' %} {{ request.user.email }}
+                {% trans 'Cześć' %}, {{ request.user.email }}
             </div>
             <div class="item borderless">
                 <a href="{% url 'account_logout' %}">
                     <div class="ui medium violet button">
-                        <i class="address card icon"></i> {% trans 'Wyloguj się' %}
+                        <i class="sign-out icon"></i> {% trans 'Wyloguj się' %}
                     </div>
                 </a>
             </div>
         {% else %}
             <div class="item borderless">
-                <a href="{% url 'account_login' %}">
+                <a href="{% url 'user:login' %}">
                     <div class="ui medium violet button" id="login-button">
                         <i class="address card icon"></i> {% trans 'Zaloguj się' %}
                     </div>
                 </a>
             </div>
             <div class="item borderless">
-                <a href="{% url 'user:login' %}">
+                <a href="{% url 'user:register' %}">
                     <div class="ui medium violet button">
                         <i class="icon user"></i> {% trans 'Rejestracja' %}
                     </div>
