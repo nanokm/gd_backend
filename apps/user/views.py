@@ -22,14 +22,13 @@ class LoginAPIView(KnoxLoginView):
 #
 
 
+class DashboardView(TemplateView):
+    template_name = "user/dashboard.html"
+
+
 class LoginNormalView(LoginView):
     template_name = "allauth/login.html"
 
 
 class SignupNormalView(SignupView):
     template_name = "allauth/register.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        print(context["form"].errors)
-        return context

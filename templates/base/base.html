@@ -27,21 +27,26 @@
     </div>
     <a class="item {% if request.path == "/map/" %}active{% endif %}"
        href="{% url 'map:map' %}">{% trans 'Szukaj adresu' %}</a>
-    <a class="item {% if request.path == "/shared/under_construction/" %}active{% endif %}" href="{% url 'shared:under-construction' %}">{% trans 'Ceny mieszkań' %}</a>
+    <a class="item {% if request.path == "/shared/under_construction/" %}active{% endif %}"
+       href="{% url 'shared:under-construction' %}">{% trans 'Ceny mieszkań' %}</a>
     <a class="item  {% if request.path == "/shared/about/" %}active{% endif %}"
        href="{% url 'shared:about' %}">{% trans 'O projekcie' %}</a>
     <div class="right menu">
 
-        <div id="drop" class="ui dropdown borderless item">
-            {% trans 'Wybierz język' %} <i class="dropdown icon"></i>
-            <div class="menu borderless">
-                <a class="item">{% trans 'Polski' %}</a>
-                <a class="item">{% trans 'Angielski' %}</a>
-            </div>
-        </div>
+        {#        <div id="drop" class="ui dropdown borderless item">#}
+        {#            {% trans 'Wybierz język' %} <i class="dropdown icon"></i>#}
+        {#            <div class="menu borderless">#}
+        {#                <a class="item">{% trans 'Polski' %}</a>#}
+        {#                <a class="item">{% trans 'Angielski' %}</a>#}
+        {#            </div>#}
+        {#        </div>#}
         {% if request.user.is_authenticated %}
-            <div class="item borderless">
-                {% trans 'Cześć' %}, {{ request.user.email }}
+            <div id="drop" class="ui dropdown borderless item">
+                {% trans 'Cześć' %}, {{ request.user.get_menubar_string }}<i class="dropdown icon"></i>
+                <div class="menu borderless">
+                    <a href="{% url 'user:dashboard' %}" class="item"><i
+                            class="sun outline icon"></i>{% trans 'Ustawienia' %}</a>
+                </div>
             </div>
             <div class="item borderless">
                 <a href="{% url 'account_logout' %}">
@@ -95,7 +100,14 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#drop").dropdown();
+        $("#drop").dropdown({
+            delay: {
+                hide: 1,
+                show: 130,
+                search: 50,
+                touch: 50
+            }
+        });
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
