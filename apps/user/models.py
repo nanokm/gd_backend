@@ -19,8 +19,8 @@ class GDUser(AbstractUser):
         verbose_name_plural = _("GD Users")
 
     def get_menubar_string(self) -> str:
-        name = f"{self.first_name.strip().capitalize()} {self.last_name.strip().capitalize()}"
-        return name or self.email.strip()
+        name = f"{self.first_name.capitalize()} {self.last_name.capitalize()}"
+        return name.strip() or self.email.strip()
 
     def __str__(self):
         return f"{self.email} joined: {self.date_joined:%d-%m-%Y}"

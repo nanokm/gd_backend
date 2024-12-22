@@ -35,7 +35,7 @@ fail-under = 10
 # the module_or_package argument.
 # from-stdin =
 
-# Files or directories to be skipped. They should be base names, not paths.
+# Files or directories to be skipped. They should be gd_backend names, not paths.
 ignore = ["settings.py", "apps.py", "migrations", "asgi.py", "wsgi.py", "db_routers.py"]
 
 # Add files or directories matching the regular expressions patterns to the
@@ -45,7 +45,7 @@ ignore = ["settings.py", "apps.py", "migrations", "asgi.py", "wsgi.py", "db_rout
 # ignore-paths =
 
 # Files or directories matching the regular expression patterns are skipped. The
-# regex matches against base names, not paths. The default value ignores Emacs
+# regex matches against gd_backend names, not paths. The default value ignores Emacs
 # file locks
 ignore-patterns = ["^\\.#"]
 

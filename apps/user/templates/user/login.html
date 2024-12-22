@@ -1,0 +1,58 @@
+{% extends 'user/_login_register_base.html' %}
+{% load i18n %}
+{% load socialaccount %}
+
+{% block login_register_content %}
+
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <h2 class="ui violet center aligned header">
+                {% trans 'Zaloguj się' %}
+            </h2>
+            <div class="ui stacked segment">
+                <form class="ui large form" method="POST" action="{% url 'user:login' %}">
+                    {% csrf_token %}
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="email" name="login" placeholder="E-mail" type="text"/>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input name="password" placeholder="{% trans 'Hasło' %}" type="password"/>
+                        </div>
+                    </div>
+                    <div class="field" id="remember_me_checkbox">
+                        <div class="ui checked checkbox">
+                            <input type="checkbox" name="remember" id="id_remember">
+                            <label for="id_remember">{% trans 'Zapamiętaj mnie' %}</label>
+                        </div>
+                    </div>
+                    <div class="ui fluid large violet submit button">{% trans 'Zaloguj' %}</div>
+                    {% if form.errors %}
+                        <div class="ui small negative message">
+                            <p>{% trans 'Niepoprawny email lub hasło.' %}</p>
+                        </div>
+                    {% endif %}
+
+                </form>
+                <div class="ui horizontal divider">
+                    {% trans 'Lub' %}
+                </div>
+                <button class="gsi-material-button" style="width:400px"
+                        onclick="window.location.href='{% provider_login_url 'google' %}'">
+                    <div class="gsi-material-button-state"></div>
+                    <div class="gsi-material-button-content-wrapper">
+                        {% include 'user/partial/_google_button.html' %}
+                        <span class="gsi-material-button-contents">{% trans 'Zaloguj się z Google' %}</span>
+                        <span style="display: none;">Sign in with Google</span>
+                    </div>
+                </button>
+            </div>
+            <div class="ui message">{% trans 'Nie masz konta?' %}<a
+                    href="{% url 'user:register' %}"> {% trans 'Zarejestruj się' %}</a></div>
+        </div>
+    </div>
+{% endblock %}

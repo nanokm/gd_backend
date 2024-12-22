@@ -417,21 +417,6 @@ phonenumbers = ["phonenumbers (>=7.0.2)"]
 phonenumberslite = ["phonenumberslite (>=7.0.2)"]
 
 [[package]]
-name = "django-rest-knox"
-version = "5.0.2"
-description = "Authentication for django rest framework"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "django_rest_knox-5.0.2-py3-none-any.whl", hash = "sha256:694da5d0ad6eb3edbfd7cdc8d69c089fc074e6b0e548e00ff2750bf2fdfadb6f"},
-    {file = "django_rest_knox-5.0.2.tar.gz", hash = "sha256:f283622bcf5d28a6a0203845c065d06c7432efa54399ae32070c61ac03af2d6f"},
-]
-
-[package.dependencies]
-django = ">=4.2"
-djangorestframework = "*"
-
-[[package]]
 name = "django-storages"
 version = "1.14.4"
 description = "Support for many storage backends in Django"
@@ -1478,4 +1463,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "0f00c65227ce49a444220ba4d99f318282b4292fb6c89c5a04855812964cfe1f"
+content-hash = "d04ec776d08061d52e33dd458f1755e2711f3184b536e453fe60c273b799eab7"

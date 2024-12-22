@@ -1,14 +1,11 @@
 from django.urls import path
 
-from apps.user.views import DashboardView, LoginNormalView, SignupNormalView
+from apps.user.views import DashboardView, UserLoginView, UserLogoutView, UserSignupView
 
 app_name = "user"
 urlpatterns = [
-    # path(r"login/", LoginAPIView.as_view(), name="knox_login"),
-    # path(r"logout/", knox_views.LogoutView.as_view(), name="knox_logout"),
-    # path(r"logoutall/", knox_views.LogoutAllView.as_view(), name="knox_logoutall"),
-    # path(r"login/", LoginVIew.as_view(), name="login"),
-    path(r"login/", LoginNormalView.as_view(), name="login"),
-    path(r"signup/", SignupNormalView.as_view(), name="register"),
+    path(r"login/", UserLoginView.as_view(), name="login"),
+    path(r"signup/", UserSignupView.as_view(), name="register"),
+    path(r"signup/", UserLogoutView.as_view(), name="logout"),
     path(r"dashboard/", DashboardView.as_view(), name="dashboard"),
 ]

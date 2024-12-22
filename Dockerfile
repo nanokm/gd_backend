@@ -1,4 +1,4 @@
-# pull official base image
+# pull official gd_backend image
 FROM python:3.12.0-bookworm
 
 # set work directory

@@ -1,21 +1,5 @@
-from allauth.account.views import LoginView, SignupView
-from django.contrib.auth import login
+from allauth.account.views import LoginView, LogoutView, SignupView
 from django.views.generic import TemplateView
-from knox.views import LoginView as KnoxLoginView
-from rest_framework import permissions
-from rest_framework.authtoken.serializers import AuthTokenSerializer
-
-
-class LoginAPIView(KnoxLoginView):
-    permission_classes = (permissions.AllowAny,)
-
-    def post(self, request, format=None):
-        serializer = AuthTokenSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data["user"]
-        login(request, user)
-        return super(LoginAPIView, self).post(request, format=None)
-
 
 # class LoginVIew(TemplateView):
 #     template_name = "user/login.html"
@@ -26,9 +10,13 @@ class DashboardView(TemplateView):
     template_name = "user/dashboard.html"
 
 
-class LoginNormalView(LoginView):
-    template_name = "allauth/login.html"
+class UserLoginView(LoginView):
+    template_name = "user/login.html"
 
 
-class SignupNormalView(SignupView):
-    template_name = "allauth/register.html"
+class UserSignupView(SignupView):
+    template_name = "user/register.html"
+
+
+class UserLogoutView(LogoutView):
+    pass

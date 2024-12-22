@@ -21,17 +21,6 @@ MAX_DISTANCE_FROM_POINT_KM = 3
 OSM_DB_NAME = "osm"
 OSM_POINT_TABLE_POINT = "planet_osm_point"
 
-
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "knox.auth.TokenAuthentication",
-    ]
-}
-
-REST_KNOX = {
-    "USER_SERIALIZER": "shared.serializers.GDUserSerializer",
-}
-
 DATABASE_ROUTERS = ["gd_backend.db_routers.OSMRouter"]
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
@@ -152,7 +141,6 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*", "localhost"])
 THIRD_PARTY_APPS = [
     "rest_framework",
     "django_filters",
-    "knox",
     "phonenumber_field",
     "rest_framework_gis",
     "allauth",
