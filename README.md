@@ -1,4 +1,5 @@
 # zametr alternative in the making
+[![vid](https://img.youtube.com/vi/HTV9T2rkDYs/0.jpg)](https://www.youtube.com/watch?v=HTV9T2rkDYs)
 
 
 ### Todo
