@@ -101,8 +101,8 @@ AUTHENTICATION_BACKENDS = [
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
-            "client_id": env.str("GOOGLE_SOCIAL_CLIENT_ID"),
-            "secret": env.str("GOOGLE_SOCIAL_SECRET"),
+            "client_id": env.str("GOOGLE_SOCIAL_CLIENT_ID", ""),
+            "secret": env.str("GOOGLE_SOCIAL_SECRET" ""),
             "key": "",
         },
         "SCOPE": [
