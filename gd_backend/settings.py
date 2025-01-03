@@ -31,7 +31,7 @@ LANGUAGES = [
     ("en", _("English")),
 ]
 
-LANGUAGE_CODE = "pl"
+LANGUAGE_CODE = env.str("LANGUAGE_CODE", "pl")
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
 
@@ -101,8 +101,8 @@ AUTHENTICATION_BACKENDS = [
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
-            "client_id": "1079725403294-8vmqev45k1qti5pfudak8ll6dpiu0leg.apps.googleusercontent.com",
-            "secret": "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",
+            "client_id": env.str("GOOGLE_SOCIAL_CLIENTID"),
+            "secret": env.str("GOOGLE_SOCIAL_SECRET"),
             "key": "",
         },
         "SCOPE": [

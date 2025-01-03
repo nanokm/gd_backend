@@ -1,10 +1,6 @@
 from allauth.account.views import LoginView, LogoutView, SignupView
 from django.views.generic import TemplateView
 
-# class LoginVIew(TemplateView):
-#     template_name = "user/login.html"
-#
-
 
 class DashboardView(TemplateView):
     template_name = "user/dashboard.html"
