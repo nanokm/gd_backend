@@ -1,5 +1,5 @@
 # pull official gd_backend image
-FROM python:3.12.0-bookworm
+FROM python:3.13.2-bookworm
 
 # set work directory
 WORKDIR /code
