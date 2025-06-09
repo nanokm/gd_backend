@@ -27,52 +27,10 @@ pydantic = "^2.11.5"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
 markdown = "^3.7"
-pylint = "^3.3.2"
-isort = "^6.0.1"
-pre-commit = "^4.0.1"
 pytest-django = "^4.9.0"
 ruff = "^0.11.13"
 
 
-[tool.poetry.group.black.dependencies]
-isort = "^6.0.1"
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.ruff]
-# Exclude a variety of commonly ignored directories.
-exclude = [
-    ".bzr",
-    ".direnv",
-    ".eggs",
-    ".git",
-    ".git-rewrite",
-    ".hg",
-    ".ipynb_checkpoints",
-    ".mypy_cache",
-    ".nox",
-    ".pants.d",
-    ".pyenv",
-    ".pytest_cache",
-    ".pytype",
-    ".ruff_cache",
-    ".svn",
-    ".tox",
-    ".venv",
-    ".vscode",
-    "__pypackages__",
-    "_build",
-    "buck-out",
-    "build",
-    "dist",
-]
-
-# Same as Black.
-line-length = 120
-indent-width = 4
-
-[tool.ruff.lint]
-select = ["E", "F"]
-ignore = ["F401"]

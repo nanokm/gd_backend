@@ -11,39 +11,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
-    runs-on: ubuntu-22.04
-    steps:
-      #----------------------------------------------
-      #       check-out repo and set-up python
-      #----------------------------------------------
-      - name: "Fetch code"
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: '0'
-      - name: "Set up python 3.13"
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-          cache: "pip"
-      - name: "Install pre-commit"
-        run: pip install pre-commit
-      #----------------------------------------------
-      #       load cached venv if cache exists
-      #----------------------------------------------
-      - name: "Cache pre-commit"
-        uses: actions/cache@v4
-        with:
-          path: "~/.cache/pre-commit"
-          key: ${{ runner.os }}-venv-pre-commit-${{ hashFiles('**/.pre-commit-config.yaml') }}
-      #----------------------------------------------
-      #       Run linters
-      #----------------------------------------------
-      - name: "Run linters"
-        run: pre-commit run -a
   test:
     runs-on: ubuntu-22.04
-    needs: lint
     steps:
       #----------------------------------------------
       #       check-out repo and set-up python
