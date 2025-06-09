@@ -1,6 +1,7 @@
 from rest_framework.generics import ListCreateAPIView
 
 from apps.offer.models import Offer
+
 from .serialziers import OfferSerializer
 
 
