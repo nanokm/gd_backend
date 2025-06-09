@@ -45,7 +45,9 @@ class GeocodeAPIView(APIView):
                         "region": region,
                     },
                 }:
-                    data.append({"title": name, "description": f"{locality}, {region.capitalize()}", "lat_long": [x, y]})
+                    data.append(
+                        {"title": name, "description": f"{locality}, {region.capitalize()}", "lat_long": [x, y]}
+                    )
                 case _:
                     logger.warning("Unable to match suggestion: %s", suggestion)
         return data

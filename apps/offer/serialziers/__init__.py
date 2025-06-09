@@ -4,8 +4,8 @@ from .offer import OfferSerializer
 from .photo import PhotoSerializer
 
 __all__ = [
-    'AppliancesSerializer',
-    'FlooringSerializer',
-    'OfferSerializer',
-    'PhotoSerializer',
+    "AppliancesSerializer",
+    "FlooringSerializer",
+    "OfferSerializer",
+    "PhotoSerializer",
 ]
