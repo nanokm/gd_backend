@@ -6,6 +6,7 @@ class Photo(models.Model):
     name = models.CharField()
     date_added = models.DateTimeField(auto_now_add=True)
     file = models.ImageField(upload_to="photos", blank=True)
+    offer = models.ForeignKey("Offer", on_delete=models.SET_NULL, related_name="photos", null=True, blank=True)
 
     def __str__(self):
         return f"{self.name} - {self.date_added:%d-%m-%Y} "

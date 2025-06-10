@@ -102,7 +102,7 @@ SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
             "client_id": env.str("GOOGLE_SOCIAL_CLIENT_ID", "<google_client_id>"),
-            "secret": env.str("GOOGLE_SOCIAL_SECRET<google_secret>"),
+            "secret": env.str("GOOGLE_SOCIAL_SECRET", "<google_secret>"),
             "key": "",
         },
         "SCOPE": [
@@ -115,17 +115,16 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-LOGIN_REDIRECT_URL = "/"
-ACCOUNT_LOGOUT_REDIRECT_URL = "/"
-ACCOUNT_LOGOUT_ON_GET = True
-SOCIALACCOUNT_ENABLED = True
-SOCIALACCOUNT_LOGIN_ON_GET = True
-SOCIALACCOUNT_AUTO_SIGNUP = True
-SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+# settings.ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
+# ACCOUNT_LOGIN_METHODS = {'email'}
+# LOGIN_REDIRECT_URL = "/"
+# ACCOUNT_LOGOUT_REDIRECT_URL = "/"
+# ACCOUNT_LOGOUT_ON_GET = True
+# SOCIALACCOUNT_ENABLED = True
+# SOCIALACCOUNT_LOGIN_ON_GET = True
+# SOCIALACCOUNT_AUTO_SIGNUP = True
+# SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
 
 
 PELIAS_ENDPOINT = env.str("PELIAS_ENDPOINT", "http://pelias_api:4000/")
@@ -142,14 +141,13 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "django_filters",
     "phonenumber_field",
-    "rest_framework_gis",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
 ]
 
-PROJECT_APPS = ["apps.user", "apps.map", "apps.shared", "apps.org", "apps.offer", "apps.prices", "apps.geocoding"]
+PROJECT_APPS = ["apps.user", "apps.shared", "apps.org", "apps.offer", "apps.prices",]
 
 INSTALLED_APPS = (
     [
@@ -159,7 +157,6 @@ INSTALLED_APPS = (
         "django.contrib.sessions",
         "django.contrib.messages",
         "django.contrib.staticfiles",
-        "django.contrib.gis",
     ]
     + THIRD_PARTY_APPS
     + PROJECT_APPS
@@ -200,16 +197,8 @@ WSGI_APPLICATION = "gd_backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": env.str("POSTGRES_DB", "postgres"),
-        "USER": env.str("POSTGRES_USER", "user"),
-        "PASSWORD": env.str("POSTGRES_PASSWORD", "password"),
-        "HOST": env.str("POSTGRES_HOST", "localhost"),
-        "PORT": env.str("POSTGRES_PORT", "5432"),
-    },
-    OSM_DB_NAME: {
-        "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "NAME": OSM_DB_NAME,
         "USER": env.str("POSTGRES_USER", "user"),
         "PASSWORD": env.str("POSTGRES_PASSWORD", "password"),
         "HOST": env.str("POSTGRES_HOST", "localhost"),
@@ -221,7 +210,7 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": env.str("REDIS_URL", "redis://redis:6379/"),
-        "KEY_PREFIX": "gd",
+        "KEY_PREFIX": env.str("KEY_PREFIX", "GD"),
         "TIMEOUT": 60 * 15,  # in seconds: 60 * 15 (15 minutes)
     }
 }
