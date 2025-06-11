@@ -363,6 +363,28 @@ socialaccount = ["pyjwt[crypto] (>=2.0,<3)", "requests (>=2.0.0,<3)", "requests-
 steam = ["python3-openid (>=3.0.8,<4)"]
 
 [[package]]
+name = "django-countries"
+version = "7.6.1"
+description = "Provides a country field for Django models."
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "django-countries-7.6.1.tar.gz", hash = "sha256:c772d4e3e54afcc5f97a018544e96f246c6d9f1db51898ab0c15cd57e19437cf"},
+    {file = "django_countries-7.6.1-py3-none-any.whl", hash = "sha256:1ed20842fe0f6194f91faca21076649513846a8787c9eb5aeec3cbe1656b8acc"},
+]
+
+[package.dependencies]
+asgiref = "*"
+typing-extensions = "*"
+
+[package.extras]
+dev = ["black", "django", "djangorestframework", "graphene-django", "pytest", "pytest-django", "tox (==4.*)"]
+maintainer = ["django", "zest.releaser[recommended]"]
+pyuca = ["pyuca"]
+test = ["djangorestframework", "graphene-django", "pytest", "pytest-cov", "pytest-django"]
+
+[[package]]
 name = "django-filter"
 version = "25.1"
 description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
@@ -1588,4 +1610,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "823832bc0b90a73aa2743cd8c5617e02859bb21b0b1c1f44934e59acf5371fe8"
+content-hash = "3261f6a5fafbcdcc7c3c9a3b17c65c7453096133607c5d4a7f52f372714bb090"
