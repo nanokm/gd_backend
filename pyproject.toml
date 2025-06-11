@@ -20,6 +20,7 @@ django-allauth = {extras = ["socialaccount"], version = "^65.3.0"}
 requests = "^2.32.4"
 pydantic = "^2.11.5"
 psycopg = {extras = ["binary"], version = "^3.2.9"}
+drf-spectacular = "^0.28.0"
 
 
 [tool.poetry.group.dev.dependencies]

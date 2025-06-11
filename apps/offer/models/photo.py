@@ -1,15 +1,16 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from apps.shared.models import TimestampModelMixin
 
-class Photo(models.Model):
+
+class Photo(TimestampModelMixin, models.Model):
     name = models.CharField()
-    date_added = models.DateTimeField(auto_now_add=True)
     file = models.ImageField(upload_to="photos", blank=True)
     offer = models.ForeignKey("Offer", on_delete=models.SET_NULL, related_name="photos", null=True, blank=True)
 
     def __str__(self):
-        return f"{self.name} - {self.date_added:%d-%m-%Y} "
+        return f"{self.name} - {self.date_created:%d-%m-%Y} "
 
     class Meta:
         verbose_name = _("Photo")

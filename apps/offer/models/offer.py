@@ -10,33 +10,58 @@ class Offer(TimestampModelMixin, models.Model):
     class Category(models.IntegerChoices):
         APARTMENT = 1, _("Apartment")
         GARAGE = 2, _("Garage")
+        HOUSE = 3, _("House")
+        ROOM = 4, _("Room")
+        PLOT = 5, _("Plot")
 
-    owner = models.ForeignKey(to=get_user_model(), blank=True, null=True, on_delete=models.SET_NULL)
+    class Type(models.IntegerChoices):
+        LOFT = 1, _("Loft")
+        SINGLE = 2, _("Single")
+        SHARED = 3, _("Shared")
+
+    # uuid = models.UUIDField(default=uuid.uuid4, db_index=True)
+    author = models.ForeignKey(to=get_user_model(), blank=True, null=True, on_delete=models.SET_NULL)
     category = models.PositiveSmallIntegerField(choices=Category.choices, blank=False, default=Category.APARTMENT)
-    rent = models.PositiveIntegerField(blank=True)
-    square_meters = models.PositiveIntegerField()
-    price = models.PositiveIntegerField(blank=True)
-    deposit = models.PositiveIntegerField(blank=False)
-    construction_year = models.PositiveIntegerField(blank=False, null=True)
+    type = models.PositiveSmallIntegerField(choices=Type.choices, blank=False, default=Type.SINGLE)
+
+    #####
+    ##### Key required fields
+    #####
     title = models.CharField(max_length=200)
-    energy_certificate = models.CharField(blank=True, null=True)
-    description = models.TextField(max_length=2000)
-    phone_number = PhoneNumberField()
+    price = models.PositiveIntegerField(blank=False)
+    square_meters = models.PositiveIntegerField(blank=False)
     rooms = models.PositiveIntegerField(blank=False)
-    # appliances = models.ManyToManyField(Appliances, blank=True)
-    # flooring = models.ManyToManyField(Flooring, blank=True)
+
+    construction_year = models.PositiveIntegerField(blank=False, null=True)
+    addrline1 = models.CharField(max_length=250)
+    addrline2 = models.CharField(max_length=250, blank=True)
+    deposit = models.PositiveIntegerField(blank=True, null=True)
+    deposit_received = models.BooleanField(default=False)
+    description = models.TextField()
+
+    #####
+    ##### Misc bool fields
+    #####
+    air_conditioning = models.BooleanField(blank=False, null=True)
+    broadband = models.BooleanField(blank=False, null=True)
+    available_in = models.SmallIntegerField(blank=True, null=True)
+
+    ####
+    #### Misc fields
+    ####
+
+    floor = models.PositiveIntegerField("Floor", blank=True, null=True)
+    floors = models.PositiveIntegerField("Number of floors", blank=True, null=True)
+    energy_certificate = models.CharField(blank=True, null=True)
+    phone_number = PhoneNumberField()
     lease_terms = models.PositiveIntegerField(blank=True, null=True)
-    last_modified = models.DateTimeField(auto_now=True)
     lift = models.BooleanField(blank=False, null=True)
-    broadband = models.CharField(max_length=250, null=True, blank=True)
-    floor = models.PositiveIntegerField(blank=True, null=True)
-    # heating_type = models.ManyToManyField(HeatingType, blank=True)
 
     def get_square_meter_price(self):
         return self.price / self.square_meters
 
     def __str__(self):
-        return f"<{self.id}> - {self.owner} -  {self.title[:50]}"
+        return f"<{self.id}> - {self.author} -  {self.title[:50]}"
 
     class Meta:
         verbose_name = _("Offer")

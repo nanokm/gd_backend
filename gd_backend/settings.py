@@ -16,12 +16,6 @@ DEBUG = env.bool("DEBUG", True)
 
 #########################        APP SETTINGS      #########################
 AUTH_USER_MODEL = "user.GDUser"
-APP_SRID = 4326
-MAX_DISTANCE_FROM_POINT_KM = 3
-OSM_DB_NAME = "osm"
-OSM_POINT_TABLE_POINT = "planet_osm_point"
-
-DATABASE_ROUTERS = ["gd_backend.db_routers.OSMRouter"]
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
@@ -34,61 +28,6 @@ LANGUAGES = [
 LANGUAGE_CODE = env.str("LANGUAGE_CODE", "pl")
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
-
-OSM_CATEGORY_MAPPING = {
-    "books": {"column": "shop", "value": "books"},
-    "restaurant": {"column": "amenity", "value": "restaurant"},
-    "cafe": {
-        "column": "amenity",
-        "value": "cafe",
-    },
-    "fast_food": {
-        "column": "amenity",
-        "value": "fast_food",
-    },
-    "convenience": {
-        "column": "shop",
-        "value": "convenience",
-    },
-    "pharmacy": {
-        "column": "amenity",
-        "value": "pharmacy",
-    },
-    "gym": [
-        {
-            "column": "leisure",
-            "value": "fitness_centre",
-        },
-        {"column": "amenity", "value": "gym"},
-        {"column": "sport", "value": "fitness"},
-        {"column": "leisure", "value": "sports_hall"},
-        {"column": "sport", "value": "multi"},
-        {"column": "leisure", "value": "bowling_alley"},
-        {"column": "leisure", "value": "ice_rink"},
-        {"column": "leisure", "value": "fitness_station"},
-        {"column": "leisure", "value": "sports_centre"},
-    ],
-    "community_centre": [
-        {
-            "column": "amenity",
-            "value": "community_centre",
-        },
-        {
-            "column": "tourism",
-            "value": "museum",
-        },
-        {"column": "tourism", "value": "gallery"},
-        {"column": "shop", "value": "antiques"},
-        {
-            "column": "amenity",
-            "value": "theatre",
-        },
-    ],
-    "atm": {"column": "amenity", "value": "atm"},
-    "religion": {"column": "religion", "value": "religion"},
-}
-
-OSM_CATEGORY_LIST = [key.lower() for key in OSM_CATEGORY_MAPPING.keys()]
 
 
 AUTHENTICATION_BACKENDS = [
@@ -145,9 +84,10 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "drf_spectacular",
 ]
 
-PROJECT_APPS = ["apps.user", "apps.shared", "apps.org", "apps.offer", "apps.prices",]
+PROJECT_APPS = ["apps.user", "apps.shared", "apps.offer", "apps.saved_searches", "apps.chat"]
 
 INSTALLED_APPS = (
     [
@@ -157,6 +97,7 @@ INSTALLED_APPS = (
         "django.contrib.sessions",
         "django.contrib.messages",
         "django.contrib.staticfiles",
+        "django.contrib.postgres",
     ]
     + THIRD_PARTY_APPS
     + PROJECT_APPS
@@ -215,6 +156,20 @@ CACHES = {
     }
 }
 
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your Project API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
+
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -237,3 +192,4 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 LOGIN_URL = "/admin/login/"
+

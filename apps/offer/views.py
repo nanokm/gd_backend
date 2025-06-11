@@ -1,14 +1,14 @@
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from apps.offer.models import Offer
-
-from .serialziers import OfferSerializer
+from .serializers import OfferDetailSerializer, OfferListSerializer
 
 
 class ListCreateOfferAPIView(ListCreateAPIView):
-    serializer_class = OfferSerializer
+    serializer_class = OfferListSerializer
     queryset = Offer.objects.all()
 
 
-class RetrieveUpdateDestroyOfferAPIView(ListCreateOfferAPIView):
-    serializer_class = OfferSerializer
+class OfferRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = OfferDetailSerializer
+    queryset = Offer.objects.all()

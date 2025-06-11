@@ -26,7 +26,8 @@ exclude = [
     "site-packages",
     "venv",
 
-    "settings.py"
+    "settings.py",
+    "migrations"
 ]
 
 

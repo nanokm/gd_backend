@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class OrgConfig(AppConfig):
+class PriceChangeConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "apps.org"
+    name = "apps.price_change"
