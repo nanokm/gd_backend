@@ -4,6 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Kamil Bobola <kamilb9610@proton.me>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -22,6 +23,7 @@ pydantic = "^2.11.5"
 psycopg = {extras = ["binary"], version = "^3.2.9"}
 drf-spectacular = "^0.28.0"
 django-countries = "^7.6.1"
+sentry-sdk = "^2.29.1"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -195,3 +195,10 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 LOGIN_URL = "/admin/login/"
 
+
+if not DEBUG:
+    import sentry_sdk
+    sentry_sdk.init(
+        "https://12927b5f211046b575ee51fd8b1ac34f@o1.ingest.sentry.io/1",
+        traces_sample_rate=1.0,
+    )

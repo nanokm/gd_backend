@@ -5,7 +5,7 @@ from apps.shared.models import TimestampModelMixin
 
 
 class Photo(TimestampModelMixin, models.Model):
-    name = models.CharField()
+    name = models.CharField(null=True, blank=True, max_length=150)
     file = models.ImageField(upload_to="photos", blank=True)
     offer = models.ForeignKey("Offer", on_delete=models.SET_NULL, related_name="photos", null=True, blank=True)
 

@@ -19,10 +19,18 @@ class Offer(TimestampModelMixin, models.Model):
         SINGLE = 2, _("Single")
         SHARED = 3, _("Shared")
 
+    class Status(models.IntegerChoices):
+        ACTIVE = 1, _("Active")
+        EXPIRED = 2, _("Expired")
+        PENDING = 3, _("Pending")
+        REJECTED = 4, _("Rejected")
+
     # uuid = models.UUIDField(default=uuid.uuid4, db_index=True)
     author = models.ForeignKey(to=get_user_model(), blank=True, null=True, on_delete=models.SET_NULL)
     category = models.PositiveSmallIntegerField(choices=Category.choices, blank=False, default=Category.APARTMENT)
     type = models.PositiveSmallIntegerField(choices=Type.choices, blank=False, default=Type.SINGLE)
+    status = models.PositiveSmallIntegerField(choices=Status.choices, blank=False, default=Status.PENDING)
+    rejected_reason = models.TextField(blank=True, null=True)
 
     #####
     ##### Key required fields
@@ -56,6 +64,13 @@ class Offer(TimestampModelMixin, models.Model):
     phone_number = PhoneNumberField()
     lease_terms = models.PositiveIntegerField(blank=True, null=True)
     lift = models.BooleanField(blank=False, null=True)
+
+    ####
+    #### Links
+    ####
+
+    video = models.URLField(blank=True, null=True)
+    virtual_tour = models.URLField(blank=True, null=True)
 
     def get_square_meter_price(self):
         return self.price / self.square_meters
