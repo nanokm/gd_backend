@@ -4,10 +4,6 @@ from apps.offer.models import Offer
 from apps.offer.serializers.photo import PhotoSerializer
 
 
-# author = models.ForeignKey(to=get_user_model(), blank=True, null=True, on_delete=models.SET_NULL)
-# type = models.PositiveSmallIntegerField(choices=Type.choices, blank=False, default=Type.SINGLE)
-
-
 class OfferSerializerMixing(serializers.Serializer):
     url = serializers.HyperlinkedIdentityField(view_name="offer:offer-detail", lookup_field="id", lookup_url_kwarg="pk")
     category_label = serializers.CharField(source="get_category_display", read_only=True)
@@ -23,12 +19,14 @@ class OfferListSerializer(OfferSerializerMixing, serializers.HyperlinkedModelSer
             "url",
             "price",
             "photos",
+            "slug",
             "square_meters",
             "title",
             "type_label",
             "date_created",
             "category",
             "category_label",
+            "author_display_name",
         )
 
 
@@ -38,6 +36,7 @@ class OfferDetailSerializer(OfferSerializerMixing, serializers.HyperlinkedModelS
         fields = (
             "url",
             "title",
+            "slug",
             "square_meters",
             "price",
             "air_conditioning",
@@ -61,4 +60,5 @@ class OfferDetailSerializer(OfferSerializerMixing, serializers.HyperlinkedModelS
             "lift",
             "lease_terms",
             "price_history",
+            "author_display_name",
         )

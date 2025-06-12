@@ -19,6 +19,7 @@ class GDUser(AbstractUser):
 
     username = None
     email = models.EmailField(_("Email address"), unique=True)
+    first_name = models.CharField(_("first name"), max_length=150, blank=True, null=True)
     account_type = models.PositiveSmallIntegerField(choices=AccountType.choices, default=AccountType.PRIVATE)
     profile_photo = models.ImageField(upload_to="profile_photo", blank=True, null=True)
 

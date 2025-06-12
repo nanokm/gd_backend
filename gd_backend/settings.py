@@ -88,7 +88,7 @@ THIRD_PARTY_APPS = [
     "reversion"
 ]
 
-PROJECT_APPS = ["apps.user", "apps.shared", "apps.offer", "apps.saved_searches", "apps.chat"]
+PROJECT_APPS = ["apps.user", "apps.shared", "apps.offer", "apps.saved_searches", "apps.chat", "apps.investment"]
 
 INSTALLED_APPS = (
     [

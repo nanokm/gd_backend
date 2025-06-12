@@ -61,13 +61,6 @@ jobs:
             path: ./.venv
             key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
       #----------------------------------------------
-      #       Install poetry and sys packages
-      #----------------------------------------------
-      - name: "Install dependencies"
-        run: poetry install
-      - name: "Install GDAL"
-        run: sudo apt-get install gdal-bin --no-install-suggests --no-install-recommends --yes --no-upgrade
-      #----------------------------------------------
       #       Run test
       #----------------------------------------------
       - name: "Run tests"

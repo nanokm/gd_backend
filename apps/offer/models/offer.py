@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.functional import cached_property
@@ -7,7 +9,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from reversion.models import Version
 
 from apps.shared.models import TimestampModelMixin
-import uuid
+from apps.shared.validators import validate_current_year
 
 
 class Offer(TimestampModelMixin, models.Model):
@@ -29,12 +31,19 @@ class Offer(TimestampModelMixin, models.Model):
         PENDING = 3, _("Pending")
         REJECTED = 4, _("Rejected")
 
+    class Currency(models.IntegerChoices):
+        PLN = 1, _("PLN")
+        EUR = 2, _("EUR")
+        USD = 3, _("USD")
+        GBP = 4, _("GBP")
+
     uuid = models.UUIDField(default=uuid.uuid4, db_index=True)
     slug = models.SlugField(max_length=250, unique=True, blank=True, null=True)
     author = models.ForeignKey(to=get_user_model(), blank=True, null=True, on_delete=models.SET_NULL)
     category = models.PositiveSmallIntegerField(choices=Category.choices, blank=False, default=Category.APARTMENT)
     type = models.PositiveSmallIntegerField(choices=Type.choices, blank=False, default=Type.SINGLE)
     status = models.PositiveSmallIntegerField(choices=Status.choices, blank=False, default=Status.PENDING)
+    currency = models.PositiveSmallIntegerField(choices=Currency.choices, blank=False, default=Currency.PLN)
     rejected_reason = models.TextField(blank=True, null=True)
 
     #####
@@ -45,7 +54,13 @@ class Offer(TimestampModelMixin, models.Model):
     square_meters = models.PositiveIntegerField(blank=False)
     rooms = models.PositiveIntegerField(blank=False)
 
-    construction_year = models.PositiveIntegerField(blank=False, null=True)
+    construction_year = models.PositiveIntegerField(
+        blank=False,
+        null=True,
+        validators=[
+            validate_current_year,
+        ],
+    )
     addrline1 = models.CharField(max_length=250)
     addrline2 = models.CharField(max_length=250, blank=True)
     deposit = models.PositiveIntegerField(blank=True, null=True)
@@ -89,12 +104,16 @@ class Offer(TimestampModelMixin, models.Model):
             {"price": version.field_dict["price"], "date": version.field_dict["date_modified"]} for version in versions
         ]
 
-    def __str__(self):
-        return f"<{self.id}> - {self.author} -  {self.title[:50]}"
+    @property
+    def author_display_name(self):
+        return self.author.first_name.strip()
 
     def save(self, *args, **kwargs) -> None:
         self.slug = f"{slugify(self.title)}-{str(self.uuid)[:8]}"
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"<{self.id}> - {self.author} -  {self.title[:50]}"
 
     class Meta:
         verbose_name = _("Offer")
