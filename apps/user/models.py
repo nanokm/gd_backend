@@ -38,7 +38,7 @@ class GDUser(AbstractUser):
     # Notification section
     allow_sms_notifications = models.BooleanField(default=False)
     allow_email_notifications = models.BooleanField(default=False)
-    allow_push_notifications = models.BooleanField(default=False)
+    subscribe_to_newsletter = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 

@@ -1,9 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils.functional import cached_property
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
+from reversion.models import Version
 
 from apps.shared.models import TimestampModelMixin
+import uuid
 
 
 class Offer(TimestampModelMixin, models.Model):
@@ -25,7 +29,8 @@ class Offer(TimestampModelMixin, models.Model):
         PENDING = 3, _("Pending")
         REJECTED = 4, _("Rejected")
 
-    # uuid = models.UUIDField(default=uuid.uuid4, db_index=True)
+    uuid = models.UUIDField(default=uuid.uuid4, db_index=True)
+    slug = models.SlugField(max_length=250, unique=True, blank=True, null=True)
     author = models.ForeignKey(to=get_user_model(), blank=True, null=True, on_delete=models.SET_NULL)
     category = models.PositiveSmallIntegerField(choices=Category.choices, blank=False, default=Category.APARTMENT)
     type = models.PositiveSmallIntegerField(choices=Type.choices, blank=False, default=Type.SINGLE)
@@ -75,8 +80,21 @@ class Offer(TimestampModelMixin, models.Model):
     def get_square_meter_price(self):
         return self.price / self.square_meters
 
+    @cached_property
+    def price_history(self):
+        versions = Version.objects.get_for_object(self)
+        if len(versions) == 1:
+            return []
+        return [
+            {"price": version.field_dict["price"], "date": version.field_dict["date_modified"]} for version in versions
+        ]
+
     def __str__(self):
         return f"<{self.id}> - {self.author} -  {self.title[:50]}"
+
+    def save(self, *args, **kwargs) -> None:
+        self.slug = f"{slugify(self.title)}-{str(self.uuid)[:8]}"
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = _("Offer")

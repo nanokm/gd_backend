@@ -60,4 +60,5 @@ class OfferDetailSerializer(OfferSerializerMixing, serializers.HyperlinkedModelS
             "construction_year",
             "lift",
             "lease_terms",
+            "price_history",
         )

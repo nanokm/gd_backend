@@ -85,6 +85,7 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "drf_spectacular",
+    "reversion"
 ]
 
 PROJECT_APPS = ["apps.user", "apps.shared", "apps.offer", "apps.saved_searches", "apps.chat"]
