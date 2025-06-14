@@ -54,6 +54,14 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+HEADLESS_FRONTEND_URLS = {
+    "account_confirm_email": "https://app.project.org/account/verify-email/{key}",
+    "account_reset_password_from_key": "https://app.org/account/password/reset/key/{key}",
+    "account_signup": "https://app.org/account/signup",
+}
+
+HEADLESS_ONLY = True
+
 # ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 # settings.ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 # ACCOUNT_LOGIN_METHODS = {'email'}
@@ -80,15 +88,19 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "django_filters",
     "phonenumber_field",
-    "allauth",
+
+    # Allauth
     "allauth.account",
+    #'allauth.headless',
     "allauth.socialaccount",
+    #'allauth.mfa',
+    #'allauth.usersessions',
     "allauth.socialaccount.providers.google",
-    "drf_spectacular",
+
     "reversion"
 ]
 
-PROJECT_APPS = ["apps.user", "apps.shared", "apps.offer", "apps.saved_searches", "apps.chat", "apps.investment"]
+PROJECT_APPS = ["apps.user", "apps.shared", "apps.offer", "apps.saved_searches", "apps.chat", "apps.investment", "apps.triage"]
 
 INSTALLED_APPS = (
     [
@@ -159,6 +171,9 @@ CACHES = {
 
 REST_FRAMEWORK = {
     # YOUR SETTINGS
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 25,
 }

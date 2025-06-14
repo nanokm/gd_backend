@@ -1,11 +1,10 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-
+from reversion.admin import VersionAdmin
 from .forms import GDUserChangeForm, GDUserCreationForm
 from .models import GDUser
 
 
-class GDUserAdmin(UserAdmin):
+class GDUserAdmin(VersionAdmin):
     add_form = GDUserCreationForm
     form = GDUserChangeForm
     model = GDUser
@@ -20,10 +19,21 @@ class GDUserAdmin(UserAdmin):
         "is_active",
     )
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
+        (
+            "General info",
+            {"fields": ("email", "first_name", "account_type", "profile_photo")},
+        ),
         (
             "Permissions",
-            {"fields": ("is_staff", "is_active", "groups", "user_permissions")},
+            {"fields": ("is_staff", "is_active")},
+        ),
+        (
+            "Contact info",
+            {"fields": ("phone_number", "country", "city", "street", "house_number", "zip_code")},
+        ),
+        (
+            "Notifications",
+            {"fields": ("allow_sms_notifications", "allow_email_notifications", "subscribe_to_newsletter")},
         ),
     )
     add_fieldsets = (

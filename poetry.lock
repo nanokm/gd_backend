@@ -629,6 +629,24 @@ files = [
 testing = ["hatch", "pre-commit", "pytest", "tox"]
 
 [[package]]
+name = "fido2"
+version = "2.0.0"
+description = "FIDO2/WebAuthn library for implementing clients and servers."
+optional = false
+python-versions = "<4,>=3.10"
+groups = ["main"]
+files = [
+    {file = "fido2-2.0.0-py3-none-any.whl", hash = "sha256:685f54a50a57e019c6156e2dd699802a603e3abf70bab334f26affdd4fb8d4f7"},
+    {file = "fido2-2.0.0.tar.gz", hash = "sha256:3061cd05e73b3a0ef6afc3b803d57c826aa2d6a9732d16abd7277361f58e7964"},
+]
+
+[package.dependencies]
+cryptography = ">=2.6,<35 || >35,<48"
+
+[package.extras]
+pcsc = ["pyscard (>=1.9,<3)"]
+
+[[package]]
 name = "hiredis"
 version = "3.2.1"
 description = "Python wrapper for hiredis"
@@ -1522,4 +1540,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "b088558b5121ee1710c819971ab9dfd799962e37d704195a2292d29d538825d4"
+content-hash = "f989bcde8e9512139d6eceefc8fbf6fa8584fbb16c7b5861043476626e6652fa"

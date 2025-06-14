@@ -9,6 +9,8 @@ urlpatterns = [
     path(r"api/v1/u/", include("apps.user.urls")),
     path(r"api/v1/o/", include("apps.offer.urls")),
     path(r"api/v1/s/", include("apps.shared.urls")),
+    path("accounts/", include("allauth.urls")),
+    path("_allauth/", include("allauth.headless.urls")),
 ]
 
 if settings.DEBUG:

@@ -13,9 +13,10 @@ class GDUser(AbstractUser):
 
     class AccountType(models.IntegerChoices):
         PRIVATE = 1, _("Private")
-        DEVELOPER_ADMIN = 2, _("Developer Admin")
-        DEVELOPER_EMPLOYEE = 3, _("Developer Employee")
-        STATE_OFFICIAL = 4, _("State official")
+        TRIAGE_ADMIN = 2, _("Triage Admin")
+        DEVELOPER_ADMIN = 3, _("Developer Admin")
+        DEVELOPER_EMPLOYEE = 4, _("Developer Employee")
+        STATE_OFFICIAL = 5, _("State official")
 
     username = None
     email = models.EmailField(_("Email address"), unique=True)
