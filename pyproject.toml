@@ -18,9 +18,7 @@ pillow = "^11.0.0"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "^8.0.0"}
 django-storages = "^1.14.4"
 django-allauth = {extras = ["socialaccount"], version = "^65.3.0"}
-pydantic = "^2.11.5"
 psycopg = {extras = ["binary"], version = "^3.2.9"}
-drf-spectacular = "^0.28.0"
 django-countries = "^7.6.1"
 sentry-sdk = "^2.30.0"
 django-reversion = "^5.1.0"

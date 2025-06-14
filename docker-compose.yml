@@ -2,7 +2,7 @@ services:
   web:
     working_dir: /code
     build: ./
-    command: ./scripts/entrypoint.sh
+    command: ./scripts/dev/entrypoint.sh
     volumes:
       - .:/code
     ports:
