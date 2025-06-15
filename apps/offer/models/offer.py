@@ -10,9 +10,12 @@ from reversion.models import Version
 
 from apps.shared.models import TimestampModelMixin
 from apps.shared.validators import validate_current_year
+from apps.user.models import GDUser
+import reversion
 
 
-class Offer(TimestampModelMixin, models.Model):
+@reversion.register
+class  Offer(TimestampModelMixin, models.Model):
     class Category(models.IntegerChoices):
         APARTMENT = 1, _("Apartment")
         GARAGE = 2, _("Garage")
@@ -37,24 +40,25 @@ class Offer(TimestampModelMixin, models.Model):
         USD = 3, _("USD")
         GBP = 4, _("GBP")
 
-    uuid = models.UUIDField(default=uuid.uuid4, db_index=True)
-    slug = models.SlugField(max_length=250, unique=True, blank=True, null=True)
-    author = models.ForeignKey(to=get_user_model(), blank=True, null=True, on_delete=models.SET_NULL)
-    category = models.PositiveSmallIntegerField(choices=Category.choices, blank=False, default=Category.APARTMENT)
-    type = models.PositiveSmallIntegerField(choices=Type.choices, blank=False, default=Type.SINGLE)
-    status = models.PositiveSmallIntegerField(choices=Status.choices, blank=False, default=Status.PENDING)
-    currency = models.PositiveSmallIntegerField(choices=Currency.choices, blank=False, default=Currency.PLN)
-    rejected_reason = models.TextField(blank=True, null=True)
+    uuid = models.UUIDField(_("UUID"), default=uuid.uuid4, db_index=True)
+    slug = models.SlugField(_("Slug"), max_length=250, unique=True, blank=True, null=True)
+    author = models.ForeignKey(verbose_name=_("Author"), to=GDUser, blank=True, null=True, on_delete=models.SET_NULL)
+    category = models.PositiveSmallIntegerField(_("Category"), choices=Category.choices, blank=False, default=Category.APARTMENT)
+    type = models.PositiveSmallIntegerField(_("Offer type"), choices=Type.choices, blank=False, default=Type.SINGLE)
+    status = models.PositiveSmallIntegerField(_("Offer status"), choices=Status.choices, blank=False, default=Status.PENDING)
+    currency = models.PositiveSmallIntegerField(_("Currency"), choices=Currency.choices, blank=False, default=Currency.PLN)
+    rejected_reason = models.TextField(_("Reject reason"), blank=True, null=True, max_length=300)
 
     #####
     ##### Key required fields
     #####
-    title = models.CharField(max_length=200)
-    price = models.PositiveIntegerField(blank=False)
-    square_meters = models.PositiveIntegerField(blank=False)
-    rooms = models.PositiveIntegerField(blank=False)
+    title = models.CharField(_("Title"), max_length=200)
+    price = models.PositiveIntegerField(_("Price"), blank=False)
+    square_meters = models.PositiveIntegerField(_("Square meters"), blank=False)
+    rooms = models.PositiveIntegerField(_("Rooms"), blank=False)
 
     construction_year = models.PositiveIntegerField(
+        _("Construction year"),
         blank=False,
         null=True,
         validators=[
@@ -118,3 +122,4 @@ class Offer(TimestampModelMixin, models.Model):
     class Meta:
         verbose_name = _("Offer")
         verbose_name_plural = _("Offers")
+        ordering = ["-date_created"]

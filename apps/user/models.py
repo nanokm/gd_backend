@@ -3,10 +3,10 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
-
+import reversion
 from apps.user.managers import CustomUserManager
 
-
+@reversion.register
 class GDUser(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["password"]
@@ -17,6 +17,7 @@ class GDUser(AbstractUser):
         DEVELOPER_ADMIN = 3, _("Developer Admin")
         DEVELOPER_EMPLOYEE = 4, _("Developer Employee")
         STATE_OFFICIAL = 5, _("State official")
+        AUDITOR = 6, _("Auditor")
 
     username = None
     email = models.EmailField(_("Email address"), unique=True)

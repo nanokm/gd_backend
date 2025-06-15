@@ -10,6 +10,18 @@ class OfferSerializerMixing(serializers.Serializer):
     type_label = serializers.CharField(source="get_type_display", read_only=True)
 
 
+    def validate_rooms(self, num_of_rooms):
+        if 10 < num_of_rooms < 1:
+            raise serializers.ValidationError("Number of rooms must be between 1 and 10")
+        return num_of_rooms
+
+    def validate_square_meters(self, square_meters):
+        if square_meters < 1:
+            raise serializers.ValidationError("Square meters must be greater than 0")
+        return square_meters
+
+
+
 class OfferListSerializer(OfferSerializerMixing, serializers.HyperlinkedModelSerializer):
     photos = PhotoSerializer(many=True, read_only=True)
 
@@ -61,4 +73,5 @@ class OfferDetailSerializer(OfferSerializerMixing, serializers.HyperlinkedModelS
             "lease_terms",
             "price_history",
             "author_display_name",
+            "status",
         )
