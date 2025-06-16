@@ -64,4 +64,4 @@ jobs:
       #       Run test
       #----------------------------------------------
       - name: "Run tests"
-        run: eval $(poetry env activate) && poetry run pytest
+        run: poetry run python manage.py test
