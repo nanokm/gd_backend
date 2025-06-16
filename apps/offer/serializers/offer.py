@@ -9,7 +9,6 @@ class OfferSerializerMixing(serializers.Serializer):
     category_label = serializers.CharField(source="get_category_display", read_only=True)
     type_label = serializers.CharField(source="get_type_display", read_only=True)
 
-
     def validate_rooms(self, num_of_rooms):
         if 10 < num_of_rooms < 1:
             raise serializers.ValidationError("Number of rooms must be between 1 and 10")
@@ -19,7 +18,6 @@ class OfferSerializerMixing(serializers.Serializer):
         if square_meters < 1:
             raise serializers.ValidationError("Square meters must be greater than 0")
         return square_meters
-
 
 
 class OfferListSerializer(OfferSerializerMixing, serializers.HyperlinkedModelSerializer):

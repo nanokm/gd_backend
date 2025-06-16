@@ -15,8 +15,8 @@ class PhotoAdmin(admin.ModelAdmin):
 class CollectionAdmin(VersionAdmin):
     pass
 
-class GDUserAdmin(VersionAdmin):
 
+class GDUserAdmin(VersionAdmin):
     model = Offer
     list_display = (
         "title",
@@ -49,7 +49,6 @@ class GDUserAdmin(VersionAdmin):
 
     search_fields = ("title",)
     ordering = ("-date_created",)
-
 
 
 admin.site.register(Offer, OfferAdmin)

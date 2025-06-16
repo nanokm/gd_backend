@@ -6,6 +6,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 import reversion
 from apps.user.managers import CustomUserManager
 
+
 @reversion.register
 class GDUser(AbstractUser):
     USERNAME_FIELD = "email"

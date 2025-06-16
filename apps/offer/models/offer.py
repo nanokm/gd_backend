@@ -1,6 +1,5 @@
 import uuid
 
-from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.functional import cached_property
 from django.utils.text import slugify
@@ -15,7 +14,7 @@ import reversion
 
 
 @reversion.register
-class  Offer(TimestampModelMixin, models.Model):
+class Offer(TimestampModelMixin, models.Model):
     class Category(models.IntegerChoices):
         APARTMENT = 1, _("Apartment")
         GARAGE = 2, _("Garage")
@@ -43,10 +42,16 @@ class  Offer(TimestampModelMixin, models.Model):
     uuid = models.UUIDField(_("UUID"), default=uuid.uuid4, db_index=True)
     slug = models.SlugField(_("Slug"), max_length=250, unique=True, blank=True, null=True)
     author = models.ForeignKey(verbose_name=_("Author"), to=GDUser, blank=True, null=True, on_delete=models.SET_NULL)
-    category = models.PositiveSmallIntegerField(_("Category"), choices=Category.choices, blank=False, default=Category.APARTMENT)
+    category = models.PositiveSmallIntegerField(
+        _("Category"), choices=Category.choices, blank=False, default=Category.APARTMENT
+    )
     type = models.PositiveSmallIntegerField(_("Offer type"), choices=Type.choices, blank=False, default=Type.SINGLE)
-    status = models.PositiveSmallIntegerField(_("Offer status"), choices=Status.choices, blank=False, default=Status.PENDING)
-    currency = models.PositiveSmallIntegerField(_("Currency"), choices=Currency.choices, blank=False, default=Currency.PLN)
+    status = models.PositiveSmallIntegerField(
+        _("Offer status"), choices=Status.choices, blank=False, default=Status.PENDING
+    )
+    currency = models.PositiveSmallIntegerField(
+        _("Currency"), choices=Currency.choices, blank=False, default=Currency.PLN
+    )
     rejected_reason = models.TextField(_("Reject reason"), blank=True, null=True, max_length=300)
 
     #####
