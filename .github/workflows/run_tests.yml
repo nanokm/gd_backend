@@ -48,7 +48,7 @@ jobs:
       - name: "Install poetry"
         uses: snok/install-poetry@v1
         with:
-          version: 1.8.5
+          version: 2.1
           virtualenvs-in-project: true
           virtualenvs-path: .venv
           installer-parallel: true
@@ -64,4 +64,4 @@ jobs:
       #       Run test
       #----------------------------------------------
       - name: "Run tests"
-        run: poetry run pytest
+        run: eval $(poetry env activate) && poetry run pytest
